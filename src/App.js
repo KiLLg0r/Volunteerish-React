@@ -8,7 +8,6 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Shop from "./components/pages/Shop";
 import Messages from "./components/pages/Messages";
-import Settings from "./components/pages/Settings";
 import Announces from "./components/pages/Announces";
 
 //Css
@@ -27,7 +26,6 @@ function App() {
         <Route path="/announces" element={<Announces />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/messages" element={<Messages />} />
-        {/* <Route path="/settings" element={<Settings />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!userLogged ? <Navigation /> : null}
