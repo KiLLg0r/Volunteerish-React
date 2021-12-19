@@ -1,0 +1,108 @@
+@use "./colors" as *;
+@import url("https://fonts.googleapis.com/css2?family=Love+Light&display=swap");
+
+.login {
+  height: 100vh;
+  width: 100%;
+  padding-inline: 1rem;
+  padding-block: 0rem 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  svg {
+    width: 80%;
+    display: block;
+    margin-inline: auto;
+  }
+
+  .title {
+    font-size: 2rem;
+    text-align: center;
+    color: $accent;
+    font-weight: 800;
+    margin-block: 1rem;
+  }
+
+  .app-name {
+    font-family: "Love Light", cursive;
+    letter-spacing: 2px;
+    font-size: 4rem;
+    margin-block: 0;
+  }
+
+  .f-wrapper {
+    position: relative;
+    display: flex;
+    height: 4rem;
+    width: 100%;
+    margin-block: 1.25rem;
+
+    .label {
+      position: absolute;
+      top: 50%;
+      left: 0.65rem;
+      transform: translateY(-50%);
+      color: $gray-light-500;
+      padding: 0.25rem 0.5rem;
+      pointer-events: none;
+      transition: all 0.35s;
+    }
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      font-size: 1.675rem;
+      color: $gray-light-500;
+      transition: all 0.35s;
+    }
+
+    input {
+      height: inherit;
+      width: 100%;
+      border: 2px solid $gray-light-500;
+      border-radius: 0.5rem;
+      outline: none;
+      background: transparent;
+      color: $gray-light-900;
+      font-size: 1rem;
+      text-indent: 1rem;
+      transition: all 0.35s;
+      text-indent: 4rem;
+      padding-right: 3rem;
+    }
+    input:focus {
+      border-color: $accent;
+      text-indent: 1rem;
+    }
+    input:focus ~ .icon {
+      color: $accent;
+    }
+    input:focus ~ .label {
+      background: $gray-light-100;
+      color: $accent;
+      transform: translateY(-2.875rem);
+    }
+
+    .password-input {
+      text-indent: 6rem;
+    }
+  }
+
+  .contact-btn {
+    height: 4rem;
+    width: 100%;
+    background-color: $accent;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    transition: all 0.35s;
+    cursor: pointer;
+    &:hover {
+      background-color: $accent-dark-500;
+      color: $gray-light-900;
+    }
+  }
+}

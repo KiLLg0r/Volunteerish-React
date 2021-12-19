@@ -1,0 +1,66 @@
+@use "./colors" as *;
+
+.home {
+  height: calc(100vh - 5rem);
+  overflow: scroll;
+  color: $gray-light-600;
+  padding-inline: 1rem;
+  padding-block-end: 1rem;
+
+  .title {
+    color: $gray-light-900;
+    font-size: 2rem;
+    padding-block: 1.25rem;
+  }
+
+  .subtitle {
+    color: $accent-light-200;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .profile {
+    width: 100%;
+
+    .profile-data {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      img {
+        height: 4rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      span {
+        font-size: 0.875rem;
+        color: $gray-light-600;
+      }
+
+      .name {
+        color: $accent-light-100;
+      }
+
+      .points {
+        color: $accent-dark-200-bl;
+      }
+      .helped {
+        color: $gray-light-900;
+      }
+    }
+  }
+
+  .chart {
+    .title {
+      font-size: 1.25rem;
+    }
+
+    img {
+      width: 80%;
+      display: block;
+      margin-inline: auto;
+    }
+  }
+}
