@@ -33,7 +33,7 @@ const Register = () => {
     setLoading(false);
   }
   return (
-    <div className="login">
+    <div className="register">
       <h1 className="title app-name">Volunteerish</h1>
       <RegisterSvg />
       <h1 className="title">Create new account</h1>
