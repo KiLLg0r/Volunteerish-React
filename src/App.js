@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Auth context
-import { AuthProvider, useAuth } from "./components/contexts/AuthContext";
+import { AuthProvider } from "./components/contexts/AuthContext";
 
 // Custom components
 import Navigation from "./components/navigation/Navigation";
@@ -16,12 +16,8 @@ import PrivateRoute from "./components/PrivateRoute";
 
 //Css
 import "./assets/css/main.css";
-import { useState, useEffect } from "react";
 
 function App() {
-  // const { currentUser } = useAuth();
-  const [user, setUser] = useState(false);
-
   return (
     <Router>
       <AuthProvider>
