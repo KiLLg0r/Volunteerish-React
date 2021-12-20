@@ -1,4 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+// Auth context
+import { AuthProvider, useAuth } from "./components/contexts/AuthContext";
 
 // Custom components
 import Navigation from "./components/navigation/Navigation";
@@ -9,26 +12,30 @@ import Register from "./components/auth/Register";
 import Shop from "./components/pages/Shop";
 import Messages from "./components/pages/Messages";
 import Announces from "./components/pages/Announces";
+import PrivateRoute from "./components/PrivateRoute";
 
 //Css
 import "./assets/css/main.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const userLogged = useState(false);
+  // const { currentUser } = useAuth();
+  const [user, setUser] = useState(false);
 
   return (
     <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/announces" element={<Announces />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      {!userLogged ? <Navigation /> : null}
+      <AuthProvider>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <PrivateRoute exact path="/" component={Home} />
+          <PrivateRoute path="/announces" component={Announces} />
+          <PrivateRoute path="/shop" component={Shop} />
+          <PrivateRoute path="/messages" component={Messages} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+        <Navigation />
+      </AuthProvider>
     </Router>
   );
 }

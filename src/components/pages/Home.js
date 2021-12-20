@@ -1,8 +1,31 @@
 import Img from "../../assets/img/pic.jpeg";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Home = () => {
+  const [error, setError] = useState("");
+  const { logout } = useAuth();
+  const history = useHistory();
+
+  async function handleLogOut() {
+    setError("");
+
+    try {
+      await logout();
+      history.push("/login");
+    } catch {
+      setError("Failed to log out");
+    }
+  }
+
   return (
     <section className="home">
+      {error && (
+        <div className="alert" role="alert">
+          {error}
+        </div>
+      )}
       <div className="profile">
         <h1 className="title">Profile</h1>
         <div className="profile-data">
@@ -28,6 +51,9 @@ const Home = () => {
           />
         </div>
       </div>
+      <button variant="link" onClick={handleLogOut}>
+        Log out
+      </button>
       <div className="announces">
         <h1 className="title">Announces</h1>
         <div className="active-ann">

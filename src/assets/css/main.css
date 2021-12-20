@@ -96,13 +96,14 @@
   height: 100vh;
   width: 100%;
   padding-inline: 1rem;
-  padding-block: 0rem 2rem;
+  padding-block: 0rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 .login svg {
   width: 80%;
+  aspect-ratio: 1;
   display: block;
   margin-inline: auto;
 }
@@ -118,6 +119,15 @@
   letter-spacing: 2px;
   font-size: 4rem;
   margin-block: 0;
+}
+.login .link-text {
+  text-align: center;
+  margin-block: 1.5rem;
+  color: #bfc0c2;
+}
+.login .link-text a {
+  color: #ff5a5a;
+  text-decoration: none;
 }
 .login .f-wrapper {
   position: relative;
@@ -174,17 +184,18 @@
 .login .f-wrapper .password-input {
   text-indent: 6rem;
 }
-.login .contact-btn {
+.login .btn {
+  color: #eaeaeb;
   height: 4rem;
   width: 100%;
-  background-color: #ff5a5a;
+  background-color: #e65151;
   border: none;
   border-radius: 0.5rem;
   font-size: 1.25rem;
   transition: all 0.35s;
   cursor: pointer;
 }
-.login .contact-btn:hover {
+.login .btn:hover {
   background-color: #802d2d;
   color: #eaeaeb;
 }

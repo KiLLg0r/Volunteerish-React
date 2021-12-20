@@ -5,13 +5,14 @@
   height: 100vh;
   width: 100%;
   padding-inline: 1rem;
-  padding-block: 0rem 2rem;
+  padding-block: 0rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
 
   svg {
     width: 80%;
+    aspect-ratio: 1;
     display: block;
     margin-inline: auto;
   }
@@ -29,6 +30,17 @@
     letter-spacing: 2px;
     font-size: 4rem;
     margin-block: 0;
+  }
+
+  .link-text {
+    text-align: center;
+    margin-block: 1.5rem;
+    color: $gray-light-700;
+
+    a {
+      color: $accent;
+      text-decoration: none;
+    }
   }
 
   .f-wrapper {
@@ -91,10 +103,11 @@
     }
   }
 
-  .contact-btn {
+  .btn {
+    color: $gray-light-900;
     height: 4rem;
     width: 100%;
-    background-color: $accent;
+    background-color: $accent-dark-100;
     border: none;
     border-radius: 0.5rem;
     font-size: 1.25rem;
