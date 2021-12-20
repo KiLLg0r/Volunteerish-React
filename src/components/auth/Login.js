@@ -1,5 +1,5 @@
 import { ReactComponent as LoginSvg } from "../../assets/svg/login.svg";
-import { BsEyeFill, BsFillEnvelopeFill } from "react-icons/bs";
+import { BsEyeFill, BsFillEnvelopeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import "../../assets/css/login.css";
 
 import { useRef, useState } from "react";
@@ -13,6 +13,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -27,6 +28,10 @@ const Login = () => {
       setError("Failed to log in");
     }
     setLoading(false);
+  }
+
+  function handleShowPassword() {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   }
 
   return (
@@ -49,10 +54,15 @@ const Login = () => {
             </div>
           </div>
           <div className="f-wrapper">
-            <input type="password" required className="password-input" ref={passwordRef} />
+            <input
+              type={`${showPassword ? "text" : "password"}`}
+              required
+              className="password-input"
+              ref={passwordRef}
+            />
             <div className="label">Password</div>
-            <div className="icon">
-              <BsEyeFill />
+            <div className="icon password-icon" onClick={handleShowPassword}>
+              {!showPassword ? <BsEyeFill /> : <BsFillEyeSlashFill />}
             </div>
           </div>
         </div>

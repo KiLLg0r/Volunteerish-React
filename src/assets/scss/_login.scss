@@ -44,6 +44,10 @@
     }
   }
 
+  .password-icon {
+    cursor: pointer;
+  }
+
   .f-wrapper {
     position: relative;
     display: flex;
@@ -67,7 +71,7 @@
       top: 50%;
       right: 1rem;
       transform: translateY(-50%);
-      font-size: 1.675rem;
+      font-size: 2rem;
       color: $gray-light-500;
       transition: all 0.35s;
     }
@@ -101,6 +105,10 @@
 
     .password-input {
       text-indent: 6rem;
+    }
+
+    .confirm-password {
+      text-indent: 10rem;
     }
   }
 

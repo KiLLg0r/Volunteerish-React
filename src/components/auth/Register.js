@@ -1,5 +1,5 @@
 import { ReactComponent as RegisterSvg } from "../../assets/svg/register.svg";
-import { BsEyeFill, BsFillEnvelopeFill } from "react-icons/bs";
+import { BsEyeFill, BsFillEnvelopeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import "../../assets/css/register.css";
 
 import { useAuth } from "../contexts/AuthContext";
@@ -14,6 +14,7 @@ const Register = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -32,6 +33,11 @@ const Register = () => {
     }
     setLoading(false);
   }
+
+  function handleShowPassword() {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  }
+
   return (
     <div className="register">
       <h1 className="title app-name">Volunteerish</h1>
@@ -52,17 +58,27 @@ const Register = () => {
             </div>
           </div>
           <div className="f-wrapper">
-            <input type="password" required className="password-input" ref={passwordRef} />
+            <input
+              type={`${showPassword ? "text" : "password"}`}
+              required
+              className="password-input"
+              ref={passwordRef}
+            />
             <div className="label">Password</div>
-            <div className="icon">
-              <BsEyeFill />
+            <div className="icon password-icon" onClick={handleShowPassword}>
+              {!showPassword ? <BsEyeFill /> : <BsFillEyeSlashFill />}
             </div>
           </div>
           <div className="f-wrapper">
-            <input type="password" required className="password-input" ref={passwordConfirmRef} />
+            <input
+              type={`${showPassword ? "text" : "password"}`}
+              required
+              className="password-input confirm-password"
+              ref={passwordConfirmRef}
+            />
             <div className="label">Confirm Password</div>
-            <div className="icon">
-              <BsEyeFill />
+            <div className="icon password-icon" onClick={handleShowPassword}>
+              {!showPassword ? <BsEyeFill /> : <BsFillEyeSlashFill />}
             </div>
           </div>
         </div>

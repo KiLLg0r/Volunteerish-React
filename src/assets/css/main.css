@@ -135,6 +135,10 @@
   color: #ff5a5a;
   text-decoration: none;
 }
+.login .password-icon,
+.register .password-icon {
+  cursor: pointer;
+}
 .login .f-wrapper,
 .register .f-wrapper {
   position: relative;
@@ -160,7 +164,7 @@
   top: 50%;
   right: 1rem;
   transform: translateY(-50%);
-  font-size: 1.675rem;
+  font-size: 2rem;
   color: #94969a;
   transition: all 0.35s;
 }
@@ -197,6 +201,10 @@
 .login .f-wrapper .password-input,
 .register .f-wrapper .password-input {
   text-indent: 6rem;
+}
+.login .f-wrapper .confirm-password,
+.register .f-wrapper .confirm-password {
+  text-indent: 10rem;
 }
 .login .btn,
 .register .btn {
