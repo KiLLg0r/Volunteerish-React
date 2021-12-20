@@ -5,7 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 const Home = () => {
   const [error, setError] = useState("");
-  const { logout } = useAuth();
+  const { logout, currentUser } = useAuth();
   const history = useHistory();
 
   async function handleLogOut() {
@@ -19,6 +19,21 @@ const Home = () => {
     }
   }
 
+  function updateUser() {
+    currentUser
+      .updateProfile({
+        displayName: "Rob Oblesniuc",
+        photoURL:
+          "https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg",
+      })
+      .then(() => {
+        window.location.reload(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <section className="home">
       {error && (
@@ -26,13 +41,14 @@ const Home = () => {
           {error}
         </div>
       )}
+      {/* <button onClick={updateUser}>Update</button> */}
       <div className="profile">
         <h1 className="title">Profile</h1>
         <div className="profile-data">
-          <img src={Img} alt="pic" />
+          <img src={currentUser.photoURL} alt="pic" />
           <h3 className="name">
             <span>Name</span>
-            <p>Robert Oblesniuc</p>
+            <p>{currentUser.displayName}</p>
           </h3>
           <h3 className="points">
             <span>Points</span>
