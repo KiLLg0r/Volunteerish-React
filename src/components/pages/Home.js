@@ -33,21 +33,6 @@ const Home = () => {
     }
   }
 
-  function updateUser() {
-    currentUser
-      .updateProfile({
-        displayName: "Rob Oblesniuc",
-        photoURL:
-          "https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg",
-      })
-      .then(() => {
-        window.location.reload(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   const loadFile = (event) => {
     if (event.target.files && event.target.files[0]) {
       imgRef.current.src = URL.createObjectURL(event.target.files[0]);
