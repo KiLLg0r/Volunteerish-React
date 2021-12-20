@@ -1,5 +1,151 @@
-@import url("https://fonts.googleapis.com/css2?family=Love+Light&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Love+Light&display=swap");
+.completeRegistration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #3e4148;
+  z-index: 1000;
+  height: auto;
+  width: 100%;
+  padding: 2rem;
+}
+.completeRegistration svg {
+  width: 80%;
+  aspect-ratio: 1;
+  display: block;
+  margin-inline: auto;
+}
+.completeRegistration .popup {
+  width: 100%;
+}
+.completeRegistration .popup .volunteerSvg {
+  width: 80%;
+  aspect-ratio: 1;
+  display: block;
+  margin-inline: auto;
+}
+.completeRegistration .title {
+  text-align: center;
+}
+.completeRegistration .title.logo {
+  font-family: "Love Light", cursive;
+  letter-spacing: 2px;
+  font-size: 4rem;
+  margin-block: 0;
+  color: #ff5a5a;
+  padding-block: 0;
+}
+.completeRegistration .subtitle-primary {
+  font-size: 1rem;
+  color: #a9abae;
+  text-align: center;
+}
+.completeRegistration .img-placeholder {
+  height: 125px;
+  aspect-ratio: 1;
+  margin-block: 1rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  text-align: center;
+  line-height: 125px;
+  display: block;
+  margin-inline: auto;
+  object-fit: cover;
+}
+.completeRegistration #img-placeholder {
+  width: 100%;
+  height: 100%;
+}
+.completeRegistration .btns {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-inline: 0.5rem;
+}
+.completeRegistration .prev-btn,
+.completeRegistration .next-btn {
+  background-color: #ff5a5a;
+  padding: 1rem 1rem;
+  border-radius: 0.5rem;
+  color: #040405;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+.completeRegistration .prev-btn.swiper-button-disabled,
+.completeRegistration .next-btn.swiper-button-disabled {
+  background-color: #802d2d;
+  color: #bfc0c2;
+}
+.completeRegistration .swiper-slide {
+  padding-inline: 0.5rem;
+  height: fit-content;
+}
+
+.password-icon {
+  cursor: pointer;
+}
+
+.f-wrapper {
+  position: relative;
+  display: flex;
+  height: 4rem;
+  width: 100%;
+  margin-block: 1.25rem;
+}
+.f-wrapper .label {
+  position: absolute;
+  top: 50%;
+  left: 0.65rem;
+  transform: translateY(-50%);
+  color: #94969a;
+  padding: 0.25rem 0.5rem;
+  pointer-events: none;
+  transition: all 0.35s;
+}
+.f-wrapper .icon {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #94969a;
+  transition: all 0.35s;
+}
+.f-wrapper input {
+  height: inherit;
+  width: 100%;
+  border: 2px solid #94969a;
+  border-radius: 0.5rem;
+  outline: none;
+  background: transparent;
+  color: #eaeaeb;
+  font-size: 1rem;
+  text-indent: 1rem;
+  transition: all 0.35s;
+  text-indent: 4rem;
+  padding-right: 3rem;
+}
+.f-wrapper input:focus {
+  border-color: #ff5a5a;
+  text-indent: 1rem;
+}
+.f-wrapper input:focus ~ .icon {
+  color: #ff5a5a;
+}
+.f-wrapper input:focus ~ .label {
+  background: #3e4148;
+  color: #ff5a5a;
+  transform: translateY(-2.875rem);
+}
+.f-wrapper .password-input {
+  text-indent: 6rem;
+}
+.f-wrapper .confirm-password {
+  text-indent: 10rem;
+}
+
 .primary-nav {
   width: 100%;
   height: 5rem;
@@ -134,77 +280,6 @@
 .register .link-text a {
   color: #ff5a5a;
   text-decoration: none;
-}
-.login .password-icon,
-.register .password-icon {
-  cursor: pointer;
-}
-.login .f-wrapper,
-.register .f-wrapper {
-  position: relative;
-  display: flex;
-  height: 4rem;
-  width: 100%;
-  margin-block: 1.25rem;
-}
-.login .f-wrapper .label,
-.register .f-wrapper .label {
-  position: absolute;
-  top: 50%;
-  left: 0.65rem;
-  transform: translateY(-50%);
-  color: #94969a;
-  padding: 0.25rem 0.5rem;
-  pointer-events: none;
-  transition: all 0.35s;
-}
-.login .f-wrapper .icon,
-.register .f-wrapper .icon {
-  position: absolute;
-  top: 50%;
-  right: 1rem;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  color: #94969a;
-  transition: all 0.35s;
-}
-.login .f-wrapper input,
-.register .f-wrapper input {
-  height: inherit;
-  width: 100%;
-  border: 2px solid #94969a;
-  border-radius: 0.5rem;
-  outline: none;
-  background: transparent;
-  color: #eaeaeb;
-  font-size: 1rem;
-  text-indent: 1rem;
-  transition: all 0.35s;
-  text-indent: 4rem;
-  padding-right: 3rem;
-}
-.login .f-wrapper input:focus,
-.register .f-wrapper input:focus {
-  border-color: #ff5a5a;
-  text-indent: 1rem;
-}
-.login .f-wrapper input:focus ~ .icon,
-.register .f-wrapper input:focus ~ .icon {
-  color: #ff5a5a;
-}
-.login .f-wrapper input:focus ~ .label,
-.register .f-wrapper input:focus ~ .label {
-  background: #3e4148;
-  color: #ff5a5a;
-  transform: translateY(-2.875rem);
-}
-.login .f-wrapper .password-input,
-.register .f-wrapper .password-input {
-  text-indent: 6rem;
-}
-.login .f-wrapper .confirm-password,
-.register .f-wrapper .confirm-password {
-  text-indent: 10rem;
 }
 .login .btn,
 .register .btn {

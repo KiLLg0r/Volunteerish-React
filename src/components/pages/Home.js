@@ -1,12 +1,26 @@
-import Img from "../../assets/img/pic.jpeg";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+
+import { ReactComponent as VolunteerSvg } from "../../assets/svg/volunteer.svg";
+
+SwiperCore.use([Navigation]);
 
 const Home = () => {
   const [error, setError] = useState("");
   const { logout, currentUser } = useAuth();
   const history = useHistory();
+
+  const navigationPrevRef = useRef(null);
+  const navigationNextRef = useRef(null);
+
+  const imgRef = useRef(null);
+  const fileRef = useRef(null);
+  const completeRegistrationRef = useRef(null);
 
   async function handleLogOut() {
     setError("");
@@ -33,6 +47,85 @@ const Home = () => {
         console.log(error);
       });
   }
+
+  const loadFile = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      imgRef.current.src = URL.createObjectURL(event.target.files[0]);
+    }
+  };
+
+  const uploadImg = () => {
+    console.log(fileRef.current);
+    fileRef.current.click();
+  };
+
+  const hidePopup = () => {
+    completeRegistrationRef.current.style.display = "none";
+  };
+
+  const CompleteRegistration = () => {
+    return (
+      <>
+        <form action="" className="completeRegistration" ref={completeRegistrationRef}>
+          <div className="cloes" onClick={hidePopup}>
+            X
+          </div>
+          <h1 className="title">Welcome to</h1>
+          <VolunteerSvg className="volunteerSvg" />
+          <h1 className="title logo">Volunteerish</h1>
+          <h3 className="subtitle-primary">In order to complete registration we need more information about you</h3>
+          <Swiper
+            allowTouchMove={false}
+            className="popup"
+            navigation={{
+              nextEl: navigationNextRef.current,
+              prevEl: navigationPrevRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = navigationPrevRef.current;
+              swiper.params.navigation.nextEl = navigationNextRef.current;
+            }}
+          >
+            <SwiperSlide>
+              <div className="wrapper">
+                <div className="img-upload">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/volunteerish-ed549.appspot.com/o/placeholder.jpg?alt=media&token=8960960f-36a2-4a20-8115-c692d95e9fda"
+                    ref={imgRef}
+                    onClick={uploadImg}
+                    alt="Placeholder for uploading profile"
+                    className="img-placeholder"
+                  />
+                  <input type="file" name="imageUpload" onChange={loadFile} style={{ display: "none" }} ref={fileRef} />
+                  <label htmlFor="file" style={{ cursor: "pointer" }} onClick={uploadImg} className="labelImg">
+                    Upload a picture
+                  </label>
+                </div>
+                <div className="f-wrapper">
+                  <input type="email" spellCheck="false" required />
+                  <div className="label">Name</div>
+                  <div className="icon"></div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>2</SwiperSlide>
+            <SwiperSlide>3</SwiperSlide>
+            <SwiperSlide>4</SwiperSlide>
+            <SwiperSlide>5</SwiperSlide>
+            <SwiperSlide>6</SwiperSlide>
+            <div className="btns">
+              <div className="prev-btn" ref={navigationPrevRef}>
+                Previous
+              </div>
+              <div className="next-btn" ref={navigationNextRef}>
+                Next
+              </div>
+            </div>
+          </Swiper>
+        </form>
+      </>
+    );
+  };
 
   return (
     <section className="home">
@@ -102,6 +195,7 @@ const Home = () => {
           </p>
         </div>
       </div>
+      <CompleteRegistration />
     </section>
   );
 };

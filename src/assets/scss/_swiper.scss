@@ -1,0 +1,94 @@
+@use "./colors" as *;
+
+.completeRegistration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: $gray-light-100;
+  z-index: 1000;
+  height: auto;
+  width: 100%;
+  padding: 2rem;
+
+  svg {
+    width: 80%;
+    aspect-ratio: 1;
+    display: block;
+    margin-inline: auto;
+  }
+
+  .popup {
+    width: 100%;
+
+    .volunteerSvg {
+      width: 80%;
+      aspect-ratio: 1;
+      display: block;
+      margin-inline: auto;
+    }
+  }
+
+  .title {
+    text-align: center;
+    &.logo {
+      font-family: "Love Light", cursive;
+      letter-spacing: 2px;
+      font-size: 4rem;
+      margin-block: 0;
+      color: $accent;
+      padding-block: 0;
+    }
+  }
+
+  .subtitle-primary {
+    font-size: 1rem;
+    color: $gray-light-600;
+    text-align: center;
+  }
+
+  .img-placeholder {
+    height: 125px;
+    aspect-ratio: 1;
+    margin-block: 1rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    text-align: center;
+    line-height: 125px;
+    display: block;
+    margin-inline: auto;
+    object-fit: cover;
+  }
+
+  #img-placeholder {
+    width: 100%;
+    height: 100%;
+  }
+
+  .btns {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-inline: 0.5rem;
+  }
+
+  .prev-btn,
+  .next-btn {
+    background-color: $accent;
+    padding: 1rem 1rem;
+    border-radius: 0.5rem;
+    color: $gray-dark-900;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+
+    &.swiper-button-disabled {
+      background-color: $accent-dark-500;
+      color: $gray-light-700;
+    }
+  }
+
+  .swiper-slide {
+    padding-inline: 0.5rem;
+    height: fit-content;
+  }
+}
