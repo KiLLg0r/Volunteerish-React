@@ -2,12 +2,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Love+Light&display=swap");
 .completeRegistration {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   background: #3e4148;
   z-index: 1000;
   height: 100%;
   width: 100%;
   padding: 2rem;
+  overflow: hidden;
 }
 .completeRegistration svg {
   width: 80%;
@@ -18,6 +20,9 @@
 .completeRegistration .popup {
   width: 100%;
   height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 .completeRegistration .popup .volunteerSvg {
   width: 80%;
@@ -25,12 +30,18 @@
   display: block;
   margin-inline: auto;
 }
-.completeRegistration .first-slide {
-  margin-bottom: auto;
+.completeRegistration .second-slide .title,
+.completeRegistration .third-slide .title,
+.completeRegistration .fourth-slide .title,
+.completeRegistration .fifth-slide .title {
+  font-size: 1.5rem;
+  color: #eaeaeb;
+  margin-block-end: 1rem;
 }
-.completeRegistration .swiper-wrapper {
-  height: calc(100% - 10rem);
-  align-items: center;
+.completeRegistration input[type=date]::-webkit-inner-spin-button,
+.completeRegistration input[type=date]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
 }
 .completeRegistration .title {
   text-align: center;
@@ -49,8 +60,14 @@
   color: #a9abae;
   text-align: center;
 }
+.completeRegistration .close {
+  font-size: 2rem;
+  font-weight: 800;
+  float: right;
+  color: #ff5a5a;
+}
 .completeRegistration .img-placeholder {
-  height: 125px;
+  height: 15rem;
   aspect-ratio: 1;
   margin-block: 1rem;
   border-radius: 0.75rem;
@@ -73,18 +90,22 @@
   font-size: 1.25rem;
   text-align: center;
 }
+.completeRegistration .wrapper .group {
+  display: flex;
+  gap: 1rem;
+}
+.completeRegistration .wrapper .group .f-wrapper {
+  margin-block: 0;
+}
 .completeRegistration .btns {
   margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-inline: 0.5rem;
+  margin-bottom: 2rem;
 }
 .completeRegistration .prev-btn,
 .completeRegistration .next-btn,
 .completeRegistration .complete-btn {
-  margin-block: 0.5rem;
-  padding-inline: 0.5rem;
+  margin-block: 1rem;
+  margin-inline: 0.5rem;
   padding: 1rem 1rem;
   border-radius: 0.5rem;
   font-weight: 600;
@@ -95,14 +116,18 @@
 .completeRegistration .prev-btn.swiper-button-disabled,
 .completeRegistration .next-btn.swiper-button-disabled,
 .completeRegistration .complete-btn.swiper-button-disabled {
-  display: none;
+  visibility: hidden;
 }
 .completeRegistration .next-btn,
 .completeRegistration .complete-btn {
   background-color: #ff5a5a;
   color: #040405;
 }
+.completeRegistration .next-btn.swiper-button-disabled {
+  display: none;
+}
 .completeRegistration .prev-btn {
+  margin-block-start: auto;
   border: 2px solid #ff5a5a;
   color: #ff5a5a;
 }
@@ -112,12 +137,13 @@
 .completeRegistration .complete-btn.not-last-slide {
   display: none;
 }
-.completeRegistration .prev-btn.swiper-button-disabled + .next-btn {
-  margin-top: 4.6rem;
+.completeRegistration .wrapper {
+  width: 100%;
 }
 .completeRegistration .swiper-slide {
   padding-inline: 0.5rem;
-  height: fit-content;
+  display: flex;
+  align-items: center;
 }
 
 .password-icon {
@@ -129,7 +155,7 @@
   display: flex;
   height: 4rem;
   width: 100%;
-  margin-block: 1.25rem;
+  margin-block: 1rem;
 }
 .f-wrapper .label {
   position: absolute;
@@ -159,14 +185,13 @@
   background: transparent;
   color: #eaeaeb;
   font-size: 1rem;
-  text-indent: 1rem;
   transition: all 0.35s;
   text-indent: 4rem;
   padding-right: 3rem;
 }
 .f-wrapper input:focus {
   border-color: #ff5a5a;
-  text-indent: 1rem;
+  text-indent: 1rem !important;
 }
 .f-wrapper input:focus ~ .icon {
   color: #ff5a5a;

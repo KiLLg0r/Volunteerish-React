@@ -9,7 +9,7 @@
   display: flex;
   height: 4rem;
   width: 100%;
-  margin-block: 1.25rem;
+  margin-block: 1rem;
 
   .label {
     position: absolute;
@@ -41,14 +41,13 @@
     background: transparent;
     color: $gray-light-900;
     font-size: 1rem;
-    text-indent: 1rem;
     transition: all 0.35s;
     text-indent: 4rem;
     padding-right: 3rem;
   }
   input:focus {
     border-color: $accent;
-    text-indent: 1rem;
+    text-indent: 1rem !important;
   }
   input:focus ~ .icon {
     color: $accent;
