@@ -36,8 +36,6 @@ const Home = () => {
             <span>Name</span>
             <p>{currentUser.displayName}</p>
           </h3>
-          {currentUser.displayName}
-          {currentUser.phoneNumber}
           <h3 className="points">
             <span>Points</span>
             <p>100K</p>
