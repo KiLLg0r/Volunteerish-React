@@ -9,7 +9,6 @@ import "swiper/css/navigation";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
-import { app, auth } from "../../firebase";
 
 import { ReactComponent as VolunteerSvg } from "../../assets/svg/volunteer.svg";
 
@@ -21,7 +20,6 @@ const CompleteRegistration = () => {
   const placeholderSRC =
     "https://firebasestorage.googleapis.com/v0/b/volunteerish-ed549.appspot.com/o/placeholder.jpg?alt=media&token=8960960f-36a2-4a20-8115-c692d95e9fda";
 
-  const [error, setError] = useState("");
   const [lastSlide, setLastSlide] = useState(false);
   let file = 0;
 
