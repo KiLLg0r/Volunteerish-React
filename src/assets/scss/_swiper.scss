@@ -2,11 +2,10 @@
 
 .completeRegistration {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   background: $gray-light-100;
   z-index: 1000;
-  height: auto;
+  height: 100%;
   width: 100%;
   padding: 2rem;
 
@@ -19,6 +18,7 @@
 
   .popup {
     width: 100%;
+    height: 100%;
 
     .volunteerSvg {
       width: 80%;
@@ -26,6 +26,15 @@
       display: block;
       margin-inline: auto;
     }
+  }
+
+  .first-slide {
+    margin-bottom: auto;
+  }
+
+  .swiper-wrapper {
+    height: calc(100% - 10rem);
+    align-items: center;
   }
 
   .title {
@@ -41,6 +50,7 @@
   }
 
   .subtitle-primary {
+    margin-block-start: 1rem;
     font-size: 1rem;
     color: $gray-light-600;
     text-align: center;
@@ -64,27 +74,62 @@
     height: 100%;
   }
 
+  .img-upload {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .img-label {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
   .btns {
+    margin-top: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding-inline: 0.5rem;
   }
-
   .prev-btn,
-  .next-btn {
-    background-color: $accent;
+  .next-btn,
+  .complete-btn {
+    margin-block: 0.5rem;
+    padding-inline: 0.5rem;
     padding: 1rem 1rem;
     border-radius: 0.5rem;
-    color: $gray-dark-900;
     font-weight: 600;
     text-align: center;
     cursor: pointer;
+    font-size: 1.125rem;
 
     &.swiper-button-disabled {
-      background-color: $accent-dark-500;
-      color: $gray-light-700;
+      display: none;
     }
+  }
+
+  .next-btn,
+  .complete-btn {
+    background-color: $accent;
+    color: $gray-dark-900;
+  }
+
+  .prev-btn {
+    border: 2px solid $accent;
+    color: $accent;
+  }
+
+  .complete-btn {
+    &.last-slide {
+      display: block;
+    }
+    &.not-last-slide {
+      display: none;
+    }
+  }
+
+  .prev-btn.swiper-button-disabled + .next-btn {
+    margin-top: 4.6rem;
   }
 
   .swiper-slide {

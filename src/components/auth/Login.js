@@ -34,6 +34,8 @@ const Login = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   }
 
+  // TODO Add 1s timeout after successfully login and display to user a success message
+
   return (
     <div className="login">
       <h1 className="title app-name">Volunteerish</h1>
@@ -73,7 +75,7 @@ const Login = () => {
         </div>
       </form>
       <div className="link-text">
-        Need an account? <Link to="/register">Sing up</Link>
+        Need an account? <Link to="/register">Sign up</Link>
       </div>
     </div>
   );

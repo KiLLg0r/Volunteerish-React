@@ -38,6 +38,8 @@ const Register = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   }
 
+  // TODO Add 1s timeout after successfully register and display to user a success message
+
   return (
     <div className="register">
       <h1 className="title app-name">Volunteerish</h1>
