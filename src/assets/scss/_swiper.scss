@@ -33,10 +33,7 @@
     }
   }
 
-  .second-slide,
-  .third-slide,
-  .fourth-slide,
-  .fifth-slide {
+  .wrapper {
     .title {
       font-size: 1.5rem;
       color: $gray-light-900;
@@ -115,6 +112,7 @@
   .btns {
     margin-top: auto;
     margin-bottom: 2rem;
+    width: 100%;
   }
   .prev-btn,
   .next-btn,
@@ -127,10 +125,26 @@
     text-align: center;
     cursor: pointer;
     font-size: 1.125rem;
+    border: none;
+    display: block;
 
     &.swiper-button-disabled {
       visibility: hidden;
     }
+  }
+
+  .sixth-slide {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    .title {
+      margin-block: auto;
+    }
+  }
+
+  .complete-btn {
+    margin-inline: 0;
   }
 
   .next-btn,
@@ -149,15 +163,6 @@
     color: $accent;
   }
 
-  .complete-btn {
-    &.last-slide {
-      display: block;
-    }
-    &.not-last-slide {
-      display: none;
-    }
-  }
-
   .wrapper {
     width: 100%;
   }
@@ -166,5 +171,6 @@
     padding-inline: 0.5rem;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 }

@@ -4,10 +4,29 @@ import { useAuth } from "../contexts/AuthContext";
 
 import CompleteRegistration from "./CompleteRegistration";
 
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+
 const Home = () => {
   const [error, setError] = useState("");
   const { logout, currentUser } = useAuth();
   const history = useHistory();
+
+  const db = firebase.firestore();
+  const userDoc = db.collection("users").doc(currentUser.uid);
+  let userData;
+
+  const getData = () => {
+    userDoc
+      .get()
+      .then((doc) => {
+        console.log(doc.data());
+        userData = doc.data();
+      })
+      .catch((error) => {
+        console.log("Error getting cached document:", error);
+      });
+  };
 
   async function handleLogOut() {
     setError("");
@@ -19,6 +38,11 @@ const Home = () => {
       setError("Failed to log out");
     }
   }
+
+  const RenderForm = () => {
+    if (currentUser.displayName) return <CompleteRegistration />;
+    else return null;
+  };
 
   return (
     <section className="home">
@@ -56,6 +80,7 @@ const Home = () => {
       <button variant="link" onClick={handleLogOut}>
         Log out
       </button>
+      <button onClick={getData}>Get data</button>
       <div className="announces">
         <h1 className="title">Announces</h1>
         <div className="active-ann">
@@ -88,7 +113,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <CompleteRegistration />
+      <RenderForm />
     </section>
   );
 };
