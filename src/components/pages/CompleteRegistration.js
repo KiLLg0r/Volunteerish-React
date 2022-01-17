@@ -15,6 +15,8 @@ import { ReactComponent as VolunteerSvg } from "../../assets/svg/volunteer.svg";
 
 SwiperCore.use([Navigation]);
 
+// TODO Implement errors
+
 const CompleteRegistration = () => {
   const { currentUser } = useAuth();
 

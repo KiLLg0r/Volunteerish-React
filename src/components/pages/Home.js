@@ -14,14 +14,12 @@ const Home = () => {
 
   const db = firebase.firestore();
   const userDoc = db.collection("users").doc(currentUser.uid);
-  let userData;
 
   const getData = () => {
     userDoc
       .get()
       .then((doc) => {
         console.log(doc.data());
-        userData = doc.data();
       })
       .catch((error) => {
         console.log("Error getting cached document:", error);
@@ -40,7 +38,7 @@ const Home = () => {
   }
 
   const RenderForm = () => {
-    if (currentUser.displayName) return <CompleteRegistration />;
+    if (!currentUser.displayName) return <CompleteRegistration />;
     else return null;
   };
 
