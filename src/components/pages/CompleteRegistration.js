@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 import { useAuth } from "../contexts/AuthContext";
 
@@ -21,7 +21,6 @@ const CompleteRegistration = () => {
   const placeholderSRC =
     "https://firebasestorage.googleapis.com/v0/b/volunteerish-ed549.appspot.com/o/placeholder.jpg?alt=media&token=8960960f-36a2-4a20-8115-c692d95e9fda";
 
-  const [lastSlide, setLastSlide] = useState(false);
   let file = 0;
 
   const swiperRef = useRef(null);
@@ -206,12 +205,6 @@ const CompleteRegistration = () => {
               default:
                 break;
             }
-          }}
-          onSlidePrevTransitionStart={() => {
-            setLastSlide(false);
-          }}
-          onReachEnd={() => {
-            setLastSlide(true);
           }}
         >
           <SwiperSlide>
