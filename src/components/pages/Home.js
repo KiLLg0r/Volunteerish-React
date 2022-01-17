@@ -83,16 +83,60 @@ const Home = () => {
         <h1 className="title">Announces</h1>
         <div className="active-ann">
           <h1 className="subtitle">Helping</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum fuga obcaecati recusandae nemo sed.
-            Officiis voluptatem exercitationem eos consectetur vitae saepe tempora, animi iste repudiandae doloribus
-            rerum placeat officia assumenda nulla! Ipsum sed porro modi, qui est, magnam officia eos eius, voluptates
-            repudiandae assumenda minima numquam repellat temporibus quibusdam illum aliquam nam veniam unde. Rerum
-            suscipit tempora rem temporibus earum tempore laborum, aperiam dolore quaerat perspiciatis quas ut, facere,
-            distinctio vel. Dicta quibusdam, eveniet id dolorum debitis fugit explicabo deserunt itaque aliquid,
-            delectus, earum esse expedita! Facere in ut reprehenderit tempora autem animi harum accusamus, impedit ea
-            molestias repellat voluptate.
-          </p>
+          <div className="card">
+            <div className="card-top">
+              <img src={currentUser.photoURL} alt="Profile" />
+              <div className="info">
+                <div className="card-title">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                  porro, voluptas est repellat harum dolores quo?
+                </div>
+                <div className="card-desc">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                </div>
+                <div className="card-difficulty diff-1">Easy</div>
+              </div>
+            </div>
+            <div className="card-bottom">
+              <button className="view-more">View more</button>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-top">
+              <img src={currentUser.photoURL} alt="Profile" />
+              <div className="info">
+                <div className="card-title">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                  porro, voluptas est repellat harum dolores quo?
+                </div>
+                <div className="card-desc">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                </div>
+                <div className="card-difficulty diff-2">Medium</div>
+              </div>
+            </div>
+            <div className="card-bottom">
+              <button className="view-more">View more</button>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-top">
+              <img src={currentUser.photoURL} alt="Profile" />
+              <div className="info">
+                <div className="card-title">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                  porro, voluptas est repellat harum dolores quo?
+                </div>
+                <div className="card-desc">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                </div>
+                <div className="card-difficulty diff-3">Hard</div>
+              </div>
+            </div>
+            <div className="card-bottom">
+              <button className="view-more">View more</button>
+            </div>
+          </div>
         </div>
         <div className="other-ann">
           <h1 className="subtitle">Helped</h1>

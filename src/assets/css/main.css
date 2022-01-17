@@ -459,6 +459,64 @@
     transform: rotate(360deg);
   }
 }
+.card {
+  width: 100%;
+  background-color: #53565d;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-block: 1rem;
+  box-shadow: 0.5rem 0.5rem 2rem -1rem #181a1f;
+}
+.card .card-top {
+  display: flex;
+}
+.card .card-top img {
+  height: 125px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+.card .card-top .info {
+  padding-inline-start: 1rem;
+  width: 100%;
+  height: 100%;
+}
+.card .card-top .info .card-title {
+  font-size: 1.25rem;
+  color: #ff5a5a;
+  overflow: hidden;
+  height: 1.5rem;
+}
+.card .card-top .info .card-name {
+  color: #d4d5d6;
+}
+.card .card-top .info .card-difficulty {
+  font-size: 1.125rem;
+  font-style: italic;
+}
+.card .card-top .info .card-difficulty.diff-1 {
+  color: #32cd32;
+}
+.card .card-top .info .card-difficulty.diff-2 {
+  color: #e6a440;
+}
+.card .card-top .info .card-difficulty.diff-3 {
+  color: #ff0800;
+}
+.card .card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.card .card-bottom .view-more {
+  display: block;
+  border: 2px solid #ffbd59;
+  color: #ffbd59;
+  background-color: transparent;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+}
+
 *,
 *::after,
 *::before {
