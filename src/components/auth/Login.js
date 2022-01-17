@@ -35,6 +35,7 @@ const Login = () => {
   }
 
   // TODO Add 1s timeout after successfully login and display to user a success message
+  // TODO Implement errors
 
   return (
     <div className="login">

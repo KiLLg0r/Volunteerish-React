@@ -67,18 +67,13 @@ const Home = () => {
             <p>20K</p>
           </h3>
         </div>
-        <div className="chart">
-          <h1 className="title">Statistics</h1>
-          <img
-            src="https://blog.hubspot.com/hs-fs/hubfs/Agency_Post/Blog_Images/DataHero_Customers_by_Close_Date.png?width=669&name=DataHero_Customers_by_Close_Date.png"
-            alt="chart"
-          />
-        </div>
       </div>
-      <button variant="link" onClick={handleLogOut}>
+      <button variant="link" onClick={handleLogOut} className="view-more" style={{ marginBlock: "1rem" }}>
         Log out
       </button>
-      <button onClick={getData}>Get data</button>
+      <button onClick={getData} className="view-more">
+        Get data
+      </button>
       <div className="announces">
         <h1 className="title">Announces</h1>
         <div className="active-ann">
@@ -140,19 +135,24 @@ const Home = () => {
         </div>
         <div className="other-ann">
           <h1 className="subtitle">Helped</h1>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda earum reprehenderit perferendis,
-            sapiente blanditiis repellendus ea. Molestiae optio totam vel eveniet numquam minus enim odio nulla
-            expedita, quibusdam tempore, neque odit asperiores officiis illum eius consequatur. Et alias vero
-            laboriosam. Cupiditate unde deleniti aperiam eaque excepturi quos illo numquam dolore eveniet harum voluptas
-            repudiandae, molestias ullam ducimus dicta est nemo impedit neque id. Inventore officiis neque dolor fugiat,
-            odit rerum? Tempora ipsum odit, beatae laudantium eaque corrupti deleniti distinctio totam ipsam voluptas
-            officia! Debitis, harum culpa ut modi libero qui fugit beatae, non, tempora ducimus inventore? Debitis
-            veniam magni suscipit distinctio, odit eaque nesciunt minus voluptatem maiores ab tempora dolor doloremque
-            eligendi est unde ut voluptas temporibus! Vero autem optio velit adipisci ipsam. Sunt magnam dolore
-            voluptatem, natus veritatis quia aliquam ipsam iste nostrum maxime. Ut, perspiciatis eos dolores omnis
-            asperiores amet id, eveniet iure, numquam obcaecati placeat architecto veritatis.
-          </p>
+          <div className="card">
+            <div className="card-top">
+              <img src={currentUser.photoURL} alt="Profile" />
+              <div className="info">
+                <div className="card-title">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                  porro, voluptas est repellat harum dolores quo?
+                </div>
+                <div className="card-desc">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                </div>
+                <div className="card-difficulty diff-3">Hard</div>
+              </div>
+            </div>
+            <div className="card-bottom">
+              <button className="view-more">View more</button>
+            </div>
+          </div>
         </div>
       </div>
       <RenderForm />

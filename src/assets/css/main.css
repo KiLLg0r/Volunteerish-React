@@ -508,7 +508,8 @@
   align-items: center;
   justify-content: flex-end;
 }
-.card .card-bottom .view-more {
+
+.view-more {
   display: block;
   border: 2px solid #ffbd59;
   color: #ffbd59;

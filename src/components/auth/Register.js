@@ -39,6 +39,7 @@ const Register = () => {
   }
 
   // TODO Add 1s timeout after successfully register and display to user a success message
+  // TODO Implement errors
 
   return (
     <div className="register">
