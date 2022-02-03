@@ -13,6 +13,8 @@ import "firebase/compat/firestore";
 
 import { ReactComponent as VolunteerSvg } from "../../assets/svg/volunteer.svg";
 
+import Input from "../Input";
+
 SwiperCore.use([Navigation]);
 
 // TODO Implement errors
@@ -245,74 +247,28 @@ const CompleteRegistration = () => {
           <SwiperSlide>
             <div className="wrapper third-slide">
               <div className="title">Let's add your personal information</div>
-              <div className="f-wrapper">
-                <input type="email" spellCheck="false" required ref={nameRef} />
-                <div className="label">Name</div>
-                <div className="icon"></div>
-              </div>
-              <div className="f-wrapper">
-                <input type="date" spellCheck="false" required style={{ textIndent: "5.75rem" }} ref={birthRef} />
-                <div className="label">Birth date</div>
-                <div className="icon"></div>
-              </div>
+              <Input type="text" indent="0" ref={nameRef} name="Name" />
+              <Input type="date" indent="5.75" ref={birthRef} name="Birth date" />
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="wrapper fourth-slide">
               <div className="title">Next, we need your address</div>
-              <div className="f-wrapper">
-                <input type="text" spellCheck="false" required style={{ textIndent: "5rem" }} ref={countryRef} />
-                <div className="label">Country</div>
-                <div className="icon"></div>
-              </div>
-              <div className="f-wrapper">
-                <input type="text" spellCheck="false" required style={{ textIndent: "3.75rem" }} ref={stateRef} />
-                <div className="label">State</div>
-                <div className="icon"></div>
-              </div>
-              <div className="f-wrapper">
-                <input type="text" spellCheck="false" required style={{ textIndent: "3.25rem" }} ref={cityRef} />
-                <div className="label">City</div>
-                <div className="icon"></div>
-              </div>
+              <Input type="text" indent="5" ref={countryRef} name="Country" />
+              <Input type="text" indent="3.75" ref={stateRef} name="State" />
+              <Input type="text" indent="3.25" ref={cityRef} name="City" />
             </div>
           </SwiperSlide>
           <SwiperSlide>
             <div className="wrapper fifth-slide">
               <div className="title">Next, we need your address</div>
-              <div className="f-wrapper">
-                <input type="text" spellCheck="false" required style={{ textIndent: "4rem" }} ref={streetRef} />
-                <div className="label">Street</div>
-                <div className="icon"></div>
-              </div>
+              <Input type="text" indent="4" ref={streetRef} name="Street" />
               <div className="group">
-                <div className="f-wrapper">
-                  <input
-                    type="number"
-                    spellCheck="false"
-                    required
-                    style={{ textIndent: "5rem" }}
-                    ref={streetNumberRef}
-                  />
-                  <div className="label">Number</div>
-                  <div className="icon"></div>
-                </div>
-                <div className="f-wrapper">
-                  <input type="text" spellCheck="false" required style={{ textIndent: "5rem" }} ref={buildingRef} />
-                  <div className="label">Building</div>
-                  <div className="icon"></div>
-                </div>
+                <Input type="number" indent="5" ref={streetNumberRef} name="Number" />
+                <Input type="text" indent="5" ref={buildingRef} name="Building" />
               </div>
-              <div className="f-wrapper">
-                <input type="number" spellCheck="false" required style={{ textIndent: "6.25rem" }} ref={apartmentRef} />
-                <div className="label">Apartment</div>
-                <div className="icon"></div>
-              </div>
-              <div className="f-wrapper" style={{ marginBlock: "1rem" }}>
-                <input type="number" spellCheck="false" required style={{ textIndent: "6rem" }} ref={zipcodeRef} />
-                <div className="label">Zip code</div>
-                <div className="icon"></div>
-              </div>
+              <Input type="number" indent="6.25" ref={apartmentRef} name="Apartment" />
+              <Input type="number" indent="6" ref={zipcodeRef} name="Zip code" style={{ marginBlock: "1rem" }} />
             </div>
           </SwiperSlide>
           {/* <SwiperSlide>cv</SwiperSlide> */}
@@ -328,6 +284,7 @@ const CompleteRegistration = () => {
                   setTimeout(() => {
                     spinnerRef.current.classList.toggle("visible");
                     hidePopup();
+                    window.location.reload();
                   }, 3000);
                 }}
               >

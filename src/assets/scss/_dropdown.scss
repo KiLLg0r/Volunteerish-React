@@ -1,0 +1,38 @@
+@use "./colors" as *;
+
+.dropdown {
+  margin-block: 1rem;
+  width: 100%;
+  height: auto;
+  border: 2px solid $accent;
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+
+  #helpingDropdown {
+    margin-top: 0;
+  }
+
+  .dropdown-btn {
+    width: 100%;
+    height: 4rem;
+    padding-inline: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    svg {
+      color: $accent;
+      font-size: 2.5rem;
+    }
+  }
+
+  .dropdown-menu {
+    &.closed {
+      display: none;
+    }
+    &.opened {
+      display: block;
+    }
+  }
+}

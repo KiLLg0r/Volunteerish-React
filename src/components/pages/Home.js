@@ -7,10 +7,14 @@ import CompleteRegistration from "./CompleteRegistration";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
+import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+
 const Home = () => {
   const [error, setError] = useState("");
   const { logout, currentUser } = useAuth();
   const history = useHistory();
+
+  const [isOpen, setIsOpen] = useState([false, false]);
 
   const db = firebase.firestore();
   const userDoc = db.collection("users").doc(currentUser.uid);
@@ -42,6 +46,11 @@ const Home = () => {
     else return null;
   };
 
+  const DropdownIcon = ({ isOpen }) => {
+    if (isOpen) return <BiChevronDown />;
+    else return <BiChevronUp />;
+  };
+
   return (
     <section className="home">
       {error && (
@@ -49,7 +58,6 @@ const Home = () => {
           {error}
         </div>
       )}
-      {/* <button onClick={updateUser}>Update</button> */}
       <div className="profile">
         <h1 className="title">Profile</h1>
         <div className="profile-data">
@@ -77,80 +85,216 @@ const Home = () => {
       <div className="announces">
         <h1 className="title">Announces</h1>
         <div className="active-ann">
-          <h1 className="subtitle">Helping</h1>
-          <div className="card">
-            <div className="card-top">
-              <img src={currentUser.photoURL} alt="Profile" />
-              <div className="info">
-                <div className="card-title">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                  porro, voluptas est repellat harum dolores quo?
+          <div className="dropdown" id="helpingDropdown">
+            <div
+              className="dropdown-btn"
+              onClick={() => {
+                let newArray = [...isOpen];
+                newArray[0] = !isOpen[0];
+                setIsOpen(newArray);
+              }}
+            >
+              <div className="subtitle">Helping</div>
+              <DropdownIcon isOpen={isOpen[0]} />
+            </div>
+            <div className={`dropdown-menu ${isOpen[0] ? "opened" : "closed"}`}>
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
                 </div>
-                <div className="card-desc">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
                 </div>
-                <div className="card-difficulty diff-1">Easy</div>
               </div>
-            </div>
-            <div className="card-bottom">
-              <button className="view-more">View more</button>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-top">
-              <img src={currentUser.photoURL} alt="Profile" />
-              <div className="info">
-                <div className="card-title">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                  porro, voluptas est repellat harum dolores quo?
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
                 </div>
-                <div className="card-desc">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
                 </div>
-                <div className="card-difficulty diff-2">Medium</div>
               </div>
-            </div>
-            <div className="card-bottom">
-              <button className="view-more">View more</button>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-top">
-              <img src={currentUser.photoURL} alt="Profile" />
-              <div className="info">
-                <div className="card-title">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                  porro, voluptas est repellat harum dolores quo?
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
                 </div>
-                <div className="card-desc">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
                 </div>
-                <div className="card-difficulty diff-3">Hard</div>
               </div>
-            </div>
-            <div className="card-bottom">
-              <button className="view-more">View more</button>
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
+                </div>
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
+                </div>
+              </div>
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
+                </div>
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div className="other-ann">
-          <h1 className="subtitle">Helped</h1>
-          <div className="card">
-            <div className="card-top">
-              <img src={currentUser.photoURL} alt="Profile" />
-              <div className="info">
-                <div className="card-title">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                  porro, voluptas est repellat harum dolores quo?
-                </div>
-                <div className="card-desc">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                </div>
-                <div className="card-difficulty diff-3">Hard</div>
-              </div>
+          <div className="dropdown">
+            <div
+              className="dropdown-btn"
+              onClick={() => {
+                let newArray = [...isOpen];
+                newArray[1] = !isOpen[1];
+                setIsOpen(newArray);
+              }}
+            >
+              <div className="subtitle">Helped</div>
+              <DropdownIcon isOpen={isOpen[1]} />
             </div>
-            <div className="card-bottom">
-              <button className="view-more">View more</button>
+            <div className={`dropdown-menu ${isOpen[1] ? "opened" : "closed"}`}>
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
+                </div>
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
+                </div>
+              </div>
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
+                </div>
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
+                </div>
+              </div>
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
+                </div>
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
+                </div>
+              </div>
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
+                </div>
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
+                </div>
+              </div>
+              <div className="card">
+                <div className="card-top">
+                  <img src={currentUser.photoURL} alt="Profile" />
+                  <div className="info">
+                    <div className="card-title">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
+                      porro, voluptas est repellat harum dolores quo?
+                    </div>
+                    <div className="card-desc">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    </div>
+                    <div className="card-difficulty diff-1">Easy</div>
+                  </div>
+                </div>
+                <div className="card-bottom">
+                  <button className="view-more">View more</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

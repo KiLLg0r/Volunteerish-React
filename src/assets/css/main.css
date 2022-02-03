@@ -234,6 +234,7 @@
   align-items: center;
 }
 .primary-nav .navigation .navigation-links .nav-link {
+  -webkit-tap-highlight-color: transparent;
   width: 100%;
   height: 100%;
   display: flex;
@@ -267,7 +268,7 @@
   padding-block: 1.25rem;
 }
 .home .subtitle {
-  color: #ff7b7b;
+  color: #ff5a5a;
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -493,6 +494,7 @@
 .card .card-top .info .card-difficulty {
   font-size: 1.125rem;
   font-style: italic;
+  margin-top: 0.5rem;
 }
 .card .card-top .info .card-difficulty.diff-1 {
   color: #32cd32;
@@ -516,6 +518,36 @@
   background-color: transparent;
   padding: 0.625rem 1rem;
   border-radius: 0.5rem;
+}
+
+.dropdown {
+  margin-block: 1rem;
+  width: 100%;
+  height: auto;
+  border: 2px solid #ff5a5a;
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+}
+.dropdown #helpingDropdown {
+  margin-top: 0;
+}
+.dropdown .dropdown-btn {
+  width: 100%;
+  height: 4rem;
+  padding-inline: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dropdown .dropdown-btn svg {
+  color: #ff5a5a;
+  font-size: 2.5rem;
+}
+.dropdown .dropdown-menu.closed {
+  display: none;
+}
+.dropdown .dropdown-menu.opened {
+  display: block;
 }
 
 *,
