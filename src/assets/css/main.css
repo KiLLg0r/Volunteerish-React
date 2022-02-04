@@ -594,7 +594,7 @@
   height: calc(100vh - 5rem);
   overflow: scroll;
   color: #a9abae;
-  padding: 1rem;
+  padding: 1rem 2rem;
   font-size: 1.25rem;
 }
 .settings .title {
@@ -639,7 +639,35 @@
   padding: 0.5rem 0;
 }
 .settings .settings-links .settings-link svg {
+  font-size: 1.75rem;
+}
+.settings .settings-links .settings-link span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.account {
+  height: calc(100vh - 5rem);
+  overflow: scroll;
+  color: #a9abae;
+  padding: 1rem;
+}
+.account .header {
+  width: 100%;
   font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ff5a5a;
+}
+.account .header button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #ff5a5a;
+  font-size: 3rem;
 }
 
 *,

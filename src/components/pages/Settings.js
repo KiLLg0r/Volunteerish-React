@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { BiChevronRight, BiLogOut } from "react-icons/bi";
+import { BiChevronRight, BiLogOut, BiUserCircle, BiHelpCircle, BiInfoCircle } from "react-icons/bi";
 
 const Settings = () => {
   const { logout } = useAuth();
@@ -26,18 +26,27 @@ const Settings = () => {
       <div>{error}</div>
       <nav className="settings-links">
         <hr className="line" />
-        <NavLink className="settings-link" exact to="/account">
-          <span>Account</span>
+        <NavLink className="settings-link" to="/account">
+          <span>
+            <BiUserCircle />
+            Account
+          </span>
           <BiChevronRight />
         </NavLink>
         <hr className="line" />
-        <NavLink className="settings-link" exact to="/help">
-          <span>Help &#38; Support</span>
+        <NavLink className="settings-link" to="/help">
+          <span>
+            <BiHelpCircle />
+            Help &#38; Support
+          </span>
           <BiChevronRight />
         </NavLink>
         <hr className="line" />
-        <NavLink className="settings-link" exact to="/about">
-          <span>About</span>
+        <NavLink className="settings-link" to="/about">
+          <span>
+            <BiInfoCircle />
+            About
+          </span>
           <BiChevronRight />
         </NavLink>
         <hr className="line" />

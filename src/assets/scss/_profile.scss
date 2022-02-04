@@ -1,0 +1,26 @@
+@use "./colors" as *;
+
+.account {
+  height: calc(100vh - 5rem);
+  overflow: scroll;
+  color: $gray-light-600;
+  padding: 1rem;
+
+  .header {
+    width: 100%;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $accent;
+
+    button {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: none;
+      color: $accent;
+      font-size: 3rem;
+    }
+  }
+}
