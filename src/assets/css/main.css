@@ -525,7 +525,7 @@
   width: 100%;
   height: auto;
   border: 2px solid #ff5a5a;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   border-radius: 0.625rem;
 }
 .dropdown #helpingDropdown {
@@ -548,6 +548,98 @@
 }
 .dropdown .dropdown-menu.opened {
   display: block;
+}
+
+.announcements {
+  height: calc(100vh - 5rem);
+  overflow: scroll;
+  color: #a9abae;
+  padding: 1rem;
+}
+.announcements .title {
+  color: #ff5a5a;
+  font-size: 2rem;
+  margin-block-end: 1rem;
+}
+.announcements .dropdown {
+  padding: 0 0.5rem;
+  border-radius: 2rem;
+  border: none;
+  background: #53565d;
+}
+.announcements .dropdown .dropdown-menu {
+  padding-bottom: 1.5rem;
+  padding-inline: 1rem;
+}
+.announcements .dropdown svg {
+  color: #a9abae;
+}
+.announcements .select-group {
+  margin-block: 0.5rem;
+}
+.announcements label {
+  color: #eaeaeb;
+}
+.announcements select {
+  display: block;
+  width: 100%;
+  padding-block: 0.5rem;
+  background: #53565d;
+  color: #a9abae;
+  border-radius: 0.685rem;
+  margin-top: 0.5rem;
+}
+
+.settings {
+  height: calc(100vh - 5rem);
+  overflow: scroll;
+  color: #a9abae;
+  padding: 1rem;
+  font-size: 1.25rem;
+}
+.settings .title {
+  color: #ff5a5a;
+  font-size: 2rem;
+  margin-block-end: 1rem;
+}
+.settings .line {
+  width: 100%;
+  height: 1px;
+  background: #94969a;
+  margin-block: 0.25rem;
+  border: none;
+}
+.settings .log-out {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  color: #ff5a5a;
+  background: transparent;
+  border: 2px solid #ff5a5a;
+  border-radius: 0.685rem;
+}
+.settings .log-out svg {
+  font-size: 1.5rem;
+  color: #ff5a5a;
+}
+.settings .settings-links {
+  display: flex;
+  flex-direction: column;
+}
+.settings .settings-links .settings-link {
+  color: #d4d5d6;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+.settings .settings-links .settings-link svg {
+  font-size: 1.5rem;
 }
 
 *,

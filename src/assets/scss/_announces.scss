@@ -1,0 +1,48 @@
+@use "./colors" as *;
+
+.announcements {
+  height: calc(100vh - 5rem);
+  overflow: scroll;
+  color: $gray-light-600;
+  padding: 1rem;
+
+  .title {
+    color: $accent;
+    font-size: 2rem;
+    margin-block-end: 1rem;
+  }
+
+  .dropdown {
+    padding: 0 0.5rem;
+    border-radius: 2rem;
+    border: none;
+    background: $gray-light-200;
+
+    .dropdown-menu {
+      padding-bottom: 1.5rem;
+      padding-inline: 1rem;
+    }
+
+    svg {
+      color: $gray-light-600;
+    }
+  }
+
+  .select-group {
+    margin-block: 0.5rem;
+  }
+
+  label {
+    color: $gray-light-900;
+  }
+
+  select {
+    display: block;
+    width: 100%;
+    padding-block: 0.5rem;
+    background: $gray-light-200;
+    color: $gray-light-600;
+    border-radius: 0.685rem;
+    margin-top: 0.5rem;
+  }
+}

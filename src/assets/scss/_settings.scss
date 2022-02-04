@@ -1,0 +1,60 @@
+@use "./colors" as *;
+
+.settings {
+  height: calc(100vh - 5rem);
+  overflow: scroll;
+  color: $gray-light-600;
+  padding: 1rem;
+  font-size: 1.25rem;
+
+  .title {
+    color: $accent;
+    font-size: 2rem;
+    margin-block-end: 1rem;
+  }
+
+  .line {
+    width: 100%;
+    height: 1px;
+    background: $gray-light-500;
+    margin-block: 0.25rem;
+    border: none;
+  }
+
+  .log-out {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    color: $accent;
+    background: transparent;
+    border: 2px solid $accent;
+    border-radius: 0.685rem;
+
+    svg {
+      font-size: 1.5rem;
+      color: $accent;
+    }
+  }
+
+  .settings-links {
+    display: flex;
+    flex-direction: column;
+
+    .settings-link {
+      color: $gray-light-800;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+
+      svg {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

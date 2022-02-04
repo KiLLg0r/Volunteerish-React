@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 import CompleteRegistration from "./CompleteRegistration";
@@ -10,9 +9,7 @@ import "firebase/compat/firestore";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 
 const Home = () => {
-  const [error, setError] = useState("");
-  const { logout, currentUser } = useAuth();
-  const history = useHistory();
+  const { currentUser } = useAuth();
 
   const [isOpen, setIsOpen] = useState([false, false]);
 
@@ -30,17 +27,6 @@ const Home = () => {
       });
   };
 
-  async function handleLogOut() {
-    setError("");
-
-    try {
-      await logout();
-      history.push("/login");
-    } catch {
-      setError("Failed to log out");
-    }
-  }
-
   const RenderForm = () => {
     if (!currentUser.displayName) return <CompleteRegistration />;
     else return null;
@@ -53,11 +39,6 @@ const Home = () => {
 
   return (
     <section className="home">
-      {error && (
-        <div className="alert" role="alert">
-          {error}
-        </div>
-      )}
       <div className="profile">
         <h1 className="title">Profile</h1>
         <div className="profile-data">
@@ -76,9 +57,6 @@ const Home = () => {
           </h3>
         </div>
       </div>
-      <button variant="link" onClick={handleLogOut} className="view-more" style={{ marginBlock: "1rem" }}>
-        Log out
-      </button>
       <button onClick={getData} className="view-more">
         Get data
       </button>
