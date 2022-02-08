@@ -67,3 +67,22 @@ The application is made entirely of JavaScript, SCSS and HTML5. Optional framewo
 -> FirebaseFirebase for authentication, storage of files, messages and user data
 
 -> Countries States Cities Database for precise location management of users (country, state, and city)
+
+
+{{ template:logo }}
+<h1 align="center">volunteerish-react</h1>
+{{ template:badges }}
+{{ template:description }}
+bullets
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
+
+## ➤ Table of Contents
+
+* [➤ Volunteerish](#-volunteerish)
+	* [➤ Home](#-home)
+	* [➤ Announcements](#-announcements)
+	* [➤ Shop](#-shop)
+	* [➤ Messages](#-messages)
+	* [➤ Settings](#-settings)
+	* [➤ Technology and frameworks](#-technology-and-frameworks)
