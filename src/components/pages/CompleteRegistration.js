@@ -175,10 +175,6 @@ const CompleteRegistration = () => {
   return (
     <>
       <form className="completeRegistration" ref={completeRegistrationRef}>
-        <div className="close" onClick={hidePopup}>
-          &#9747;
-        </div>
-
         <Swiper
           allowTouchMove={false}
           className="popup"

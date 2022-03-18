@@ -85,11 +85,11 @@ const Home = () => {
                   </div>
                   <div className="card--group">
                     <div className="card--category">
-                      <label for="">Category: </label>
+                      <label htmlFor="">Category: </label>
                       <span> Grocery </span>
                     </div>
                     <div className="card--difficulty">
-                      <label for="">Difficulty: </label>
+                      <label htmlFor="">Difficulty: </label>
                       <span>Medium</span>
                     </div>
                   </div>
@@ -154,11 +154,11 @@ const Home = () => {
                   </div>
                   <div className="card--group">
                     <div className="card--category">
-                      <label for="">Category: </label>
+                      <label htmlFor="">Category: </label>
                       <span> Grocery </span>
                     </div>
                     <div className="card--difficulty">
-                      <label for="">Difficulty: </label>
+                      <label htmlFor="">Difficulty: </label>
                       <span>Medium</span>
                     </div>
                   </div>
@@ -180,11 +180,11 @@ const Home = () => {
                   </div>
                   <div className="card--group">
                     <div className="card--category">
-                      <label for="">Category: </label>
+                      <label htmlFor="">Category: </label>
                       <span> Grocery </span>
                     </div>
                     <div className="card--difficulty">
-                      <label for="">Difficulty: </label>
+                      <label htmlFor="">Difficulty: </label>
                       <span>Medium</span>
                     </div>
                   </div>
@@ -206,11 +206,11 @@ const Home = () => {
                   </div>
                   <div className="card--group">
                     <div className="card--category">
-                      <label for="">Category: </label>
+                      <label htmlFor="">Category: </label>
                       <span> Grocery </span>
                     </div>
                     <div className="card--difficulty">
-                      <label for="">Difficulty: </label>
+                      <label htmlFor="">Difficulty: </label>
                       <span>Medium</span>
                     </div>
                   </div>
@@ -232,11 +232,11 @@ const Home = () => {
                   </div>
                   <div className="card--group">
                     <div className="card--category">
-                      <label for="">Category: </label>
+                      <label htmlFor="">Category: </label>
                       <span> Grocery </span>
                     </div>
                     <div className="card--difficulty">
-                      <label for="">Difficulty: </label>
+                      <label htmlFor="">Difficulty: </label>
                       <span>Medium</span>
                     </div>
                   </div>
