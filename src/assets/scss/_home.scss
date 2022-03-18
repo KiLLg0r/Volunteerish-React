@@ -9,7 +9,7 @@
 
   .title {
     color: $gray-light-900;
-    font-size: 2rem;
+    font-size: 1.75rem;
     padding-block: 1.25rem;
   }
 
@@ -52,11 +52,35 @@
     }
   }
 
+  .ann-container {
+    margin-block: 1rem;
+  }
+
+  .container-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .show-hide-btn {
+      text-decoration: underline;
+      width: 2.75rem;
+    }
+  }
+
   .cards-container {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
     padding-block: 1rem;
+
+    &.hide-container {
+      display: none;
+    }
+
+    &.show-container {
+      display: block;
+    }
 
     .card {
       display: inline-block;

@@ -6,12 +6,10 @@ import CompleteRegistration from "./CompleteRegistration";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
-import { BiChevronDown, BiChevronUp } from "react-icons/bi";
-
 const Home = () => {
   const { currentUser } = useAuth();
 
-  const [isOpen, setIsOpen] = useState([false, false]);
+  const [isOpen, setOpen] = useState([true, false]);
 
   const db = firebase.firestore();
   const userDoc = db.collection("users").doc(currentUser.uid);
@@ -30,11 +28,6 @@ const Home = () => {
   const RenderForm = () => {
     if (!currentUser.displayName) return <CompleteRegistration />;
     else return null;
-  };
-
-  const DropdownIcon = ({ isOpen }) => {
-    if (isOpen) return <BiChevronDown />;
-    else return <BiChevronUp />;
   };
 
   return (
@@ -62,45 +55,68 @@ const Home = () => {
       </button>
       <div className="announces">
         <h1 className="title">Announces</h1>
-        <div className="active-ann">
-          <div className="dropdown" id="helpingDropdown">
+        <div className="helping-now-container ann-container">
+          <div className="container-title">
+            <h3>Helping now</h3>
             <div
-              className="dropdown-btn"
+              className="show-hide-btn"
               onClick={() => {
                 let newArray = [...isOpen];
                 newArray[0] = !isOpen[0];
-                setIsOpen(newArray);
+                setOpen(newArray);
               }}
             >
-              <div className="subtitle">Helping</div>
-              <DropdownIcon isOpen={isOpen[0]} />
+              {isOpen[0] === true ? "Hide" : "Show"}
             </div>
-            <div className={`dropdown-menu ${isOpen[0] ? "opened" : "closed"}`}>
-              <div class="card">
-                <div class="card--background"></div>
-                <div class="card--content">
-                  <div class="card--content--left">
-                    <div class="card--img">
-                      <img
-                        src="https://e7.pngegg.com/pngimages/442/477/png-clipart-computer-icons-user-profile-avatar-profile-heroes-profile-thumbnail.png"
-                        alt="profile"
-                      />
+          </div>
+          <div className={`cards-container ${isOpen[0] === true ? "show-container" : "hide-container"}`}>
+            <div className="card">
+              <div className="card--background"></div>
+              <div className="card--content">
+                <div className="card--content--left">
+                  <div className="card--img">
+                    <img src={currentUser.photoURL} alt="profile" />
+                  </div>
+                </div>
+                <div className="card--content--right">
+                  <div className="card--name">Oblesniuc Robert Andrei</div>
+                  <div className="card--description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
+                  </div>
+                  <div className="card--group">
+                    <div className="card--category">
+                      <label for="">Category: </label>
+                      <span> Grocery </span>
+                    </div>
+                    <div className="card--difficulty">
+                      <label for="">Difficulty: </label>
+                      <span>Medium</span>
                     </div>
                   </div>
-                  <div class="card--content--right">
-                    <div class="card--name">Oblesniuc Robert Andrei</div>
-                    <div class="card--description">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
+                </div>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card--background"></div>
+              <div className="card--content">
+                <div className="card--content--left">
+                  <div className="card--img">
+                    <img src={currentUser.photoURL} alt="profile" />
+                  </div>
+                </div>
+                <div className="card--content--right">
+                  <div className="card--name">Oblesniuc Robert Andrei</div>
+                  <div className="card--description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
+                  </div>
+                  <div className="card--group">
+                    <div className="card--category">
+                      <label htmlFor="">Category: </label>
+                      <span> Grocery </span>
                     </div>
-                    <div class="card--group">
-                      <div class="card--category">
-                        <label for="">Category: </label>
-                        <span> Grocery </span>
-                      </div>
-                      <div class="card--difficulty">
-                        <label for="">Difficulty: </label>
-                        <span>Medium</span>
-                      </div>
+                    <div className="card--difficulty">
+                      <label htmlFor="">Difficulty: </label>
+                      <span>Medium</span>
                     </div>
                   </div>
                 </div>
@@ -108,162 +124,121 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="other-ann">
-          <div className="dropdown">
+        <div className="helped-container ann-container">
+          <div className="container-title">
+            <h3>Helped people</h3>
             <div
-              className="dropdown-btn"
+              className="show-hide-btn"
               onClick={() => {
                 let newArray = [...isOpen];
                 newArray[1] = !isOpen[1];
-                setIsOpen(newArray);
+                setOpen(newArray);
               }}
             >
-              <div className="subtitle">Helped</div>
-              <DropdownIcon isOpen={isOpen[1]} />
-            </div>
-            <div className={`dropdown-menu ${isOpen[1] ? "opened" : "closed"}`}>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
-                    </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                    </div>
-                    <div className="card-difficulty diff-1">Easy</div>
-                  </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
-                    </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                    </div>
-                    <div className="card-difficulty diff-1">Easy</div>
-                  </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
-                    </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                    </div>
-                    <div className="card-difficulty diff-1">Easy</div>
-                  </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
-                    </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                    </div>
-                    <div className="card-difficulty diff-1">Easy</div>
-                  </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
-                    </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                    </div>
-                    <div className="card-difficulty diff-1">Easy</div>
-                  </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
-                </div>
-              </div>
+              {isOpen[1] === true ? "Hide" : "Show"}
             </div>
           </div>
-        </div>
-        <h3>Helping now</h3>
-        <div className="cards-container">
-          <div class="card">
-            <div class="card--background"></div>
-            <div class="card--content">
-              <div class="card--content--left">
-                <div class="card--img">
-                  <img src={currentUser.photoURL} alt="profile" />
-                </div>
-              </div>
-              <div class="card--content--right">
-                <div class="card--name">Oblesniuc Robert Andrei</div>
-                <div class="card--description">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
-                </div>
-                <div class="card--group">
-                  <div class="card--category">
-                    <label for="">Category: </label>
-                    <span> Grocery </span>
+          <div className={`cards-container ${isOpen[1] === true ? "show-container" : "hide-container"}`}>
+            <div className="card">
+              <div className="card--background"></div>
+              <div className="card--content">
+                <div className="card--content--left">
+                  <div className="card--img">
+                    <img src={currentUser.photoURL} alt="profile" />
                   </div>
-                  <div class="card--difficulty">
-                    <label for="">Difficulty: </label>
-                    <span>Medium</span>
+                </div>
+                <div className="card--content--right">
+                  <div className="card--name">Oblesniuc Robert Andrei</div>
+                  <div className="card--description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
+                  </div>
+                  <div className="card--group">
+                    <div className="card--category">
+                      <label for="">Category: </label>
+                      <span> Grocery </span>
+                    </div>
+                    <div className="card--difficulty">
+                      <label for="">Difficulty: </label>
+                      <span>Medium</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card--background"></div>
-            <div class="card--content">
-              <div class="card--content--left">
-                <div class="card--img">
-                  <img src={currentUser.photoURL} alt="profile" />
+            <div className="card">
+              <div className="card--background"></div>
+              <div className="card--content">
+                <div className="card--content--left">
+                  <div className="card--img">
+                    <img src={currentUser.photoURL} alt="profile" />
+                  </div>
+                </div>
+                <div className="card--content--right">
+                  <div className="card--name">Oblesniuc Robert Andrei</div>
+                  <div className="card--description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
+                  </div>
+                  <div className="card--group">
+                    <div className="card--category">
+                      <label for="">Category: </label>
+                      <span> Grocery </span>
+                    </div>
+                    <div className="card--difficulty">
+                      <label for="">Difficulty: </label>
+                      <span>Medium</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="card--content--right">
-                <div class="card--name">Oblesniuc Robert Andrei</div>
-                <div class="card--description">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
-                </div>
-                <div class="card--group">
-                  <div class="card--category">
-                    <label for="">Category: </label>
-                    <span> Grocery </span>
+            </div>
+            <div className="card">
+              <div className="card--background"></div>
+              <div className="card--content">
+                <div className="card--content--left">
+                  <div className="card--img">
+                    <img src={currentUser.photoURL} alt="profile" />
                   </div>
-                  <div class="card--difficulty">
-                    <label for="">Difficulty: </label>
-                    <span>Medium</span>
+                </div>
+                <div className="card--content--right">
+                  <div className="card--name">Oblesniuc Robert Andrei</div>
+                  <div className="card--description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
+                  </div>
+                  <div className="card--group">
+                    <div className="card--category">
+                      <label for="">Category: </label>
+                      <span> Grocery </span>
+                    </div>
+                    <div className="card--difficulty">
+                      <label for="">Difficulty: </label>
+                      <span>Medium</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card--background"></div>
+              <div className="card--content">
+                <div className="card--content--left">
+                  <div className="card--img">
+                    <img src={currentUser.photoURL} alt="profile" />
+                  </div>
+                </div>
+                <div className="card--content--right">
+                  <div className="card--name">Oblesniuc Robert Andrei</div>
+                  <div className="card--description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
+                  </div>
+                  <div className="card--group">
+                    <div className="card--category">
+                      <label for="">Category: </label>
+                      <span> Grocery </span>
+                    </div>
+                    <div className="card--difficulty">
+                      <label for="">Difficulty: </label>
+                      <span>Medium</span>
+                    </div>
                   </div>
                 </div>
               </div>

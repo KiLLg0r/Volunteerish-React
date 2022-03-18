@@ -69,7 +69,7 @@ const Announces = () => {
             <div className="select-group">
               <label htmlFor="city">City:</label>
               <select id="city" ref={selectedCityRef}>
-                <option value="">Select a state</option>
+                <option value="">Select a city</option>
                 {cities.map((city) => {
                   return (
                     <option value={city.isoCode} key={city.isoCode}>

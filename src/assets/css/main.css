@@ -264,7 +264,7 @@
 }
 .home .title {
   color: #eaeaeb;
-  font-size: 2rem;
+  font-size: 1.75rem;
   padding-block: 1.25rem;
 }
 .home .subtitle {
@@ -299,11 +299,30 @@
 .home .profile .profile-data .helped {
   color: #eaeaeb;
 }
+.home .ann-container {
+  margin-block: 1rem;
+}
+.home .container-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.home .container-title .show-hide-btn {
+  text-decoration: underline;
+  width: 2.75rem;
+}
 .home .cards-container {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
   padding-block: 1rem;
+}
+.home .cards-container.hide-container {
+  display: none;
+}
+.home .cards-container.show-container {
+  display: block;
 }
 .home .cards-container .card {
   display: inline-block;
@@ -464,8 +483,8 @@
   }
 }
 .card {
-  height: 125px;
-  width: 300px;
+  height: 175px;
+  width: 375px;
   position: relative;
   border-radius: 0.625rem;
   overflow: hidden;
@@ -486,11 +505,11 @@
   padding: 0.5rem;
 }
 .card .card--content .card--content--left {
-  width: 40%;
+  width: 159px;
   height: 100%;
 }
 .card .card--content .card--content--left .card--img img {
-  height: 109px;
+  height: 159px;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 0.352rem;
@@ -498,7 +517,7 @@
 .card .card--content .card--content--right {
   width: 60%;
   height: 100%;
-  font-size: 0.815rem;
+  padding-top: 0.5rem;
 }
 .card .card--content .card--content--right .card--name {
   color: #eaeaeb;
