@@ -299,13 +299,16 @@
 .home .profile .profile-data .helped {
   color: #eaeaeb;
 }
-.home .chart .title {
-  font-size: 1.25rem;
+.home .cards-container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-block: 1rem;
 }
-.home .chart img {
-  width: 80%;
-  display: block;
-  margin-inline: auto;
+.home .cards-container .card {
+  display: inline-block;
+  margin-inline-end: 1rem;
+  white-space: normal;
 }
 
 .login,
@@ -461,63 +464,62 @@
   }
 }
 .card {
-  width: 100%;
-  background-color: #53565d;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  margin-block: 1rem;
-  box-shadow: 0.5rem 0.5rem 2rem -1rem #181a1f;
-}
-.card .card-top {
-  display: flex;
-}
-.card .card-top img {
   height: 125px;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 0.5rem;
+  width: 300px;
+  position: relative;
+  border-radius: 0.625rem;
+  overflow: hidden;
 }
-.card .card-top .info {
-  padding-inline-start: 1rem;
-  width: 100%;
+.card .card--background {
+  background: inherit;
+  position: absolute;
+  inset: -1rem;
+  background: linear-gradient(to bottom left, #4c1b1b, #cc4848);
+  filter: blur(5px);
+}
+.card .card--content {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.card .card--content .card--content--left {
+  width: 40%;
   height: 100%;
 }
-.card .card-top .info .card-title {
-  font-size: 1.25rem;
-  color: #ff5a5a;
-  overflow: hidden;
-  height: 1.5rem;
+.card .card--content .card--content--left .card--img img {
+  height: 109px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0.352rem;
 }
-.card .card-top .info .card-name {
-  color: #d4d5d6;
+.card .card--content .card--content--right {
+  width: 60%;
+  height: 100%;
+  font-size: 0.815rem;
 }
-.card .card-top .info .card-difficulty {
-  font-size: 1.125rem;
-  font-style: italic;
+.card .card--content .card--content--right .card--name {
+  color: #eaeaeb;
+  margin-bottom: 0.5rem;
+}
+.card .card--content .card--content--right .card--description {
+  color: #a9abae;
+}
+.card .card--content .card--content--right .card--group {
   margin-top: 0.5rem;
-}
-.card .card-top .info .card-difficulty.diff-1 {
-  color: #32cd32;
-}
-.card .card-top .info .card-difficulty.diff-2 {
-  color: #e6a440;
-}
-.card .card-top .info .card-difficulty.diff-3 {
-  color: #ff0800;
-}
-.card .card-bottom {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
 }
-
-.view-more {
+.card .card--content .card--content--right .card--group label {
+  color: #20232a;
+}
+.card .card--content .card--content--right .card--group .card--category {
+  color: #d4d5d6;
   display: block;
-  border: 2px solid #ffbd59;
-  color: #ffbd59;
-  background-color: transparent;
-  padding: 0.625rem 1rem;
-  border-radius: 0.5rem;
+}
+.card .card--content .card--content--right .card--group .card--difficulty {
+  color: #ffb647;
 }
 
 .dropdown {

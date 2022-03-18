@@ -52,15 +52,16 @@
     }
   }
 
-  .chart {
-    .title {
-      font-size: 1.25rem;
-    }
+  .cards-container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding-block: 1rem;
 
-    img {
-      width: 80%;
-      display: block;
-      margin-inline: auto;
+    .card {
+      display: inline-block;
+      margin-inline-end: 1rem;
+      white-space: normal;
     }
   }
 }

@@ -76,94 +76,33 @@ const Home = () => {
               <DropdownIcon isOpen={isOpen[0]} />
             </div>
             <div className={`dropdown-menu ${isOpen[0] ? "opened" : "closed"}`}>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
+              <div class="card">
+                <div class="card--background"></div>
+                <div class="card--content">
+                  <div class="card--content--left">
+                    <div class="card--img">
+                      <img
+                        src="https://e7.pngegg.com/pngimages/442/477/png-clipart-computer-icons-user-profile-avatar-profile-heroes-profile-thumbnail.png"
+                        alt="profile"
+                      />
                     </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                    </div>
-                    <div className="card-difficulty diff-1">Easy</div>
                   </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
+                  <div class="card--content--right">
+                    <div class="card--name">Oblesniuc Robert Andrei</div>
+                    <div class="card--description">
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
                     </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
+                    <div class="card--group">
+                      <div class="card--category">
+                        <label for="">Category: </label>
+                        <span> Grocery </span>
+                      </div>
+                      <div class="card--difficulty">
+                        <label for="">Difficulty: </label>
+                        <span>Medium</span>
+                      </div>
                     </div>
-                    <div className="card-difficulty diff-1">Easy</div>
                   </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
-                    </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                    </div>
-                    <div className="card-difficulty diff-1">Easy</div>
-                  </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
-                    </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                    </div>
-                    <div className="card-difficulty diff-1">Easy</div>
-                  </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-top">
-                  <img src={currentUser.photoURL} alt="Profile" />
-                  <div className="info">
-                    <div className="card-title">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur voluptatem ea quas aliquam
-                      porro, voluptas est repellat harum dolores quo?
-                    </div>
-                    <div className="card-desc">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, placeat.
-                    </div>
-                    <div className="card-difficulty diff-1">Easy</div>
-                  </div>
-                </div>
-                <div className="card-bottom">
-                  <button className="view-more">View more</button>
                 </div>
               </div>
             </div>
@@ -271,6 +210,61 @@ const Home = () => {
                 </div>
                 <div className="card-bottom">
                   <button className="view-more">View more</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3>Helping now</h3>
+        <div className="cards-container">
+          <div class="card">
+            <div class="card--background"></div>
+            <div class="card--content">
+              <div class="card--content--left">
+                <div class="card--img">
+                  <img src={currentUser.photoURL} alt="profile" />
+                </div>
+              </div>
+              <div class="card--content--right">
+                <div class="card--name">Oblesniuc Robert Andrei</div>
+                <div class="card--description">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
+                </div>
+                <div class="card--group">
+                  <div class="card--category">
+                    <label for="">Category: </label>
+                    <span> Grocery </span>
+                  </div>
+                  <div class="card--difficulty">
+                    <label for="">Difficulty: </label>
+                    <span>Medium</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card--background"></div>
+            <div class="card--content">
+              <div class="card--content--left">
+                <div class="card--img">
+                  <img src={currentUser.photoURL} alt="profile" />
+                </div>
+              </div>
+              <div class="card--content--right">
+                <div class="card--name">Oblesniuc Robert Andrei</div>
+                <div class="card--description">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
+                </div>
+                <div class="card--group">
+                  <div class="card--category">
+                    <label for="">Category: </label>
+                    <span> Grocery </span>
+                  </div>
+                  <div class="card--difficulty">
+                    <label for="">Difficulty: </label>
+                    <span>Medium</span>
+                  </div>
                 </div>
               </div>
             </div>

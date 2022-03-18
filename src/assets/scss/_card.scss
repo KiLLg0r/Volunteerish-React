@@ -1,69 +1,71 @@
 @use "./colors" as *;
 
 .card {
-  width: 100%;
-  background-color: $gray-light-200;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  margin-block: 1rem;
-  box-shadow: 0.5rem 0.5rem 2rem -1rem $gray-dark-400;
+  height: 125px;
+  width: 300px;
+  position: relative;
+  border-radius: 0.625rem;
+  overflow: hidden;
 
-  .card-top {
+  .card--background {
+    background: inherit;
+    position: absolute;
+    inset: -1rem;
+    background: linear-gradient(to bottom left, $accent-dark-700, $accent-dark-200);
+    filter: blur(5px);
+  }
+
+  .card--content {
+    position: absolute;
+    height: inherit;
+    width: inherit;
     display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
 
-    img {
-      height: 125px;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: 0.5rem;
-    }
-
-    .info {
-      padding-inline-start: 1rem;
-      width: 100%;
+    .card--content--left {
+      width: 40%;
       height: 100%;
 
-      .card-title {
-        font-size: 1.25rem;
-        color: $accent;
-        overflow: hidden;
-        height: 1.5rem;
+      .card--img img {
+        height: 109px;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 0.352rem;
+      }
+    }
+
+    .card--content--right {
+      width: 60%;
+      height: 100%;
+      font-size: 0.815rem;
+
+      .card--name {
+        color: $gray-light-900;
+        margin-bottom: 0.5rem;
       }
 
-      .card-name {
-        color: $gray-light-800;
+      .card--description {
+        color: $gray-light-600;
       }
 
-      .card-difficulty {
-        font-size: 1.125rem;
-        font-style: italic;
+      .card--group {
         margin-top: 0.5rem;
+        display: flex;
 
-        &.diff-1 {
-          color: #32cd32;
+        label {
+          color: $gray-dark-200;
         }
-        &.diff-2 {
-          color: $accent-dark-100-gld;
+
+        .card--category {
+          color: $gray-light-800;
+          display: block;
         }
-        &.diff-3 {
-          color: #ff0800;
+
+        .card--difficulty {
+          color: $accent-gld;
         }
       }
     }
   }
-
-  .card-bottom {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-}
-
-.view-more {
-  display: block;
-  border: 2px solid $accent-light-100-gld;
-  color: $accent-light-100-gld;
-  background-color: transparent;
-  padding: 0.625rem 1rem;
-  border-radius: 0.5rem;
 }
