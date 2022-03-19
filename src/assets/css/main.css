@@ -512,17 +512,17 @@
   margin-bottom: 0.5rem;
 }
 .card .card--content .card--content--right .card--description {
-  color: #a9abae;
+  color: #bfc0c2;
 }
 .card .card--content .card--content--right .card--group {
   margin-top: 0.5rem;
   display: flex;
 }
 .card .card--content .card--content--right .card--group label {
-  color: #20232a;
+  color: #eaeaeb;
 }
 .card .card--content .card--content--right .card--group .card--category {
-  color: #d4d5d6;
+  color: #08aeea;
   display: block;
 }
 .card .card--content .card--content--right .card--group .card--difficulty {
@@ -705,7 +705,7 @@
 .account .user-data {
   width: 100%;
   height: auto;
-  background-color: #53565d;
+  background-color: #3e4148;
   margin-bottom: 1rem;
   padding: 0.5rem;
   border-radius: 0.625rem;
@@ -720,6 +720,50 @@
   border: none;
   font-size: 1.25rem;
   color: #eaeaeb;
+}
+.account .user-data select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #eaeaeb;
+  font-size: 1.25rem;
+}
+.account .user-data select:focus {
+  background: #282c34;
+}
+.account .save-btn {
+  width: 100%;
+  margin-block: 1rem;
+  padding-block: 1rem;
+  border: none;
+  border-radius: 0.625rem;
+  font-size: 1.25rem;
+  background: linear-gradient(to bottom left, #662424, #cc4848);
+  color: #eaeaeb;
+}
+.account .save-btn.disabled {
+  filter: grayscale(0.3);
+}
+.account .success--modal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+  z-index: 100;
+}
+.account .success--modal .modal--title {
+  font-size: 1.75rem;
+  color: #ff5a5a;
+  margin-block: 1rem;
+}
+.account .success--modal .modal--subtitle {
+  font-size: 1rem;
+}
+.account .success--modal.hide {
+  visibility: hidden;
 }
 
 .messages .title {
@@ -790,7 +834,7 @@ html {
 }
 
 body {
-  background-color: #3e4148;
+  background-color: #282c34;
 }
 
 #app {

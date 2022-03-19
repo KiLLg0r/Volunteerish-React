@@ -1,5 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../../firebase";
+import firebase from "firebase/compat/app";
+import "firebase/compat/storage";
+import "firebase/compat/firestore";
 
 const AuthContext = React.createContext();
 
@@ -9,6 +12,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
+  const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(true);
 
   function signup(email, password) {
@@ -35,9 +39,19 @@ export function AuthProvider({ children }) {
     currentUser.updateEmail(password);
   }
 
+  function getData(uid) {
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(uid)
+      .get()
+      .then((doc) => setUserData(doc.data()));
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      getData(user.uid);
       setLoading(false);
     });
 
@@ -46,6 +60,8 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    userData,
+    getData,
     signup,
     login,
     logout,

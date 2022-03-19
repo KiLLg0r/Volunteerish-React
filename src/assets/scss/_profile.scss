@@ -55,7 +55,7 @@
   .user-data {
     width: 100%;
     height: auto;
-    background-color: $gray-light-200;
+    background-color: $gray-light-100;
     margin-bottom: 1rem;
     padding: 0.5rem;
     border-radius: 0.625rem;
@@ -71,6 +71,58 @@
       border: none;
       font-size: 1.25rem;
       color: $gray-light-900;
+    }
+
+    select {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: $gray-light-900;
+      font-size: 1.25rem;
+
+      &:focus {
+        background: $gray;
+      }
+    }
+  }
+
+  .save-btn {
+    width: 100%;
+    margin-block: 1rem;
+    padding-block: 1rem;
+    border: none;
+    border-radius: 0.625rem;
+    font-size: 1.25rem;
+    background: linear-gradient(to bottom left, $accent-dark-600, $accent-dark-200);
+    color: $gray-light-900;
+
+    &.disabled {
+      filter: grayscale(0.3);
+    }
+  }
+
+  .success--modal {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $gray;
+    z-index: 100;
+
+    .modal--title {
+      font-size: 1.75rem;
+      color: $accent;
+      margin-block: 1rem;
+    }
+
+    .modal--subtitle {
+      font-size: 1rem;
+    }
+
+    &.hide {
+      visibility: hidden;
     }
   }
 }

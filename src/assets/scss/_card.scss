@@ -46,7 +46,7 @@
       }
 
       .card--description {
-        color: $gray-light-600;
+        color: $gray-light-700;
       }
 
       .card--group {
@@ -54,11 +54,11 @@
         display: flex;
 
         label {
-          color: $gray-dark-200;
+          color: $gray-light-900;
         }
 
         .card--category {
-          color: $gray-light-800;
+          color: $accent-bl;
           display: block;
         }
 
