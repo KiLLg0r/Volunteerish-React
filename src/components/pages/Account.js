@@ -38,12 +38,15 @@ function Account() {
   };
 
   useEffect(() => {
-    if (!userData) getData(currentUser.uid);
+    if (!userData) getData(currentUser.uid)
+  });
+
+  if(userData) {
     showStates();
     showCities();
     setCountry(Country.getCountryByCode(userData.country));
     setState(State.getStateByCodeAndCountry(userData.state, userData.country));
-  });
+  }
 
   let file = 0;
 
