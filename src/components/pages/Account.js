@@ -38,15 +38,16 @@ function Account() {
   };
 
   useEffect(() => {
-    if (!userData) getData(currentUser.uid)
-  });
+    if (!userData) getData(currentUser.uid);
 
-  if(userData) {
-    showStates();
-    showCities();
+    setStates([]);
+    setCities([]);
+    setStates(State.getStatesOfCountry(countryRef.current.value));
+    setCities(City.getCitiesOfState(countryRef.current.value, stateRef.current.value));
+
     setCountry(Country.getCountryByCode(userData.country));
     setState(State.getStateByCodeAndCountry(userData.state, userData.country));
-  }
+  }, [currentUser.uid, userData, getData]);
 
   let file = 0;
 
