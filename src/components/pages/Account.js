@@ -43,7 +43,7 @@ function Account() {
     showCities();
     setCountry(Country.getCountryByCode(userData.country));
     setState(State.getStateByCodeAndCountry(userData.state, userData.country));
-  }, []);
+  });
 
   let file = 0;
 
