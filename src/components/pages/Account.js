@@ -146,12 +146,13 @@ function Account() {
           <label htmlFor="input">Zipcode</label>
           <input type="text" value={userDetails} />
         </div>
+        <button onClick={console.log(userDetails + "ha")}>details</button>
       </>
     );
   };
 
   const Spinner = () => {
-    return <div className="spinner"></div>;
+    return <div className="spinner">spinner</div>;
   };
 
   const Main = () => {

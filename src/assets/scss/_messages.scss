@@ -1,0 +1,66 @@
+@use "./colors" as *;
+
+.messages {
+  .title {
+    color: $accent;
+    font-size: 2rem;
+    margin-block-end: -1rem;
+  }
+
+  .line {
+    width: 100%;
+    height: 1px;
+    background: $gray-light-500;
+    margin-block: 1rem;
+    border: none;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    padding-inline: 1rem;
+
+    img {
+      display: block;
+      height: 4rem;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 0.625rem;
+    }
+
+    .profile--status {
+      margin-inline-start: 1rem;
+    }
+
+    .profile--name {
+      font-size: 1.5rem;
+      margin-inline-start: 1rem;
+      color: $gray-light-800;
+    }
+  }
+
+  .list--item {
+    padding-block: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid $gray-light-200;
+
+    &:nth-child(1) {
+      margin-top: -1rem;
+    }
+
+    .list--pic {
+      display: block;
+      height: 2.5rem;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .list--name {
+      font-size: 1.125rem;
+      color: $gray-light-900;
+    }
+  }
+}
