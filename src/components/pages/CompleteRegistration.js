@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { useAuth } from "../contexts/AuthContext";
 
@@ -15,12 +15,18 @@ import { ReactComponent as VolunteerSvg } from "../../assets/svg/volunteer.svg";
 
 import Input from "../Input";
 
+import { Country, State, City } from "country-state-city";
+
 SwiperCore.use([Navigation]);
 
 // TODO Implement errors
 
 const CompleteRegistration = () => {
   const { currentUser } = useAuth();
+
+  const countries = Country.getAllCountries();
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
 
   const placeholderSRC =
     "https://firebasestorage.googleapis.com/v0/b/volunteerish-ed549.appspot.com/o/placeholder.jpg?alt=media&token=8960960f-36a2-4a20-8115-c692d95e9fda";
@@ -49,6 +55,17 @@ const CompleteRegistration = () => {
   const zipcodeRef = useRef(null);
 
   const db = firebase.firestore();
+
+  const showStates = () => {
+    setStates([]);
+    setCities([]);
+    setStates(State.getStatesOfCountry(countryRef.current.value));
+  };
+
+  const showCities = () => {
+    setCities([]);
+    setCities(City.getCitiesOfState(countryRef.current.value, stateRef.current.value));
+  };
 
   const loadFile = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -250,9 +267,45 @@ const CompleteRegistration = () => {
           <SwiperSlide>
             <div className="wrapper fourth-slide">
               <div className="title">Next, we need your address</div>
-              <Input type="text" indent="5" ref={countryRef} name="Country" />
-              <Input type="text" indent="3.75" ref={stateRef} name="State" />
-              <Input type="text" indent="3.25" ref={cityRef} name="City" />
+              <div className="input--field">
+                <label htmlFor="input">Country</label>
+                <select id="country" ref={countryRef} onChange={showStates}>
+                  <option value="">Select a country</option>
+                  {countries.map((country) => {
+                    return (
+                      <option value={country.isoCode} key={country.isoCode}>
+                        {country.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="input--field">
+                <div className="label">State</div>
+                <select id="state" ref={stateRef} onChange={showCities}>
+                  <option value="">Select a state</option>
+                  {states.map((state) => {
+                    return (
+                      <option value={state.isoCode} key={state.isoCode}>
+                        {state.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="input--field">
+                <div className="label">City</div>
+                <select id="city" ref={cityRef}>
+                  <option value="">Select a city</option>
+                  {cities.map((city) => {
+                    return (
+                      <option value={city.isoCode} key={city.isoCode}>
+                        {city.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -267,7 +320,6 @@ const CompleteRegistration = () => {
               <Input type="number" indent="6" ref={zipcodeRef} name="Zip code" style={{ marginBlock: "1rem" }} />
             </div>
           </SwiperSlide>
-          {/* <SwiperSlide>cv</SwiperSlide> */}
           <SwiperSlide>
             <div className="wrapper sixth-slide">
               <div className="title">

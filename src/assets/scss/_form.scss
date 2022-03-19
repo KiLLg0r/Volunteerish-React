@@ -4,6 +4,40 @@
   cursor: pointer;
 }
 
+.input--field {
+  width: 100%;
+  height: auto;
+  background-color: $gray-light-100;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+
+  .label {
+    display: block;
+    color: $gray-light-600;
+  }
+
+  input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    color: $gray-light-900;
+  }
+
+  select {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: $gray-light-900;
+    font-size: 1.25rem;
+
+    &:focus {
+      background: $gray;
+    }
+  }
+}
+
 .f-wrapper {
   position: relative;
   display: flex;

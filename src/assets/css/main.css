@@ -4,7 +4,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: #3e4148;
+  background: #282c34;
   z-index: 1000;
   height: 100%;
   width: 100%;
@@ -155,6 +155,36 @@
 
 .password-icon {
   cursor: pointer;
+}
+
+.input--field {
+  width: 100%;
+  height: auto;
+  background-color: #3e4148;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+}
+.input--field .label {
+  display: block;
+  color: #a9abae;
+}
+.input--field input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: #eaeaeb;
+}
+.input--field select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #eaeaeb;
+  font-size: 1.25rem;
+}
+.input--field select:focus {
+  background: #282c34;
 }
 
 .f-wrapper {
