@@ -1,38 +1,53 @@
 import { useAuth } from "../contexts/AuthContext";
 
+import { useState, useEffect } from "react";
+
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import "firebase/compat/firestore";
 
 const Messages = () => {
   const { currentUser } = useAuth();
+  const [conversations, setConversations] = useState([]);
 
   const db = firebase.firestore();
+  const conversationsRef = db.collection("conversations");
 
-  const getMes = () => {
-    db.collection("conversations")
-      .where("person2", "==", currentUser.uid)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          db.collection("conversations")
-            .doc(doc.id)
-            .collection("messages")
-            .get()
-            .then((querySnapshot) => {
-              querySnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data());
-              });
-            })
-            .catch((error) => {
-              console.log("Error getting messages: ", error);
-            });
+  async function getMess() {
+    const person1 = conversationsRef.where("person1", "==", currentUser.uid).get();
+    const person2 = conversationsRef.where("person2", "==", currentUser.uid).get();
+
+    const [person1Query, person2Query] = await Promise.all([person1, person2]);
+
+    const person1Array = person1Query.docs;
+    const person2Array = person2Query.docs;
+
+    const documents = person1Array.concat(person2Array);
+
+    return documents;
+  }
+
+  useEffect(() => {
+    getMess()
+      .then((result) => {
+        result.forEach((docSnapshot) => {
+          const docID = docSnapshot.id;
+          setConversations((oldConversation) => [...oldConversation, docID]);
         });
       })
-      .catch((error) => {
-        console.log("Error getting documents: ", error);
-      });
-  };
+      .catch((error) => console.log(error));
+    if (conversations.length === 0) {
+      getMess()
+        .then((result) => {
+          result.forEach((docSnapshot) => {
+            const docID = docSnapshot.id;
+            setConversations((oldConversation) => [...oldConversation, docID]);
+          });
+        })
+        .catch((error) => console.log(error));
+    }
+    console.log(conversations);
+  }, []);
 
   return (
     <section className="messages">
@@ -76,7 +91,6 @@ const Messages = () => {
           </div>
         </div>
       </div>
-      <button onClick={getMes}>click me</button>
     </section>
   );
 };
