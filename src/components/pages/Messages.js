@@ -1,7 +1,38 @@
 import { useAuth } from "../contexts/AuthContext";
 
+import firebase from "firebase/compat/app";
+import "firebase/compat/storage";
+import "firebase/compat/firestore";
+
 const Messages = () => {
   const { currentUser } = useAuth();
+
+  const db = firebase.firestore();
+
+  const getMes = () => {
+    db.collection("conversations")
+      .where("person2", "==", currentUser.uid)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          db.collection("conversations")
+            .doc(doc.id)
+            .collection("messages")
+            .get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data());
+              });
+            })
+            .catch((error) => {
+              console.log("Error getting messages: ", error);
+            });
+        });
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+  };
 
   return (
     <section className="messages">
@@ -45,6 +76,7 @@ const Messages = () => {
           </div>
         </div>
       </div>
+      <button onClick={getMes}>click me</button>
     </section>
   );
 };
