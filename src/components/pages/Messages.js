@@ -6,6 +6,8 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import "firebase/compat/firestore";
 
+import { BiSearchAlt } from "react-icons/bi";
+
 const Messages = () => {
   const { currentUser } = useAuth();
   const [conversations, setConversations] = useState([]);
@@ -28,15 +30,7 @@ const Messages = () => {
   }
 
   useEffect(() => {
-    getMess()
-      .then((result) => {
-        result.forEach((docSnapshot) => {
-          const docID = docSnapshot.id;
-          setConversations((oldConversation) => [...oldConversation, docID]);
-        });
-      })
-      .catch((error) => console.log(error));
-    if (conversations.length === 0) {
+    while (conversations.length === 0) {
       getMess()
         .then((result) => {
           result.forEach((docSnapshot) => {
@@ -47,20 +41,17 @@ const Messages = () => {
         .catch((error) => console.log(error));
     }
     console.log(conversations);
-  }, []);
+  });
 
   return (
     <section className="messages">
       <div className="title">Messages</div>
-      <hr className="line" />
-      <div className="profile">
-        <img className="profile--pic" src={currentUser.photoURL} alt="User profile" />
-        <div className="profile--text">
-          <div className="profile--name">{currentUser.displayName}</div>
-          <div className="profile--status">Online</div>
-        </div>
+      <div className="search--messages">
+        <input type="text" id="message--search" placeholder="Search conversation" />
+        <label htmlFor="message--search">
+          <BiSearchAlt />
+        </label>
       </div>
-      <hr className="line" />
       <div className="list-messages">
         <div className="list--item">
           <img className="list--pic" src={currentUser.photoURL} alt="User profile" />

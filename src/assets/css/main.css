@@ -285,6 +285,10 @@
   font-size: 1.25rem;
 }
 
+.home .title {
+  color: #eaeaeb;
+  padding-block: 1.25rem;
+}
 .home .subtitle {
   color: #ff5a5a;
   font-size: 1.5rem;
@@ -589,17 +593,6 @@
   display: block;
 }
 
-.announcements {
-  height: calc(100vh - 5rem);
-  overflow: scroll;
-  color: #a9abae;
-  padding: 1rem;
-}
-.announcements .title {
-  color: #ff5a5a;
-  font-size: 2rem;
-  margin-block-end: 1rem;
-}
 .announcements .dropdown {
   padding: 0 0.5rem;
   border-radius: 2rem;
@@ -796,37 +789,53 @@
   visibility: hidden;
 }
 
-.messages .title {
-  color: #ff5a5a;
-  font-size: 2rem;
-  margin-block-end: -1rem;
-}
-.messages .line {
+.messages .search--messages {
   width: 100%;
-  height: 1px;
-  background: #94969a;
-  margin-block: 1rem;
-  border: none;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  position: relative;
+  border-radius: 1.5rem;
+  transition: all 500ms ease;
+  margin-bottom: 2rem;
 }
-.messages .profile {
+.messages .search--messages input[type=text] {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+  border: none;
+  background-color: #53565d;
+  text-indent: 1rem;
+  font-size: 1.25rem;
+  color: #d4d5d6;
+}
+.messages .search--messages input[type=text]::placeholder {
+  color: #a9abae;
+}
+.messages .search--messages input[type=text]:focus {
+  outline: 2px solid #ff7b7b;
+}
+.messages .search--messages input[type=text]:focus::placeholder {
+  color: #ff7b7b;
+}
+.messages .search--messages input[type=text]:focus + label svg {
+  color: #ff7b7b;
+}
+.messages .search--messages label {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   padding-inline: 1rem;
+  border-radius: 1.5rem;
 }
-.messages .profile img {
-  display: block;
-  height: 4rem;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 0.625rem;
-}
-.messages .profile .profile--status {
-  margin-inline-start: 1rem;
-}
-.messages .profile .profile--name {
-  font-size: 1.5rem;
-  margin-inline-start: 1rem;
-  color: #d4d5d6;
+.messages .search--messages label svg {
+  font-size: 2rem;
+  cursor: pointer;
 }
 .messages .list--item {
   padding-block: 1rem;
@@ -836,7 +845,7 @@
   border-bottom: 1px solid #53565d;
 }
 .messages .list--item:nth-child(1) {
-  margin-top: -1rem;
+  border-top: 1px solid #53565d;
 }
 .messages .list--item .list--pic {
   display: block;
@@ -895,13 +904,12 @@ section {
   height: calc(100vh - 5rem);
   overflow: scroll;
   color: #a9abae;
-  padding-inline: 1rem;
-  padding-block-end: 1rem;
+  padding: 1rem 2rem;
 }
 section .title {
-  color: #eaeaeb;
-  font-size: 1.75rem;
-  padding-block: 1.25rem;
+  color: #ff5a5a;
+  font-size: 2rem;
+  margin-block: 1rem;
 }
 
 /*# sourceMappingURL=main.css.map */

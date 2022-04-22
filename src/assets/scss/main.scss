@@ -64,12 +64,11 @@ section {
   height: calc(100vh - 5rem);
   overflow: scroll;
   color: $gray-light-600;
-  padding-inline: 1rem;
-  padding-block-end: 1rem;
+  padding: 1rem 2rem;
 
   .title {
-    color: $gray-light-900;
-    font-size: 1.75rem;
-    padding-block: 1.25rem;
+    color: $accent;
+    font-size: 2rem;
+    margin-block: 1rem;
   }
 }

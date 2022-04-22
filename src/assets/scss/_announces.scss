@@ -1,17 +1,6 @@
 @use "./colors" as *;
 
 .announcements {
-  height: calc(100vh - 5rem);
-  overflow: scroll;
-  color: $gray-light-600;
-  padding: 1rem;
-
-  .title {
-    color: $accent;
-    font-size: 2rem;
-    margin-block-end: 1rem;
-  }
-
   .dropdown {
     padding: 0 0.5rem;
     border-radius: 2rem;

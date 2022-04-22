@@ -1,6 +1,11 @@
 @use "./colors" as *;
 
 .home {
+  .title {
+    color: $gray-light-900;
+    padding-block: 1.25rem;
+  }
+
   .subtitle {
     color: $accent;
     font-size: 1.5rem;
