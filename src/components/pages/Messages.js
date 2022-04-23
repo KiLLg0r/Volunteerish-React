@@ -7,6 +7,7 @@ import "firebase/compat/storage";
 import "firebase/compat/firestore";
 
 import { BiSearchAlt } from "react-icons/bi";
+import Conversation from "../Conversation";
 
 const Messages = () => {
   const { currentUser } = useAuth();
@@ -15,22 +16,22 @@ const Messages = () => {
   const db = firebase.firestore();
   const conversationsRef = db.collection("conversations");
 
-  async function getMess() {
-    const person1 = conversationsRef.where("person1", "==", currentUser.uid).get();
-    const person2 = conversationsRef.where("person2", "==", currentUser.uid).get();
-
-    const [person1Query, person2Query] = await Promise.all([person1, person2]);
-
-    const person1Array = person1Query.docs;
-    const person2Array = person2Query.docs;
-
-    const documents = person1Array.concat(person2Array);
-
-    return documents;
-  }
-
   useEffect(() => {
-    while (conversations.length === 0) {
+    async function getMess() {
+      const person1 = conversationsRef.where("person1", "==", currentUser.uid).get();
+      const person2 = conversationsRef.where("person2", "==", currentUser.uid).get();
+
+      const [person1Query, person2Query] = await Promise.all([person1, person2]);
+
+      const person1Array = person1Query.docs;
+      const person2Array = person2Query.docs;
+
+      const documents = person1Array.concat(person2Array);
+
+      return documents;
+    }
+
+    if (conversations.length === 0) {
       getMess()
         .then((result) => {
           result.forEach((docSnapshot) => {
@@ -40,8 +41,7 @@ const Messages = () => {
         })
         .catch((error) => console.log(error));
     }
-    console.log(conversations);
-  });
+  }, [conversations.length, conversationsRef, currentUser.uid]);
 
   return (
     <section className="messages">
@@ -53,34 +53,9 @@ const Messages = () => {
         </label>
       </div>
       <div className="list-messages">
-        <div className="list--item">
-          <img className="list--pic" src={currentUser.photoURL} alt="User profile" />
-          <div className="list--text">
-            <div className="list--name">{currentUser.displayName}</div>
-            <div className="list--last-message">Frumos aseara, nu ?</div>
-          </div>
-        </div>
-        <div className="list--item">
-          <img className="list--pic" src={currentUser.photoURL} alt="User profile" />
-          <div className="list--text">
-            <div className="list--name">{currentUser.displayName}</div>
-            <div className="list--last-message">Frumos aseara, nu ?</div>
-          </div>
-        </div>
-        <div className="list--item">
-          <img className="list--pic" src={currentUser.photoURL} alt="User profile" />
-          <div className="list--text">
-            <div className="list--name">{currentUser.displayName}</div>
-            <div className="list--last-message">Frumos aseara, nu ?</div>
-          </div>
-        </div>
-        <div className="list--item">
-          <img className="list--pic" src={currentUser.photoURL} alt="User profile" />
-          <div className="list--text">
-            <div className="list--name">{currentUser.displayName}</div>
-            <div className="list--last-message">Frumos aseara, nu ?</div>
-          </div>
-        </div>
+        {conversations.map((conversation) => (
+          <Conversation key={conversation} document={conversation} />
+        ))}
       </div>
     </section>
   );

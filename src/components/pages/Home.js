@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 import CompleteRegistration from "./CompleteRegistration";
+import Card from "../Card";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
@@ -70,58 +71,20 @@ const Home = () => {
             </div>
           </div>
           <div className={`cards-container ${isOpen[0] === true ? "show-container" : "hide-container"}`}>
-            <div className="card">
-              <div className="card--background"></div>
-              <div className="card--content">
-                <div className="card--content--left">
-                  <div className="card--img">
-                    <img src={currentUser.photoURL} alt="profile" />
-                  </div>
-                </div>
-                <div className="card--content--right">
-                  <div className="card--name">Oblesniuc Robert Andrei</div>
-                  <div className="card--description">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
-                  </div>
-                  <div className="card--group">
-                    <div className="card--category">
-                      <label htmlFor="">Category: </label>
-                      <span> Grocery </span>
-                    </div>
-                    <div className="card--difficulty">
-                      <label htmlFor="">Difficulty: </label>
-                      <span>Medium</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card--background"></div>
-              <div className="card--content">
-                <div className="card--content--left">
-                  <div className="card--img">
-                    <img src={currentUser.photoURL} alt="profile" />
-                  </div>
-                </div>
-                <div className="card--content--right">
-                  <div className="card--name">Oblesniuc Robert Andrei</div>
-                  <div className="card--description">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
-                  </div>
-                  <div className="card--group">
-                    <div className="card--category">
-                      <label htmlFor="">Category: </label>
-                      <span> Grocery </span>
-                    </div>
-                    <div className="card--difficulty">
-                      <label htmlFor="">Difficulty: </label>
-                      <span>Medium</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Card
+              UID={currentUser}
+              name="Oblesniuc Robert Andrei"
+              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
+              category="Grocery"
+              difficulty="Medium"
+            />
+            <Card
+              UID={currentUser}
+              name="Oblesniuc Robert Andrei"
+              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
+              category="Grocery"
+              difficulty="Hard"
+            />
           </div>
         </div>
         <div className="helped-container ann-container">
@@ -139,110 +102,27 @@ const Home = () => {
             </div>
           </div>
           <div className={`cards-container ${isOpen[1] === true ? "show-container" : "hide-container"}`}>
-            <div className="card">
-              <div className="card--background"></div>
-              <div className="card--content">
-                <div className="card--content--left">
-                  <div className="card--img">
-                    <img src={currentUser.photoURL} alt="profile" />
-                  </div>
-                </div>
-                <div className="card--content--right">
-                  <div className="card--name">Oblesniuc Robert Andrei</div>
-                  <div className="card--description">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
-                  </div>
-                  <div className="card--group">
-                    <div className="card--category">
-                      <label htmlFor="">Category: </label>
-                      <span> Grocery </span>
-                    </div>
-                    <div className="card--difficulty">
-                      <label htmlFor="">Difficulty: </label>
-                      <span>Medium</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card--background"></div>
-              <div className="card--content">
-                <div className="card--content--left">
-                  <div className="card--img">
-                    <img src={currentUser.photoURL} alt="profile" />
-                  </div>
-                </div>
-                <div className="card--content--right">
-                  <div className="card--name">Oblesniuc Robert Andrei</div>
-                  <div className="card--description">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
-                  </div>
-                  <div className="card--group">
-                    <div className="card--category">
-                      <label htmlFor="">Category: </label>
-                      <span> Grocery </span>
-                    </div>
-                    <div className="card--difficulty">
-                      <label htmlFor="">Difficulty: </label>
-                      <span>Medium</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card--background"></div>
-              <div className="card--content">
-                <div className="card--content--left">
-                  <div className="card--img">
-                    <img src={currentUser.photoURL} alt="profile" />
-                  </div>
-                </div>
-                <div className="card--content--right">
-                  <div className="card--name">Oblesniuc Robert Andrei</div>
-                  <div className="card--description">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
-                  </div>
-                  <div className="card--group">
-                    <div className="card--category">
-                      <label htmlFor="">Category: </label>
-                      <span> Grocery </span>
-                    </div>
-                    <div className="card--difficulty">
-                      <label htmlFor="">Difficulty: </label>
-                      <span>Medium</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <div className="card--background"></div>
-              <div className="card--content">
-                <div className="card--content--left">
-                  <div className="card--img">
-                    <img src={currentUser.photoURL} alt="profile" />
-                  </div>
-                </div>
-                <div className="card--content--right">
-                  <div className="card--name">Oblesniuc Robert Andrei</div>
-                  <div className="card--description">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!
-                  </div>
-                  <div className="card--group">
-                    <div className="card--category">
-                      <label htmlFor="">Category: </label>
-                      <span> Grocery </span>
-                    </div>
-                    <div className="card--difficulty">
-                      <label htmlFor="">Difficulty: </label>
-                      <span>Medium</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Card
+              UID={currentUser}
+              name="Oblesniuc Robert Andrei"
+              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
+              category="Grocery"
+              difficulty="Medium"
+            />
+            <Card
+              UID={currentUser}
+              name="Oblesniuc Robert Andrei"
+              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
+              category="Grocery"
+              difficulty="Medium"
+            />
+            <Card
+              UID={currentUser}
+              name="Oblesniuc Robert Andrei"
+              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
+              category="Grocery"
+              difficulty="Medium"
+            />
           </div>
         </div>
       </div>

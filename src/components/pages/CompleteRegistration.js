@@ -85,7 +85,7 @@ const CompleteRegistration = () => {
   const updateImg = () => {
     if (file !== 0) {
       const storage = firebase.app().storage("gs://volunteerish-ed549.appspot.com");
-      const profileImagesRef = storage.ref().child(`profile/${currentUser.uid}-${file.name}`);
+      const profileImagesRef = storage.ref().child(`profile/${currentUser.uid}`);
       const task = profileImagesRef.put(file);
       task.on(
         "state_changed",
