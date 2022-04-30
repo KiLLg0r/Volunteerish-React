@@ -1,6 +1,7 @@
 import { ReactComponent as RegisterSvg } from "../../assets/svg/register.svg";
-import { BsEyeFill, BsFillEnvelopeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import "../../assets/css/register.css";
+
+import Input from "../Input";
 
 import { useAuth } from "../contexts/AuthContext";
 import { useState, useRef } from "react";
@@ -14,7 +15,6 @@ const Register = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -34,10 +34,6 @@ const Register = () => {
     setLoading(false);
   }
 
-  function handleShowPassword() {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  }
-
   // TODO Add 1s timeout after successfully register and display to user a success message
   // TODO Implement errors
 
@@ -53,37 +49,9 @@ const Register = () => {
       )}
       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="wrapper">
-          <div className="f-wrapper">
-            <input type="email" spellCheck="false" required ref={emailRef} />
-            <div className="label">Email</div>
-            <div className="icon">
-              <BsFillEnvelopeFill />
-            </div>
-          </div>
-          <div className="f-wrapper">
-            <input
-              type={`${showPassword ? "text" : "password"}`}
-              required
-              className="password-input"
-              ref={passwordRef}
-            />
-            <div className="label">Password</div>
-            <div className="icon password-icon" onClick={handleShowPassword}>
-              {!showPassword ? <BsEyeFill /> : <BsFillEyeSlashFill />}
-            </div>
-          </div>
-          <div className="f-wrapper">
-            <input
-              type={`${showPassword ? "text" : "password"}`}
-              required
-              className="password-input confirm-password"
-              ref={passwordConfirmRef}
-            />
-            <div className="label">Confirm Password</div>
-            <div className="icon password-icon" onClick={handleShowPassword}>
-              {!showPassword ? <BsEyeFill /> : <BsFillEyeSlashFill />}
-            </div>
-          </div>
+          <Input type="email" ref={emailRef} name="Email" icon="email" />
+          <Input type="password" ref={passwordRef} name="Password" icon="password" />
+          <Input type="password" ref={passwordConfirmRef} name="Confirm password" icon="password" />
         </div>
         <div className="wrapper">
           <button disabled={loading} type="submit" className="btn">

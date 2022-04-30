@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import { BsPlusCircleFill } from "react-icons/bs";
 import { Country, State, City } from "country-state-city";
+import AddAnnounce from "./AddAnnounce";
 
 const Announces = () => {
   const [isOpen, setOpen] = useState(false);
@@ -12,6 +14,7 @@ const Announces = () => {
   const selectedStateRef = useRef(null);
   const selectedCityRef = useRef(null);
   const orderByRef = useRef(null);
+  const pageRef = useRef(null);
 
   const showStates = () => {
     setStates([]);
@@ -91,6 +94,10 @@ const Announces = () => {
           </div>
         </div>
       </div>
+      <div className="add--ann--button" onClick={() => (pageRef.current.style.visibility = "visible")}>
+        <BsPlusCircleFill />
+      </div>
+      <AddAnnounce ref={pageRef} />
     </section>
   );
 };

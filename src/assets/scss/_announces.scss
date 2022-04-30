@@ -1,6 +1,8 @@
 @use "./colors" as *;
 
 .announcements {
+  position: relative;
+
   .dropdown {
     padding: 0 0.5rem;
     border-radius: 2rem;
@@ -33,5 +35,13 @@
     color: $gray-light-600;
     border-radius: 0.685rem;
     margin-top: 0.5rem;
+  }
+
+  .add--ann--button {
+    font-size: 3rem;
+    color: $accent;
+    position: absolute;
+    right: 2rem;
+    bottom: 0.25rem;
   }
 }

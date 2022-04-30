@@ -9,6 +9,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useState, useEffect, useRef } from "react";
 
 import { Country, State, City } from "country-state-city";
+import Input from "../Input";
 
 function Account() {
   const history = useHistory();
@@ -177,14 +178,22 @@ function Account() {
             Change image
           </label>
         </div>
-        <div className="user-data">
-          <label htmlFor="input">Name</label>
-          <input type="text" defaultValue={currentUser.displayName} ref={nameRef} onChange={handleChange} />
-        </div>
-        <div className="user-data">
-          <label htmlFor="input">Email</label>
-          <input type="email" defaultValue={currentUser.email} ref={emailRef} onChange={handleChange} />
-        </div>
+        <Input
+          name="Name"
+          type="text"
+          value={currentUser.displayName}
+          ref={nameRef}
+          onChange={handleChange}
+          icon="name"
+        />
+        <Input
+          name="Email"
+          type="email"
+          value={currentUser.email}
+          ref={emailRef}
+          onChange={handleChange}
+          icon="email"
+        />
         <div className="user-data">
           <label htmlFor="input">Country</label>
           <select id="country" ref={countryRef} onChange={showStates}>
@@ -224,26 +233,46 @@ function Account() {
             })}
           </select>
         </div>
-        <div className="user-data">
-          <label htmlFor="input">Street</label>
-          <input type="text" defaultValue={userData.street} ref={streetRef} onChange={handleChange} />
-        </div>
-        <div className="user-data">
-          <label htmlFor="input">Street Number</label>
-          <input type="number" defaultValue={userData.streetNumber} ref={streetNumberRef} onChange={handleChange} />
-        </div>
-        <div className="user-data">
-          <label htmlFor="input">Building</label>
-          <input type="text" defaultValue={userData.building} ref={buildingRef} onChange={handleChange} />
-        </div>
-        <div className="user-data">
-          <label htmlFor="input">Apartment</label>
-          <input type="text" defaultValue={userData.apartment} ref={apartmentRef} onChange={handleChange} />
-        </div>
-        <div className="user-data">
-          <label htmlFor="input">Zipcode</label>
-          <input type="number" defaultValue={userData.zipcode} ref={zipcodeRef} onChange={handleChange} />
-        </div>
+        <Input
+          name="Street"
+          type="text"
+          value={userData.street}
+          ref={streetRef}
+          onChange={handleChange}
+          icon="address"
+        />
+        <Input
+          name="Street Number"
+          type="number"
+          value={userData.streetNumber}
+          ref={streetRef}
+          onChange={handleChange}
+          icon="address"
+        />
+        <Input
+          name="Building"
+          type="text"
+          value={userData.building}
+          ref={buildingRef}
+          onChange={handleChange}
+          icon="address"
+        />
+        <Input
+          name="Apartment"
+          type="text"
+          value={userData.apartment}
+          ref={apartmentRef}
+          onChange={handleChange}
+          icon="address"
+        />
+        <Input
+          name="Zipcode"
+          type="number"
+          value={userData.zipcode}
+          ref={zipcodeRef}
+          onChange={handleChange}
+          icon="address"
+        />
         <button typeof="submit" className={`save-btn ${save ? "" : "disabled"}`} disabled={!save}>
           Save changes
         </button>

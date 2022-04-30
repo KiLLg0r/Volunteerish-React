@@ -260,8 +260,8 @@ const CompleteRegistration = () => {
           <SwiperSlide>
             <div className="wrapper third-slide">
               <div className="title">Let's add your personal information</div>
-              <Input type="text" indent="0" ref={nameRef} name="Name" />
-              <Input type="date" indent="5.75" ref={birthRef} name="Birth date" />
+              <Input type="text" ref={nameRef} name="Name" />
+              <Input type="date" ref={birthRef} name="Birth date" />
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -281,7 +281,7 @@ const CompleteRegistration = () => {
                 </select>
               </div>
               <div className="input--field">
-                <div className="label">State</div>
+                <div className="input">State</div>
                 <select id="state" ref={stateRef} onChange={showCities}>
                   <option value="">Select a state</option>
                   {states.map((state) => {
@@ -294,7 +294,7 @@ const CompleteRegistration = () => {
                 </select>
               </div>
               <div className="input--field">
-                <div className="label">City</div>
+                <div className="input">City</div>
                 <select id="city" ref={cityRef}>
                   <option value="">Select a city</option>
                   {cities.map((city) => {
@@ -311,13 +311,13 @@ const CompleteRegistration = () => {
           <SwiperSlide>
             <div className="wrapper fifth-slide">
               <div className="title">Next, we need your address</div>
-              <Input type="text" indent="4" ref={streetRef} name="Street" />
+              <Input type="text" ref={streetRef} name="Street" />
               <div className="group">
-                <Input type="number" indent="5" ref={streetNumberRef} name="Number" />
-                <Input type="text" indent="5" ref={buildingRef} name="Building" />
+                <Input type="number" ref={streetNumberRef} name="Number" />
+                <Input type="text" ref={buildingRef} name="Building" />
               </div>
-              <Input type="number" indent="6.25" ref={apartmentRef} name="Apartment" />
-              <Input type="number" indent="6" ref={zipcodeRef} name="Zip code" style={{ marginBlock: "1rem" }} />
+              <Input type="number" ref={apartmentRef} name="Apartment" />
+              <Input type="number" ref={zipcodeRef} name="Zip code" style={{ marginBlock: "1rem" }} />
             </div>
           </SwiperSlide>
           <SwiperSlide>
