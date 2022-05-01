@@ -10,11 +10,12 @@ const Announces = () => {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
 
+  const [addAnnounce, setAddAnnounce] = useState(false);
+
   const selectedCountryRef = useRef(null);
   const selectedStateRef = useRef(null);
   const selectedCityRef = useRef(null);
   const orderByRef = useRef(null);
-  const pageRef = useRef(null);
 
   const showStates = () => {
     setStates([]);
@@ -30,6 +31,10 @@ const Announces = () => {
   const DropdownIcon = ({ isOpen }) => {
     if (isOpen) return <BiChevronDown />;
     else return <BiChevronUp />;
+  };
+
+  const openModal = (state) => {
+    setAddAnnounce(state);
   };
 
   return (
@@ -94,10 +99,10 @@ const Announces = () => {
           </div>
         </div>
       </div>
-      <div className="add--ann--button" onClick={() => (pageRef.current.style.visibility = "visible")}>
+      <div className="add--ann--button" onClick={() => setAddAnnounce(true)}>
         <BsPlusCircleFill />
       </div>
-      <AddAnnounce ref={pageRef} />
+      {addAnnounce && <AddAnnounce state={openModal} />}
     </section>
   );
 };

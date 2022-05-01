@@ -58,4 +58,16 @@
       }
     }
   }
+
+  .add--announce {
+    border: none;
+    border-radius: 1rem;
+    width: 100%;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    background: linear-gradient(to top right, $accent-dark-200, $accent-dark-700);
+    color: $gray-light-900;
+    cursor: pointer;
+  }
 }

@@ -10,6 +10,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { Country, State, City } from "country-state-city";
 import Input from "../Input";
+import SuccessModal from "../SuccessModal";
 
 function Account() {
   const history = useHistory();
@@ -22,20 +23,30 @@ function Account() {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
 
+  const [countryChange, setCountryChange] = useState(false);
+  const [stateChange, setStateChange] = useState(false);
+
   const [currentCountry, setCountry] = useState([]);
   const [currentState, setState] = useState([]);
 
   const showStates = () => {
+    setCountryChange(true);
+    setStateChange(true);
     setStates([]);
     setCities([]);
     handleChange();
     setStates(State.getStatesOfCountry(countryRef.current.value));
+    stateRef.current.selectedIndex = 0;
+    cityRef.current.selectedIndex = 0;
   };
 
   const showCities = () => {
+    setCountryChange(false);
+    setStateChange(true);
     setCities([]);
     handleChange();
     setCities(City.getCitiesOfState(countryRef.current.value, stateRef.current.value));
+    cityRef.current.selectedIndex = 0;
   };
 
   useEffect(() => {
@@ -48,7 +59,7 @@ function Account() {
 
     setCountry(Country.getCountryByCode(userData.country));
     setState(State.getStateByCodeAndCountry(userData.state, userData.country));
-  }, [currentUser.uid, userData, getData]);
+  }, [currentUser.uid, userData, getData, currentCountry, currentState]);
 
   let file = 0;
 
@@ -144,9 +155,15 @@ function Account() {
       })
       .catch((error) => console.log(error));
     setSuccess(true);
-    setTimeout(() => {
-      setSuccess(false);
-    }, 2000);
+    setSave(false);
+  };
+
+  const pullData = (state) => {
+    setSuccess(state);
+  };
+
+  const handleInputChange = (status) => {
+    if (status) setSave(true);
   };
 
   return (
@@ -183,7 +200,7 @@ function Account() {
           type="text"
           value={currentUser.displayName}
           ref={nameRef}
-          onChange={handleChange}
+          change={handleInputChange}
           icon="name"
         />
         <Input
@@ -191,46 +208,63 @@ function Account() {
           type="email"
           value={currentUser.email}
           ref={emailRef}
-          onChange={handleChange}
+          change={handleInputChange}
           icon="email"
         />
         <div className="user-data">
           <label htmlFor="input">Country</label>
           <select id="country" ref={countryRef} onChange={showStates}>
-            <option value={userData.country}>{currentCountry.name}</option>
-            {countries.map((country) => {
-              return (
-                <option value={country.isoCode} key={country.isoCode}>
-                  {country.name}
-                </option>
-              );
-            })}
+            <option value={userData.country} key={userData.country}>
+              {currentCountry.name}
+            </option>
+            {countries &&
+              countries.map((country) => {
+                return (
+                  <option value={country.isoCode} key={country.isoCode}>
+                    {country.name}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <div className="user-data">
           <label htmlFor="input">State</label>
           <select id="state" ref={stateRef} onChange={showCities}>
-            <option value={userData.state}>{currentState.name}</option>
-            {states.map((state) => {
-              return (
-                <option value={state.isoCode} key={state.isoCode}>
-                  {state.name}
-                </option>
-              );
-            })}
+            {countryChange ? (
+              <option value="">Select state</option>
+            ) : (
+              <option value={userData.state} key={userData.state}>
+                {currentState.name}
+              </option>
+            )}
+            {states &&
+              states.map((state) => {
+                return (
+                  <option value={state.isoCode} key={state.isoCode}>
+                    {state.name}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <div className="user-data">
           <label htmlFor="input">City</label>
           <select id="city" ref={cityRef} onChange={handleChange}>
-            <option value={userData.city}>{userData.city}</option>
-            {cities.map((city) => {
-              return (
-                <option value={city.isoCode} key={city.isoCode}>
-                  {city.name}
-                </option>
-              );
-            })}
+            {stateChange ? (
+              <option value="">Select city</option>
+            ) : (
+              <option value={userData.city} key={userData.city}>
+                {userData.city}
+              </option>
+            )}
+            {cities &&
+              cities.map((city) => {
+                return (
+                  <option value={city.isoCode} key={city.isoCode}>
+                    {city.name}
+                  </option>
+                );
+              })}
           </select>
         </div>
         <Input
@@ -238,15 +272,15 @@ function Account() {
           type="text"
           value={userData.street}
           ref={streetRef}
-          onChange={handleChange}
+          change={handleInputChange}
           icon="address"
         />
         <Input
           name="Street Number"
           type="number"
           value={userData.streetNumber}
-          ref={streetRef}
-          onChange={handleChange}
+          ref={streetNumberRef}
+          change={handleInputChange}
           icon="address"
         />
         <Input
@@ -254,7 +288,7 @@ function Account() {
           type="text"
           value={userData.building}
           ref={buildingRef}
-          onChange={handleChange}
+          change={handleInputChange}
           icon="address"
         />
         <Input
@@ -262,7 +296,7 @@ function Account() {
           type="text"
           value={userData.apartment}
           ref={apartmentRef}
-          onChange={handleChange}
+          change={handleInputChange}
           icon="address"
         />
         <Input
@@ -270,17 +304,14 @@ function Account() {
           type="number"
           value={userData.zipcode}
           ref={zipcodeRef}
-          onChange={handleChange}
+          change={handleInputChange}
           icon="address"
         />
         <button typeof="submit" className={`save-btn ${save ? "" : "disabled"}`} disabled={!save}>
           Save changes
         </button>
       </form>
-      <div className={`success--modal ${success ? "show" : "hide"}`}>
-        <h1 className="modal--title">Changes saved successfully</h1>
-        <h3 className="modal--subtitle">This window will automatically close in 2 seconds</h3>
-      </div>
+      {success && <SuccessModal state={pullData} title="Changes were successfully saved!" sec="3" />}
     </div>
   );
 }

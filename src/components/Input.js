@@ -1,5 +1,5 @@
 import React from "react";
-import { BsFillEnvelopeFill, BsFillPersonFill, BsHouseFill } from "react-icons/bs";
+import { BsFillEnvelopeFill, BsFillPersonFill, BsHouseFill, BsFillPhoneFill } from "react-icons/bs";
 
 function Input(props, ref) {
   const Icon = () => {
@@ -10,16 +10,29 @@ function Input(props, ref) {
         return <BsFillPersonFill />;
       case "address":
         return <BsHouseFill />;
+      case "phone":
+        return <BsFillPhoneFill />;
       default:
         return null;
     }
+  };
+
+  const handleChange = () => {
+    props.change(true);
   };
 
   return (
     <div className="input--field">
       <div className="input--content">
         <div className="input--label">{props.name}</div>
-        <input type={props.type} spellCheck="false" required ref={ref} defaultValue={props.value} />
+        <input
+          type={props.type}
+          spellCheck="false"
+          required
+          ref={ref}
+          defaultValue={props.value}
+          onChange={handleChange}
+        />
       </div>
       <Icon />
     </div>

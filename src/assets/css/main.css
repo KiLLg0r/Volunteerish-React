@@ -208,7 +208,7 @@
   width: 100%;
   border: none;
   background: transparent !important;
-  color: #eaeaeb;
+  color: #eaeaeb !important;
   font-size: 1.25rem;
 }
 .input--field select:focus {
@@ -731,10 +731,15 @@
 }
 
 .account {
-  height: calc(100vh - 5rem);
-  overflow: scroll;
+  height: 100vh;
+  overflow-y: auto;
   color: #a9abae;
-  padding: 1rem;
+  padding: 2rem;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: #282c34;
+  width: 100%;
 }
 .account .header {
   width: 100%;
@@ -743,6 +748,7 @@
   align-items: center;
   gap: 0.5rem;
   color: #ff5a5a;
+  margin-bottom: 1rem;
 }
 .account .header button {
   display: flex;
@@ -817,27 +823,6 @@
 }
 .account .save-btn.disabled {
   filter: grayscale(0.3);
-}
-.account .success--modal {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  z-index: 100;
-}
-.account .success--modal .modal--title {
-  font-size: 1.75rem;
-  color: #ff5a5a;
-  margin-block: 1rem;
-}
-.account .success--modal .modal--subtitle {
-  font-size: 1rem;
-}
-.account .success--modal.hide {
-  visibility: hidden;
 }
 
 .messages .search--messages {
@@ -962,6 +947,17 @@
 .announce--page .page--content .main--information .personal--data .input--field:nth-child(2) {
   margin-bottom: 0;
 }
+.announce--page .add--announce {
+  border: none;
+  border-radius: 1rem;
+  width: 100%;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+  background: linear-gradient(to top right, #cc4848, #4c1b1b);
+  color: #eaeaeb;
+  cursor: pointer;
+}
 
 *,
 *::after,
@@ -1014,6 +1010,43 @@ section .title {
   color: #ff5a5a;
   font-size: 2rem;
   margin-block: 1rem;
+}
+
+.error--message {
+  border: 2px solid #ff5a5a;
+  width: 100%;
+  padding: 1rem 2rem;
+  border-radius: 0.625rem;
+  color: #ff5a5a;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.error--message.secondary {
+  border: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.success--modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background-color: #282c34;
+  padding: 2rem;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.success--modal .modal--title {
+  margin-bottom: 2rem;
+  color: #ff5a5a;
+}
+.success--modal .modal--subtitle span {
+  color: #ff5a5a;
 }
 
 /*# sourceMappingURL=main.css.map */

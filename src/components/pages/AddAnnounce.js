@@ -1,11 +1,33 @@
+import React, { useRef, useState, useEffect } from "react";
 import { BsXCircle } from "react-icons/bs";
-import React, { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { Country, State, City } from "country-state-city";
 import Input from "../Input";
+import SuccessModal from "../SuccessModal";
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/storage";
+import "firebase/compat/firestore";
 
 function AddAnnounce(props, ref) {
-  const { currentUser } = useAuth();
+  const { currentUser, userData, getData } = useAuth();
+
+  const [error, setError] = useState("");
+  const [difficultyError, setDifficultyError] = useState("");
+  const [categoryError, setCategoryError] = useState("");
+
+  const [addSuccess, setAddSuccess] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const countries = Country.getAllCountries();
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  const [currentCountry, setCountry] = useState([]);
+  const [currentState, setState] = useState([]);
+
   const nameRef = useRef(null);
+  const emailRef = useRef(null);
   const imgRef = useRef(null);
   const dobRef = useRef(null);
   const phoneNumberRef = useRef(null);
@@ -21,15 +43,104 @@ function AddAnnounce(props, ref) {
   const apartmentRef = useRef(null);
   const zipcodeRef = useRef(null);
 
+  const defaultMessage =
+    "Hi. I need your help. I cannot write about what I need but this ad contains the category and difficulty of the task. It can be connected with me by message or call. Thank you very much!";
+
+  const showStates = () => {
+    setStates([]);
+    setCities([]);
+    setStates(State.getStatesOfCountry(countryRef.current.value));
+  };
+
+  const showCities = () => {
+    setCities([]);
+    setCities(City.getCitiesOfState(countryRef.current.value, stateRef.current.value));
+  };
+
+  useEffect(() => {
+    if (!userData) getData(currentUser.uid);
+
+    setStates([]);
+    setCities([]);
+    setStates(State.getStatesOfCountry(countryRef.current.value));
+    setCities(City.getCitiesOfState(countryRef.current.value, stateRef.current.value));
+
+    setCountry(Country.getCountryByCode(userData.country));
+    setState(State.getStateByCodeAndCountry(userData.state, userData.country));
+  }, [currentUser.uid, userData, getData]);
+
+  const db = firebase.firestore();
+  const announcesDB = db.collection("announces");
+
+  const validate = () => {
+    if (categoryRef.current.value === "select" && difficultyRef.current.value === "select") {
+      setDifficultyError("You have to provide a category for the announcement.");
+      setCategoryError("You have to provide a difficulty for the announcement.");
+      descRef.current.scrollIntoView({ behavior: "smooth" });
+      return 0;
+    } else if (difficultyRef.current.value === "select") {
+      setDifficultyError("You have to provide a difficulty for the announcement.");
+      descRef.current.scrollIntoView({ behavior: "smooth" });
+      return 0;
+    } else if (categoryRef.current.value === "select") {
+      setCategoryError("You have to provide a category for the announcement.");
+      descRef.current.scrollIntoView({ behavior: "smooth" });
+      return 0;
+    }
+    return 1;
+  };
+
+  const handleChangeCategory = () => {
+    setCategoryError("");
+  };
+
+  const handleChangeDifficulty = () => {
+    setDifficultyError("");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate() === 1) {
+      let desc = descRef.current.value;
+      if (desc === "") desc = defaultMessage;
+      announcesDB
+        .add({
+          uid: currentUser.uid,
+          name: nameRef.current.value,
+          dateOfBirth: dobRef.current.value,
+          description: desc,
+          category: categoryRef.current.value,
+          difficulty: difficultyRef.current.value,
+          email: emailRef.current.value,
+          phone: phoneNumberRef.current.value,
+          country: countryRef.current.value,
+          state: stateRef.current.value,
+          city: cityRef.current.value,
+          street: streetRef.current.value,
+          streetNumber: streetNumberRef.current.value,
+          building: buildingRef.current.value,
+          apartment: apartmentRef.current.value,
+          zipcode: zipcodeRef.current.value,
+        })
+        .catch((error) => setError("The announcement could not be posted"));
+      setAddSuccess(true);
+    } else setAddSuccess(false);
+  };
+
+  const pullData = (state) => {
+    setAddSuccess(state);
+    setSent(!state);
+  };
+
   return (
-    <div className="announce--page" ref={ref}>
-      <div className="header" onClick={() => (ref.current.style.visibility = "hidden")}>
+    <div className="announce--page">
+      <div className="header" onClick={() => props.state(false)}>
         <button>
           <BsXCircle />
         </button>
         Close this windows
       </div>
-      <div className="page--content">
+      <form className="page--content" onSubmit={handleSubmit}>
         <div className="main--information">
           <img src={currentUser.photoURL} alt="User" ref={imgRef} />
           <div className="personal--data">
@@ -40,21 +151,19 @@ function AddAnnounce(props, ref) {
         <div className="input--field">
           <div className="input--content">
             <div className="input--label">Description</div>
-            <textarea
-              ref={descRef}
-              cols="30"
-              rows="8"
-              value={
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet neque veritatis cum magni, dolore sunt iusto harum a. Officiis, eos? Incidunt quia dolorem, esse, laudantium sed repudiandae modi distinctio aperiam voluptatum libero corporis nulla delectus commodi animi similique doloremque ipsum tempore odio eum, magnam nostrum quos architecto at! Non architecto nam repellat aliquid repudiandae dolores corrupti asperiores rem. Enim, voluptatibus quia nulla repudiandae dolorum labore facere similique architecto suscipit accusamus facilis iure consequatur, hic eveniet vero adipisci temporibus. Est aspernatur tempora quia perferendis aut doloremque in cupiditate eaque earum numquam illo pariatur, hic officia dolores sapiente totam accusantium molestias exercitationem."
-              }
-            ></textarea>
+            <textarea ref={descRef} cols="30" rows="8"></textarea>
           </div>
         </div>
+        {categoryError && (
+          <div className="error--message secondary" role="alert">
+            {categoryError}
+          </div>
+        )}
         <div className="input--field">
           <div className="input--content">
             <div className="input--label">Category</div>
-            <select ref={categoryRef}>
-              <option value="">Select category</option>
+            <select ref={categoryRef} onChange={handleChangeCategory}>
+              <option value="select">Select category</option>
               <option value="Groceries">Groceries</option>
               <option value="School meditations">School meditations</option>
               <option value="Shopping">Shopping</option>
@@ -68,11 +177,16 @@ function AddAnnounce(props, ref) {
             </select>
           </div>
         </div>
+        {difficultyError && (
+          <div className="error--message secondary" role="alert">
+            {difficultyError}
+          </div>
+        )}
         <div className="input--field">
           <div className="input--content">
             <div className="input--label">Difficulty</div>
-            <select ref={difficultyRef}>
-              <option value="">Select difficulty</option>
+            <select ref={difficultyRef} onChange={handleChangeDifficulty}>
+              <option value="select">Select difficulty</option>
               <option value="Easy">Easy</option>
               <option value="Medium">Medium</option>
               <option value="Hard">Hard</option>
@@ -80,18 +194,74 @@ function AddAnnounce(props, ref) {
           </div>
         </div>
         <div className="secondary--information">
-          <Input name="Phone number" ref={phoneNumberRef} icon="0" value="+40774653200" />
-          <Input name="Country" ref={countryRef} icon="0" value="Romania" />
-          <Input name="State" ref={stateRef} icon="0" value="Brasov" />
-          <Input name="City" ref={cityRef} icon="0" value="Brasov" />
-          <Input name="Street" ref={streetRef} icon="0" value="Lucernei" />
-          <Input name="Street Number" ref={streetNumberRef} icon="0" value="5" />
-          <Input name="Building" ref={buildingRef} icon="0" value="56A" />
-          <Input name="Apartment" ref={apartmentRef} icon="0" value="56A" />
-          <Input name="Zipcode" ref={zipcodeRef} icon="0" value="+40774653200" />
+          <Input name="Email" ref={emailRef} icon="email" value={currentUser.email} />
+          <Input name="Phone number" ref={phoneNumberRef} icon="phone" value="+40774653200" />
+          <div className="input--field">
+            <div className="input--content">
+              <div className="input--label">Country</div>
+              <select ref={countryRef} onChange={showStates}>
+                <option value={userData.country} key={userData.country}>
+                  {currentCountry.name}
+                </option>
+                {countries.map((country) => {
+                  return (
+                    <option value={country.isoCode} key={country.isoCode}>
+                      {country.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+          <div className="input--field">
+            <div className="input--content">
+              <div className="input--label">Country</div>
+              <select ref={stateRef} onChange={showCities}>
+                <option value={userData.state} key={userData.state}>
+                  {currentState.name}
+                </option>
+                {states.map((state) => {
+                  return (
+                    <option value={state.isoCode} key={state.isoCode}>
+                      {state.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+          <div className="input--field">
+            <div className="input--content">
+              <div className="input--label">City</div>
+              <select ref={cityRef}>
+                <option value={userData.city} key={userData.city}>
+                  {userData.city}
+                </option>
+                {cities.map((city) => {
+                  return (
+                    <option value={city.isoCode} key={city.isoCode}>
+                      {city.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+          <Input name="Street" ref={streetRef} icon="address" value={userData.street} />
+          <Input name="Street Number" ref={streetNumberRef} icon="address" value={userData.streetNumber} />
+          <Input name="Building" ref={buildingRef} icon="address" value={userData.building} />
+          <Input name="Apartment" ref={apartmentRef} icon="address" value={userData.apartment} />
+          <Input name="Zipcode" ref={zipcodeRef} icon="address" value={userData.zipcode} />
         </div>
-        <div className="add--announce">Post announce</div>
-      </div>
+        {error && (
+          <div className="error--message" role="alert">
+            {error}
+          </div>
+        )}
+        <input type="submit" className="add--announce" value="Post announce" />
+      </form>
+      {addSuccess && <SuccessModal state={pullData} title="Your announcement has been posted successfully!" sec="3" />}
+      {addSuccess === false && sent ? props.state(false) : null}
     </div>
   );
 }
