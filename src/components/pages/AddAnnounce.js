@@ -18,6 +18,7 @@ function AddAnnounce(props, ref) {
 
   const [addSuccess, setAddSuccess] = useState(false);
   const [sent, setSent] = useState(false);
+  const [useSameAddress, setUseSameAddress] = useState(true);
 
   const countries = Country.getAllCountries();
   const [states, setStates] = useState([]);
@@ -76,15 +77,15 @@ function AddAnnounce(props, ref) {
     if (categoryRef.current.value === "select" && difficultyRef.current.value === "select") {
       setDifficultyError("You have to provide a category for the announcement.");
       setCategoryError("You have to provide a difficulty for the announcement.");
-      descRef.current.scrollIntoView({ behavior: "smooth" });
+      imgRef.current.scrollIntoView({ behavior: "smooth" });
       return 0;
     } else if (difficultyRef.current.value === "select") {
       setDifficultyError("You have to provide a difficulty for the announcement.");
-      descRef.current.scrollIntoView({ behavior: "smooth" });
+      imgRef.current.scrollIntoView({ behavior: "smooth" });
       return 0;
     } else if (categoryRef.current.value === "select") {
       setCategoryError("You have to provide a category for the announcement.");
-      descRef.current.scrollIntoView({ behavior: "smooth" });
+      imgRef.current.scrollIntoView({ behavior: "smooth" });
       return 0;
     }
     return 1;
@@ -121,7 +122,9 @@ function AddAnnounce(props, ref) {
           building: buildingRef.current.value,
           apartment: apartmentRef.current.value,
           zipcode: zipcodeRef.current.value,
+          imgURL: imgRef.current.src,
           posted: firebase.firestore.FieldValue.serverTimestamp(),
+          status: "active",
         })
         .catch((error) => setError("The announcement could not be posted"));
       setAddSuccess(true);
@@ -131,6 +134,134 @@ function AddAnnounce(props, ref) {
   const pullData = (state) => {
     setAddSuccess(state);
     setSent(!state);
+  };
+
+  const handleCheckbox = () => {
+    setUseSameAddress(!useSameAddress);
+  };
+
+  const DefaultData = () => {
+    return (
+      <div className="secondary--information" style={{ display: "none" }}>
+        <Input name="Email" ref={emailRef} icon="email" value={currentUser.email} />
+        <Input name="Phone number" ref={phoneNumberRef} icon="phone" value={"+40774653200"} />
+        <div className="input--field">
+          <div className="input--content">
+            <div className="input--label">Country</div>
+            <select ref={countryRef} onChange={showStates}>
+              <option value={userData.country} key={userData.country}>
+                {currentCountry.name}
+              </option>
+              {countries.map((country) => {
+                return (
+                  <option value={country.isoCode} key={country.isoCode}>
+                    {country.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <div className="input--field">
+          <div className="input--content">
+            <div className="input--label">State</div>
+            <select ref={stateRef} onChange={showCities}>
+              <option value={userData.state} key={userData.state}>
+                {currentState.name}
+              </option>
+              {states.map((state) => {
+                return (
+                  <option value={state.isoCode} key={state.isoCode}>
+                    {state.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <div className="input--field">
+          <div className="input--content">
+            <div className="input--label">City</div>
+            <select ref={cityRef}>
+              <option value={userData.city} key={userData.city}>
+                {userData.city}
+              </option>
+              {cities.map((city) => {
+                return (
+                  <option value={city.isoCode} key={city.isoCode}>
+                    {city.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <Input name="Street" ref={streetRef} icon="address" value={userData.street} />
+        <Input name="Street Number" ref={streetNumberRef} icon="address" value={userData.streetNumber} />
+        <Input name="Building" ref={buildingRef} icon="address" value={userData.building} />
+        <Input name="Apartment" ref={apartmentRef} icon="address" value={userData.apartment} />
+        <Input name="Zipcode" ref={zipcodeRef} icon="address" value={userData.zipcode} />
+      </div>
+    );
+  };
+
+  const EmptyData = () => {
+    return (
+      <div className="secondary--information">
+        <Input name="Email" ref={emailRef} icon="email" value="" />
+        <Input name="Phone number" ref={phoneNumberRef} icon="phone" value="" />
+        <div className="input--field">
+          <div className="input--content">
+            <div className="input--label">Country</div>
+            <select ref={countryRef} onChange={showStates}>
+              <option value="select">Select country</option>
+              {countries.map((country) => {
+                return (
+                  <option value={country.isoCode} key={country.isoCode}>
+                    {country.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <div className="input--field">
+          <div className="input--content">
+            <div className="input--label">State</div>
+            <select ref={stateRef} onChange={showCities}>
+              <option value="select">Select state</option>
+              {states.map((state) => {
+                return (
+                  <option value={state.isoCode} key={state.isoCode}>
+                    {state.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <div className="input--field">
+          <div className="input--content">
+            <div className="input--label">City</div>
+            <select ref={cityRef}>
+              <option value="select">Select city</option>
+              {cities.map((city) => {
+                return (
+                  <option value={city.isoCode} key={city.isoCode}>
+                    {city.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
+        <Input name="Street" ref={streetRef} icon="address" value="" />
+        <Input name="Street Number" ref={streetNumberRef} icon="address" value="" />
+        <Input name="Building" ref={buildingRef} icon="address" value="" />
+        <Input name="Apartment" ref={apartmentRef} icon="address" value="" />
+        <Input name="Zipcode" ref={zipcodeRef} icon="address" value="" />
+      </div>
+    );
   };
 
   return (
@@ -147,12 +278,6 @@ function AddAnnounce(props, ref) {
           <div className="personal--data">
             <Input name="Name" ref={nameRef} icon="" value={currentUser.displayName} />
             <Input name="Date of birth" ref={dobRef} icon="" value="02.03.2004" />
-          </div>
-        </div>
-        <div className="input--field">
-          <div className="input--content">
-            <div className="input--label">Description</div>
-            <textarea ref={descRef} cols="30" rows="8"></textarea>
           </div>
         </div>
         {categoryError && (
@@ -194,66 +319,17 @@ function AddAnnounce(props, ref) {
             </select>
           </div>
         </div>
-        <div className="secondary--information">
-          <Input name="Email" ref={emailRef} icon="email" value={currentUser.email} />
-          <Input name="Phone number" ref={phoneNumberRef} icon="phone" value="+40774653200" />
-          <div className="input--field">
-            <div className="input--content">
-              <div className="input--label">Country</div>
-              <select ref={countryRef} onChange={showStates}>
-                <option value={userData.country} key={userData.country}>
-                  {currentCountry.name}
-                </option>
-                {countries.map((country) => {
-                  return (
-                    <option value={country.isoCode} key={country.isoCode}>
-                      {country.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
+        <div className="input--field">
+          <div className="input--content">
+            <div className="input--label">Description</div>
+            <textarea ref={descRef} cols="30" rows="8"></textarea>
           </div>
-          <div className="input--field">
-            <div className="input--content">
-              <div className="input--label">Country</div>
-              <select ref={stateRef} onChange={showCities}>
-                <option value={userData.state} key={userData.state}>
-                  {currentState.name}
-                </option>
-                {states.map((state) => {
-                  return (
-                    <option value={state.isoCode} key={state.isoCode}>
-                      {state.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-          <div className="input--field">
-            <div className="input--content">
-              <div className="input--label">City</div>
-              <select ref={cityRef}>
-                <option value={userData.city} key={userData.city}>
-                  {userData.city}
-                </option>
-                {cities.map((city) => {
-                  return (
-                    <option value={city.isoCode} key={city.isoCode}>
-                      {city.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-          <Input name="Street" ref={streetRef} icon="address" value={userData.street} />
-          <Input name="Street Number" ref={streetNumberRef} icon="address" value={userData.streetNumber} />
-          <Input name="Building" ref={buildingRef} icon="address" value={userData.building} />
-          <Input name="Apartment" ref={apartmentRef} icon="address" value={userData.apartment} />
-          <Input name="Zipcode" ref={zipcodeRef} icon="address" value={userData.zipcode} />
         </div>
+        <div className="input--field checkbox">
+          <input type="checkbox" id="sameAddress" onChange={handleCheckbox} defaultChecked={useSameAddress} />
+          <label htmlFor="sameAddress">Use the same address and contact information as those in your account</label>
+        </div>
+        {useSameAddress ? <DefaultData /> : <EmptyData />}
         {error && (
           <div className="error--message" role="alert">
             {error}

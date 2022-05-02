@@ -16,6 +16,8 @@ const Announces = () => {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   const [addAnnounce, setAddAnnounce] = useState(false);
   const [announces, setAnnounces] = useState([]);
 
@@ -46,8 +48,10 @@ const Announces = () => {
 
   useEffect(() => {
     if (announces.length === 0) {
+      setLoading(true);
       const db = firebase.firestore();
       db.collection("announces")
+        .orderBy("posted", "desc")
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
@@ -55,11 +59,16 @@ const Announces = () => {
               id: doc.id,
               data: doc.data(),
             };
-            setAnnounces([...announces, docData]);
+            setAnnounces((announces) => [...announces, docData]);
           });
         });
+      setLoading(false);
     }
   }, [announces]);
+
+  const pullData = (data) => {
+    setLoading(data);
+  };
 
   return (
     <section className="announcements">
@@ -123,7 +132,11 @@ const Announces = () => {
           </div>
         </div>
       </div>
-      {console.log(announces)}
+      {loading && (
+        <div className="spinner">
+          <div className="loader">Loading...</div>
+        </div>
+      )}
       {announces &&
         announces.map((announce) => {
           return (
@@ -134,6 +147,8 @@ const Announces = () => {
               desc={announce.data.description}
               category={announce.data.category}
               difficulty={announce.data.difficulty}
+              uid={announce.data.uid}
+              loaded={pullData}
             />
           );
         })}

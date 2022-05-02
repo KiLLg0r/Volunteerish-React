@@ -39,9 +39,15 @@
 
   .add--ann--button {
     font-size: 3rem;
+    border-radius: 50%;
     color: $accent;
-    position: absolute;
+    position: fixed;
     right: 2rem;
-    bottom: 0.25rem;
+    bottom: 5rem;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 1.5rem;
   }
 }

@@ -1,7 +1,7 @@
 @use "./colors" as *;
 
 .card {
-  height: 175px;
+  height: 200px;
   width: 375px;
   position: relative;
   border-radius: 0.625rem;
@@ -11,63 +11,76 @@
     background: inherit;
     position: absolute;
     inset: -1rem;
-    background: linear-gradient(to bottom left, $accent-dark-700, $accent-dark-200);
+    background: linear-gradient(to top left, $accent-dark-700, $accent-dark-200);
     filter: blur(5px);
+  }
+
+  .main--content {
+    display: flex;
+    align-items: center;
+
+    .card--img {
+      display: block;
+      width: 40%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 0.625rem;
+    }
+
+    .card--group {
+      padding: 0.5rem;
+
+      .card--name {
+        color: $gray-light-900;
+        font-size: 1.25rem;
+      }
+
+      .card--description {
+        color: $gray-light-700;
+      }
+    }
+  }
+
+  .secondary--content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
   }
 
   .card--content {
     position: absolute;
     height: inherit;
     width: inherit;
-    display: flex;
-    gap: 0.5rem;
     padding: 0.5rem;
 
-    .card--content--left {
-      width: 159px;
-      height: 100%;
-
-      .card--img img {
-        height: 159px;
-        aspect-ratio: 1;
-        object-fit: cover;
-        border-radius: 0.352rem;
-      }
+    label {
+      color: $gray-light-900;
     }
 
-    .card--content--right {
-      width: 60%;
-      height: 100%;
-      padding-top: 0.5rem;
+    .card--category span,
+    .card--difficulty span {
+      text-transform: uppercase;
+    }
 
-      .card--name {
-        color: $gray-light-900;
-        margin-bottom: 0.5rem;
+    .card--category {
+      color: $accent-light-300-bl;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card--difficulty {
+      display: flex;
+      flex-direction: column;
+
+      &.Medium {
+        color: $accent-gld;
       }
-
-      .card--description {
-        color: $gray-light-700;
+      &.Hard {
+        color: $accent-light-200;
       }
-
-      label {
-        color: $gray-light-900;
-      }
-
-      .card--category {
-        color: $accent-bl;
-        display: block;
-      }
-
-      .card--difficulty {
-        &.Medium {
-          color: $accent-gld;
-        }
-        &.Hard {
-          color: $accent;
-        }
-        &.Easy {
-          color: #00ff7f;
-        }
+      &.Easy {
+        color: #00ff7f;
       }
     }
   }

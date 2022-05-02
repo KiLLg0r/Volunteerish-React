@@ -17,6 +17,20 @@
   padding-right: 1rem;
   gap: 1rem;
 
+  &.checkbox {
+    background-color: transparent;
+
+    input#sameAddress {
+      width: 50px;
+      height: 50px;
+      accent-color: $accent;
+    }
+
+    &:focus-within {
+      box-shadow: none;
+    }
+  }
+
   .input--label {
     display: block;
     color: $gray-light-600;

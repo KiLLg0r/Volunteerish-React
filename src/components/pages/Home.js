@@ -2,9 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 import CompleteRegistration from "./CompleteRegistration";
-import Card from "../Card";
-
-
+// import Card from "../Card";
 
 const Home = () => {
   const { currentUser } = useAuth();
@@ -52,22 +50,7 @@ const Home = () => {
               {isOpen[0] === true ? "Hide" : "Show"}
             </div>
           </div>
-          <div className={`cards-container ${isOpen[0] === true ? "show-container" : "hide-container"}`}>
-            <Card
-              UID={currentUser}
-              name="Oblesniuc Robert Andrei"
-              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
-              category="Grocery"
-              difficulty="Medium"
-            />
-            <Card
-              UID={currentUser}
-              name="Oblesniuc Robert Andrei"
-              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
-              category="Grocery"
-              difficulty="Hard"
-            />
-          </div>
+          <div className={`cards-container ${isOpen[0] === true ? "show-container" : "hide-container"}`}></div>
         </div>
         <div className="helped-container ann-container">
           <div className="container-title">
@@ -83,29 +66,7 @@ const Home = () => {
               {isOpen[1] === true ? "Hide" : "Show"}
             </div>
           </div>
-          <div className={`cards-container ${isOpen[1] === true ? "show-container" : "hide-container"}`}>
-            <Card
-              UID={currentUser}
-              name="Oblesniuc Robert Andrei"
-              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
-              category="Grocery"
-              difficulty="Medium"
-            />
-            <Card
-              UID={currentUser}
-              name="Oblesniuc Robert Andrei"
-              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
-              category="Grocery"
-              difficulty="Medium"
-            />
-            <Card
-              UID={currentUser}
-              name="Oblesniuc Robert Andrei"
-              desc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, optio!"
-              category="Grocery"
-              difficulty="Medium"
-            />
-          </div>
+          <div className={`cards-container ${isOpen[1] === true ? "show-container" : "hide-container"}`}></div>
         </div>
       </div>
       <RenderForm />
