@@ -589,19 +589,21 @@
 .card .card--content .card--content--right .card--description {
   color: #bfc0c2;
 }
-.card .card--content .card--content--right .card--group {
-  margin-top: 0.5rem;
-  display: flex;
-}
-.card .card--content .card--content--right .card--group label {
+.card .card--content .card--content--right label {
   color: #eaeaeb;
 }
-.card .card--content .card--content--right .card--group .card--category {
+.card .card--content .card--content--right .card--category {
   color: #08aeea;
   display: block;
 }
-.card .card--content .card--content--right .card--group .card--difficulty {
+.card .card--content .card--content--right .card--difficulty.Medium {
   color: #ffb647;
+}
+.card .card--content .card--content--right .card--difficulty.Hard {
+  color: #ff5a5a;
+}
+.card .card--content .card--content--right .card--difficulty.Easy {
+  color: #00ff7f;
 }
 
 .dropdown {

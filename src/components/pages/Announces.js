@@ -1,8 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { Country, State, City } from "country-state-city";
 import AddAnnounce from "./AddAnnounce";
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/storage";
+import "firebase/compat/firestore";
+
+import Card from "../Card";
 
 const Announces = () => {
   const [isOpen, setOpen] = useState(false);
@@ -11,6 +17,7 @@ const Announces = () => {
   const [cities, setCities] = useState([]);
 
   const [addAnnounce, setAddAnnounce] = useState(false);
+  const [announces, setAnnounces] = useState([]);
 
   const selectedCountryRef = useRef(null);
   const selectedStateRef = useRef(null);
@@ -36,6 +43,23 @@ const Announces = () => {
   const openModal = (state) => {
     setAddAnnounce(state);
   };
+
+  useEffect(() => {
+    if (announces.length === 0) {
+      const db = firebase.firestore();
+      db.collection("announces")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            const docData = {
+              id: doc.id,
+              data: doc.data(),
+            };
+            setAnnounces([...announces, docData]);
+          });
+        });
+    }
+  }, [announces]);
 
   return (
     <section className="announcements">
@@ -99,6 +123,20 @@ const Announces = () => {
           </div>
         </div>
       </div>
+      {console.log(announces)}
+      {announces &&
+        announces.map((announce) => {
+          return (
+            <Card
+              key={announce.id}
+              ID={announce.id}
+              name={announce.data.name}
+              desc={announce.data.description}
+              category={announce.data.category}
+              difficulty={announce.data.difficulty}
+            />
+          );
+        })}
       <div className="add--ann--button" onClick={() => setAddAnnounce(true)}>
         <BsPlusCircleFill />
       </div>

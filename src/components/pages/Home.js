@@ -4,27 +4,12 @@ import { useAuth } from "../contexts/AuthContext";
 import CompleteRegistration from "./CompleteRegistration";
 import Card from "../Card";
 
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
+
 
 const Home = () => {
   const { currentUser } = useAuth();
 
   const [isOpen, setOpen] = useState([true, false]);
-
-  const db = firebase.firestore();
-  const userDoc = db.collection("users").doc(currentUser.uid);
-
-  const getData = () => {
-    userDoc
-      .get()
-      .then((doc) => {
-        console.log(doc.data());
-      })
-      .catch((error) => {
-        console.log("Error getting cached document:", error);
-      });
-  };
 
   const RenderForm = () => {
     if (!currentUser.displayName) return <CompleteRegistration />;
@@ -51,9 +36,6 @@ const Home = () => {
           </h3>
         </div>
       </div>
-      <button onClick={getData} className="view-more">
-        Get data
-      </button>
       <div className="announces">
         <h1 className="title">Announces</h1>
         <div className="helping-now-container ann-container">

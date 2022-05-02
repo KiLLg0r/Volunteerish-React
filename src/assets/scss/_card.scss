@@ -49,21 +49,24 @@
         color: $gray-light-700;
       }
 
-      .card--group {
-        margin-top: 0.5rem;
-        display: flex;
+      label {
+        color: $gray-light-900;
+      }
 
-        label {
-          color: $gray-light-900;
-        }
+      .card--category {
+        color: $accent-bl;
+        display: block;
+      }
 
-        .card--category {
-          color: $accent-bl;
-          display: block;
-        }
-
-        .card--difficulty {
+      .card--difficulty {
+        &.Medium {
           color: $accent-gld;
+        }
+        &.Hard {
+          color: $accent;
+        }
+        &.Easy {
+          color: #00ff7f;
         }
       }
     }

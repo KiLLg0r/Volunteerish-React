@@ -1,27 +1,25 @@
 import React from "react";
 
-function Card({ UID, name, desc, category, difficulty }) {
+function Card(props) {
   return (
-    <div className="card">
+    <div className="card" id={props.id}>
       <div className="card--background"></div>
       <div className="card--content">
         <div className="card--content--left">
           <div className="card--img">
-            <img src={UID.photoURL} alt="profile" />
+            <img src={"empty"} alt="profile" />
           </div>
         </div>
         <div className="card--content--right">
-          <div className="card--name">{name}</div>
-          <div className="card--description">{desc}</div>
-          <div className="card--group">
-            <div className="card--category">
-              <label htmlFor="">Category: </label>
-              <span> {category} </span>
-            </div>
-            <div className="card--difficulty">
-              <label htmlFor="">Difficulty: </label>
-              <span>{difficulty}</span>
-            </div>
+          <div className="card--name">{props.name}</div>
+          <div className="card--description">{props.desc.substring(0, 99)}</div>
+          <div className="card--category">
+            <label htmlFor="">Category: </label>
+            <span>{props.category}</span>
+          </div>
+          <div className={`card--difficulty ${props.difficulty}`}>
+            <label htmlFor="">Difficulty: </label>
+            <span>{props.difficulty}</span>
           </div>
         </div>
       </div>
