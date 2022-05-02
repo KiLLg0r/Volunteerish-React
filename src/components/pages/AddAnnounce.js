@@ -121,6 +121,7 @@ function AddAnnounce(props, ref) {
           building: buildingRef.current.value,
           apartment: apartmentRef.current.value,
           zipcode: zipcodeRef.current.value,
+          posted: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .catch((error) => setError("The announcement could not be posted"));
       setAddSuccess(true);
