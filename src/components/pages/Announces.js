@@ -22,6 +22,13 @@ const Announces = () => {
   const [lastKey, setLastKey] = useState("");
   const [nextAnnouncesLoading, setNextAnnouncesLoading] = useState(false);
 
+  const [filter, setFilter] = useState({
+    country: "",
+    state: "",
+    city: "",
+    order: "recently",
+  });
+
   const selectedCountryRef = useRef(null);
   const selectedStateRef = useRef(null);
   const selectedCityRef = useRef(null);
@@ -31,11 +38,60 @@ const Announces = () => {
     setStates([]);
     setCities([]);
     setStates(State.getStatesOfCountry(selectedCountryRef.current.value));
+    setFilter((lastFilter) => ({
+      ...lastFilter,
+      country: selectedCountryRef.current.value,
+    }));
+    setAnnounces([]);
+    AnnouncesQuery.announcesFirstFetch(currentUser.uid, filter)
+      .then((result) => {
+        setAnnounces(result.announces);
+        setLastKey(result.lastKey);
+      })
+      .catch((error) => console.log(error));
   };
 
   const showCities = () => {
     setCities([]);
     setCities(City.getCitiesOfState(selectedCountryRef.current.value, selectedStateRef.current.value));
+    setFilter((lastFilter) => ({
+      ...lastFilter,
+      state: selectedStateRef.current.value,
+    }));
+    setAnnounces([]);
+    AnnouncesQuery.announcesFirstFetch(currentUser.uid, filter)
+      .then((result) => {
+        setAnnounces(result.announces);
+        setLastKey(result.lastKey);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleCityChange = () => {
+    setFilter((lastFilter) => ({
+      ...lastFilter,
+      city: selectedCityRef.current.value,
+    }));
+    setAnnounces([]);
+    AnnouncesQuery.announcesFirstFetch(currentUser.uid, filter)
+      .then((result) => {
+        setAnnounces(result.announces);
+        setLastKey(result.lastKey);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleOrderChange = () => {
+    setFilter((lastFilter) => ({
+      ...lastFilter,
+      order: orderByRef.current.value,
+    }));
+    AnnouncesQuery.announcesFirstFetch(currentUser.uid, filter)
+      .then((result) => {
+        setAnnounces(result.announces);
+        setLastKey(result.lastKey);
+      })
+      .catch((error) => console.log(error));
   };
 
   const DropdownIcon = ({ isOpen }) => {
@@ -52,18 +108,18 @@ const Announces = () => {
   };
 
   useEffect(() => {
-    AnnouncesQuery.announcesFirstFetch(currentUser.uid)
+    AnnouncesQuery.announcesFirstFetch(currentUser.uid, filter)
       .then((result) => {
         setAnnounces(result.announces);
         setLastKey(result.lastKey);
       })
       .catch((error) => console.log(error));
-  }, [currentUser.uid]);
+  }, [currentUser.uid, filter]);
 
   const fetchMoreAnnounces = (key) => {
     if (key.length > 0) {
       setNextAnnouncesLoading(true);
-      AnnouncesQuery.announcesNextFetch(key, currentUser.uid)
+      AnnouncesQuery.announcesNextFetch(key, currentUser.uid, filter)
         .then((result) => {
           setLastKey(result.lastKey);
           setAnnounces((announces) => [...announces, result.announces]);
@@ -135,7 +191,7 @@ const Announces = () => {
             </div>
             <div className="select-group">
               <label htmlFor="city">City:</label>
-              <select id="city" ref={selectedCityRef}>
+              <select id="city" ref={selectedCityRef} onChange={handleCityChange}>
                 <option value="">Select a city</option>
                 {cities.map((city) => {
                   return (
@@ -148,9 +204,9 @@ const Announces = () => {
             </div>
             <div className="select-group">
               <label htmlFor="orderBy">Order by:</label>
-              <select id="orderBy" ref={orderByRef}>
+              <select id="orderBy" ref={orderByRef} onChange={handleOrderChange}>
                 <option value="recently">The newest</option>
-                <option value="">The oldest</option>
+                <option value="latest">The oldest</option>
                 <option value="difficultyAscending">Difficulty (Ascending)</option>
                 <option value="difficultyDescending">Difficulty (Descending)</option>
               </select>
