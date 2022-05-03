@@ -3,14 +3,13 @@ import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { Country, State, City } from "country-state-city";
 import AddAnnounce from "./AddAnnounce";
-
-import firebase from "firebase/compat/app";
-import "firebase/compat/storage";
-import "firebase/compat/firestore";
-
 import Card from "../Card";
+import AnnouncesQuery from "../AnnounceQuery";
+import { useAuth } from "../contexts/AuthContext";
 
 const Announces = () => {
+  const { currentUser } = useAuth();
+
   const [isOpen, setOpen] = useState(false);
   const countries = Country.getAllCountries();
   const [states, setStates] = useState([]);
@@ -20,6 +19,8 @@ const Announces = () => {
 
   const [addAnnounce, setAddAnnounce] = useState(false);
   const [announces, setAnnounces] = useState([]);
+  const [lastKey, setLastKey] = useState("");
+  const [nextAnnouncesLoading, setNextAnnouncesLoading] = useState(false);
 
   const selectedCountryRef = useRef(null);
   const selectedStateRef = useRef(null);
@@ -46,29 +47,54 @@ const Announces = () => {
     setAddAnnounce(state);
   };
 
-  useEffect(() => {
-    if (announces.length === 0) {
-      setLoading(true);
-      const db = firebase.firestore();
-      db.collection("announces")
-        .orderBy("posted", "desc")
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            const docData = {
-              id: doc.id,
-              data: doc.data(),
-            };
-            setAnnounces((announces) => [...announces, docData]);
-          });
-        });
-      setLoading(false);
-    }
-  }, [announces]);
-
   const pullData = (data) => {
     setLoading(data);
   };
+
+  useEffect(() => {
+    AnnouncesQuery.announcesFirstFetch(currentUser.uid)
+      .then((result) => {
+        setAnnounces(result.announces);
+        setLastKey(result.lastKey);
+      })
+      .catch((error) => console.log(error));
+  }, [currentUser.uid]);
+
+  const fetchMoreAnnounces = (key) => {
+    if (key.length > 0) {
+      setNextAnnouncesLoading(true);
+      AnnouncesQuery.announcesNextFetch(key, currentUser.uid)
+        .then((result) => {
+          setLastKey(result.lastKey);
+          setAnnounces((announces) => [...announces, result.announces]);
+          setNextAnnouncesLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setNextAnnouncesLoading(false);
+        });
+    }
+  };
+
+  const allAnnounces = (
+    <>
+      {announces.map((announce) => {
+        return (
+          <Card
+            key={announce.id}
+            ID={announce.id}
+            img={announce.announceData.imgURL}
+            name={announce.announceData.name}
+            desc={announce.announceData.description}
+            category={announce.announceData.category}
+            difficulty={announce.announceData.difficulty}
+            uid={announce.announceData.uid}
+            loaded={pullData}
+          />
+        );
+      })}
+    </>
+  );
 
   return (
     <section className="announcements">
@@ -137,21 +163,12 @@ const Announces = () => {
           <div className="loader">Loading...</div>
         </div>
       )}
-      {announces &&
-        announces.map((announce) => {
-          return (
-            <Card
-              key={announce.id}
-              ID={announce.id}
-              name={announce.data.name}
-              desc={announce.data.description}
-              category={announce.data.category}
-              difficulty={announce.data.difficulty}
-              uid={announce.data.uid}
-              loaded={pullData}
-            />
-          );
-        })}
+      {allAnnounces}
+      {nextAnnouncesLoading ? (
+        <p>Loading ...</p>
+      ) : (
+        lastKey.length > 0 && <button onClick={() => fetchMoreAnnounces(lastKey)}>Show more announces</button>
+      )}
       <div className="add--ann--button" onClick={() => setAddAnnounce(true)}>
         <BsPlusCircleFill />
       </div>
