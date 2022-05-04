@@ -6,14 +6,7 @@
   position: relative;
   border-radius: 0.625rem;
   overflow: hidden;
-
-  .card--background {
-    background: inherit;
-    position: absolute;
-    inset: -1rem;
-    background: linear-gradient(to top left, $accent-dark-700, $accent-dark-200);
-    filter: blur(5px);
-  }
+  background: linear-gradient(to top left, $accent-dark-700, $accent-dark-200);
 
   .main--content {
     display: flex;
@@ -49,7 +42,6 @@
   }
 
   .card--content {
-    position: absolute;
     height: inherit;
     width: inherit;
     padding: 0.5rem;

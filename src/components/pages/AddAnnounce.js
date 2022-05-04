@@ -45,7 +45,7 @@ function AddAnnounce(props, ref) {
   const zipcodeRef = useRef(null);
 
   const defaultMessage =
-    "Hi. I need your help. I cannot write about what I need but this ad contains the category and difficulty of the task. It can be connected with me by message or call. Thank you very much!";
+    "Hi. I need your help. I cannot write about what I need but this announce contains the category and difficulty of the task. It can be connected with me by message or call. Thank you very much!";
 
   const showStates = () => {
     setStates([]);
@@ -313,9 +313,9 @@ function AddAnnounce(props, ref) {
             <div className="input--label">Difficulty</div>
             <select ref={difficultyRef} onChange={handleChangeDifficulty}>
               <option value="select">Select difficulty</option>
-              <option value="Easy">Easy</option>
-              <option value="Medium">Medium</option>
-              <option value="Hard">Hard</option>
+              <option value="0">Easy</option>
+              <option value="1">Medium</option>
+              <option value="2">Hard</option>
             </select>
           </div>
         </div>

@@ -5,10 +5,13 @@ const db = firebase.firestore();
 
 const announcesFirstFetch = async (UID, filter) => {
   let query = db.collection("announces").where("status", "==", "active").where("uid", "!=", UID);
+
   if (filter.country) query = query.where("country", "==", filter.country);
   if (filter.state) query = query.where("state", "==", filter.state);
   if (filter.city) query = query.where("city", "==", filter.city);
+
   query = query.orderBy("uid", "desc");
+
   if (filter.order)
     switch (filter.order) {
       case "recently":
@@ -18,10 +21,10 @@ const announcesFirstFetch = async (UID, filter) => {
         query = query.orderBy("posted", "asc");
         break;
       case "difficultyAscending":
-        query = query.orderBy("difficulty", "asc");
+        query = query.orderBy("difficulty", "asc").orderBy("posted", "desc");
         break;
       case "difficultyDescending":
-        query = query.orderBy("difficulty", "desc");
+        query = query.orderBy("difficulty", "desc").orderBy("posted", "desc");
         break;
       default:
         break;
@@ -48,16 +51,34 @@ const announcesFirstFetch = async (UID, filter) => {
 };
 
 const announcesNextFetch = async (key, UID, filter) => {
+  let query = db.collection("announces").where("status", "==", "active").where("uid", "!=", UID);
+
+  if (filter.country) query = query.where("country", "==", filter.country);
+  if (filter.state) query = query.where("state", "==", filter.state);
+  if (filter.city) query = query.where("city", "==", filter.city);
+
+  query = query.orderBy("uid", "desc");
+
+  if (filter.order)
+    switch (filter.order) {
+      case "recently":
+        query = query.orderBy("posted", "desc");
+        break;
+      case "latest":
+        query = query.orderBy("posted", "asc");
+        break;
+      case "difficultyAscending":
+        query = query.orderBy("difficulty", "asc").orderBy("posted", "desc");
+        break;
+      case "difficultyDescending":
+        query = query.orderBy("difficulty", "desc").orderBy("posted", "desc");
+        break;
+      default:
+        break;
+    }
+
   try {
-    const data = await db
-      .collection("announces")
-      .where("status", "==", "active")
-      .where("uid", "!=", UID)
-      .orderBy("uid", "desc")
-      .orderBy("posted", "desc")
-      .startAfter(key)
-      .limit(10)
-      .get();
+    const data = await query.limit(10).get();
 
     let announces = [];
     let lastKey = "";

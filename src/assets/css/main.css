@@ -530,13 +530,7 @@
   position: relative;
   border-radius: 0.625rem;
   overflow: hidden;
-}
-.card .card--background {
-  background: inherit;
-  position: absolute;
-  inset: -1rem;
   background: linear-gradient(to top left, #4c1b1b, #cc4848);
-  filter: blur(5px);
 }
 .card .main--content {
   display: flex;
@@ -566,7 +560,6 @@
   margin-top: 0.5rem;
 }
 .card .card--content {
-  position: absolute;
   height: inherit;
   width: inherit;
   padding: 0.5rem;
@@ -669,6 +662,7 @@
 .announcements .card {
   width: 100%;
   margin-bottom: 1.5rem;
+  height: auto;
 }
 
 .settings {
