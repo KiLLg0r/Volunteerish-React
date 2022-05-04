@@ -12,7 +12,7 @@ const Home = () => {
 
   const [myAnnounces, setMyAnnounces] = useState([]);
   const [helpingNowAnnounces, setHelpingNowAnnounces] = useState([]);
-  const [helpedAnnounces, setHelpedNowAnnounces] = useState([]);
+  const [helpedAnnounces, setHelpedAnnounces] = useState([]);
 
   const RenderForm = () => {
     if (!currentUser.displayName) return <CompleteRegistration />;
@@ -39,7 +39,7 @@ const Home = () => {
     AnnouncesQuery.myAnnouncesFirstFetch(currentUser.uid, "closed")
       .then((result) => {
         if (result) {
-          setHelpingNowAnnounces(result.announces);
+          setHelpedAnnounces(result.announces);
         }
       })
       .catch((error) => console.log(error));
