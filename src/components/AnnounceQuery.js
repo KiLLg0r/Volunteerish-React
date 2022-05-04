@@ -78,7 +78,7 @@ const announcesNextFetch = async (key, UID, filter) => {
     }
 
   try {
-    const data = await query.limit(10).get();
+    const data = await query.startAfter(key).limit(10).get();
 
     let announces = [];
     let lastKey = "";
@@ -96,9 +96,129 @@ const announcesNextFetch = async (key, UID, filter) => {
   }
 };
 
+const myAnnouncesFirstFetch = async (UID, status) => {
+  let query = db
+    .collection("announces")
+    .where("status", "==", "active")
+    .where("uid", "==", UID)
+    .where("status", "==", status)
+    .orderBy("posted", "desc");
+
+  try {
+    const data = await query.limit(10).get();
+
+    let announces = [];
+    let lastKey = "";
+
+    data.forEach((doc) => {
+      announces.push({
+        announceID: doc.id,
+        announceData: doc.data(),
+      });
+      lastKey = doc.data().posted;
+    });
+
+    return { announces, lastKey };
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const myActiveAnnouncesNextFetch = async (key, UID, status) => {
+  let query = db
+    .collection("announces")
+    .where("status", "==", "active")
+    .where("uid", "==", UID)
+    .where("status", "==", status)
+    .orderBy("posted", "desc");
+
+  try {
+    const data = await query.startAfter(key).limit(10).get();
+
+    let announces = [];
+    let lastKey = "";
+
+    data.forEach((doc) => {
+      announces.push({
+        announceID: doc.id,
+        announceData: doc.data(),
+      });
+      lastKey = doc.data().posted;
+    });
+
+    return { announces, lastKey };
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const myHelpedAnnouncesFirstFetch = async (UID, status) => {
+  let query = db
+    .collection("announces")
+    .where("status", "==", "active")
+    .where("uid", "!=", UID)
+    .where("helpedBy", "==", UID)
+    .where("status", "==", status)
+    .orderBy("uid", "desc")
+    .orderBy("posted", "desc");
+
+  try {
+    const data = await query.limit(10).get();
+
+    let announces = [];
+    let lastKey = "";
+
+    data.forEach((doc) => {
+      announces.push({
+        announceID: doc.id,
+        announceData: doc.data(),
+      });
+      lastKey = doc.data().posted;
+    });
+
+    return { announces, lastKey };
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const myHelpedAnnouncesNextFetch = async (key, UID, status) => {
+  let query = db
+    .collection("announces")
+    .where("status", "==", "active")
+    .where("uid", "!=", UID)
+    .where("helpedBy", "==", UID)
+    .where("status", "==", status)
+    .orderBy("uid", "desc")
+    .orderBy("posted", "desc");
+
+  try {
+    const data = await query.startAfter(key).limit(10).get();
+
+    let announces = [];
+    let lastKey = "";
+
+    data.forEach((doc) => {
+      announces.push({
+        announceID: doc.id,
+        announceData: doc.data(),
+      });
+      lastKey = doc.data().posted;
+    });
+
+    return { announces, lastKey };
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const exportedFunctions = {
   announcesFirstFetch,
   announcesNextFetch,
+  myAnnouncesFirstFetch,
+  myActiveAnnouncesNextFetch,
+  myHelpedAnnouncesFirstFetch,
+  myHelpedAnnouncesNextFetch,
 };
 
 export default exportedFunctions;

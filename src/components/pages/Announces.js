@@ -112,8 +112,10 @@ const Announces = () => {
   useEffect(() => {
     AnnouncesQuery.announcesFirstFetch(currentUser.uid, filter)
       .then((result) => {
-        setAnnounces(result.announces);
-        setLastKey(result.lastKey);
+        if (result) {
+          setAnnounces(result.announces);
+          setLastKey(result.lastKey);
+        }
       })
       .catch((error) => console.log(error));
   }, [currentUser.uid, filter]);
@@ -123,9 +125,11 @@ const Announces = () => {
       setNextAnnouncesLoading(true);
       AnnouncesQuery.announcesNextFetch(key, currentUser.uid, filter)
         .then((result) => {
-          setLastKey(result.lastKey);
-          setAnnounces((announces) => [...announces, result.announces]);
-          setNextAnnouncesLoading(false);
+          if (result) {
+            setLastKey(result.lastKey);
+            setAnnounces((announces) => [...announces, result.announces]);
+            setNextAnnouncesLoading(false);
+          }
         })
         .catch((error) => {
           console.log(error);
