@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 import CompleteRegistration from "./CompleteRegistration";
 import AnnouncesQuery from "../AnnounceQuery";
@@ -8,7 +9,7 @@ import Card from "../Card";
 const Home = () => {
   const { currentUser } = useAuth();
 
-  const [isOpen, setOpen] = useState([false, false, false]);
+  const [isOpen, setOpen] = useState([false, true, false]);
 
   const [myAnnounces, setMyAnnounces] = useState([]);
   const [helpingNowAnnounces, setHelpingNowAnnounces] = useState([]);
@@ -28,7 +29,7 @@ const Home = () => {
       })
       .catch((error) => console.log(error));
 
-    AnnouncesQuery.myAnnouncesFirstFetch(currentUser.uid, "helping")
+    AnnouncesQuery.myHelpedAnnouncesFirstFetch(currentUser.uid, "helping")
       .then((result) => {
         if (result) {
           setHelpingNowAnnounces(result.announces);
@@ -36,7 +37,7 @@ const Home = () => {
       })
       .catch((error) => console.log(error));
 
-    AnnouncesQuery.myAnnouncesFirstFetch(currentUser.uid, "closed")
+    AnnouncesQuery.myHelpedAnnouncesFirstFetch(currentUser.uid, "closed")
       .then((result) => {
         if (result) {
           setHelpedAnnounces(result.announces);
@@ -85,16 +86,18 @@ const Home = () => {
             {myAnnounces &&
               myAnnounces.map((announce) => {
                 return (
-                  <Card
-                    key={announce.id}
-                    ID={announce.id}
-                    img={announce.announceData.imgURL}
-                    name={announce.announceData.name}
-                    desc={announce.announceData.description}
-                    category={announce.announceData.category}
-                    difficulty={announce.announceData.difficulty}
-                    uid={announce.announceData.uid}
-                  />
+                  <Link to={`/announce/${announce.ID}`} style={{ textDecoration: "none" }}>
+                    <Card
+                      key={announce.ID}
+                      ID={announce.ID}
+                      img={announce.Data.imgURL}
+                      name={announce.Data.name}
+                      desc={announce.Data.description}
+                      category={announce.Data.category}
+                      difficulty={announce.Data.difficulty}
+                      uid={announce.Data.uid}
+                    />
+                  </Link>
                 );
               })}
           </div>
@@ -117,16 +120,18 @@ const Home = () => {
             {helpingNowAnnounces &&
               helpingNowAnnounces.map((announce) => {
                 return (
-                  <Card
-                    key={announce.id}
-                    ID={announce.id}
-                    img={announce.announceData.imgURL}
-                    name={announce.announceData.name}
-                    desc={announce.announceData.description}
-                    category={announce.announceData.category}
-                    difficulty={announce.announceData.difficulty}
-                    uid={announce.announceData.uid}
-                  />
+                  <Link to={{ pathname: `/announce/${announce.ID}`, state: true }} style={{ textDecoration: "none" }}>
+                    <Card
+                      key={announce.ID}
+                      ID={announce.ID}
+                      img={announce.Data.imgURL}
+                      name={announce.Data.name}
+                      desc={announce.Data.description}
+                      category={announce.Data.category}
+                      difficulty={announce.Data.difficulty}
+                      uid={announce.Data.uid}
+                    />
+                  </Link>
                 );
               })}
           </div>
@@ -149,16 +154,18 @@ const Home = () => {
             {helpedAnnounces &&
               helpedAnnounces.map((announce) => {
                 return (
-                  <Card
-                    key={announce.id}
-                    ID={announce.id}
-                    img={announce.announceData.imgURL}
-                    name={announce.announceData.name}
-                    desc={announce.announceData.description}
-                    category={announce.announceData.category}
-                    difficulty={announce.announceData.difficulty}
-                    uid={announce.announceData.uid}
-                  />
+                  <Link to={`/announce/${announce.ID}`} style={{ textDecoration: "none" }}>
+                    <Card
+                      key={announce.ID}
+                      ID={announce.ID}
+                      img={announce.Data.imgURL}
+                      name={announce.Data.name}
+                      desc={announce.Data.description}
+                      category={announce.Data.category}
+                      difficulty={announce.Data.difficulty}
+                      uid={announce.Data.uid}
+                    />
+                  </Link>
                 );
               })}
           </div>

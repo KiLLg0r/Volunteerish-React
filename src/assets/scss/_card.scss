@@ -7,6 +7,7 @@
   border-radius: 0.625rem;
   overflow: hidden;
   background: linear-gradient(to top left, $accent-dark-700, $accent-dark-200);
+  cursor: pointer;
 
   .main--content {
     display: flex;
@@ -73,6 +74,124 @@
       }
       &.Easy {
         color: #00ff7f;
+      }
+    }
+  }
+}
+
+.full--card {
+  height: 100vh;
+  overflow-y: auto;
+  color: $gray-light-600;
+  padding: 2rem;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: $gray;
+  width: 100%;
+  padding-bottom: 2rem;
+
+  .header {
+    width: 100%;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $accent;
+    margin-bottom: 1rem;
+
+    button {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: none;
+      color: $accent;
+      font-size: 3rem;
+    }
+  }
+
+  .card--content {
+    height: 100%;
+    width: 100%;
+
+    .card--img {
+      display: block;
+      width: 60%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      margin-inline: auto;
+      border-radius: 0.625rem;
+      margin-bottom: 2rem;
+    }
+
+    .card--data {
+      width: 100%;
+      min-height: 4rem;
+      background-color: $gray-light-100;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border-radius: 0.625rem;
+      padding-right: 1rem;
+      gap: 1rem;
+      font-size: 1.25rem;
+      color: $gray-light-900;
+
+      &.description {
+        min-height: fit-content;
+      }
+
+      .card--label {
+        display: block;
+        color: $gray-light-600;
+      }
+
+      &.difficulty {
+        &.Medium {
+          color: $accent-gld;
+        }
+        &.Hard {
+          color: $accent-light-200;
+        }
+        &.Easy {
+          color: #00ff7f;
+        }
+      }
+    }
+
+    .sensitive--data {
+      padding-bottom: 1rem;
+    }
+
+    .btn--group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .cancel--btn,
+      .help--btn,
+      .close--btn,
+      .edit--btn {
+        padding: 1rem 2rem;
+        width: 100%;
+        height: auto;
+        color: $gray-light-900;
+        border: none;
+        border-radius: 0.625rem;
+        text-transform: uppercase;
+
+        font-size: 1.25rem;
+        white-space: nowrap;
+      }
+
+      .cancel--btn,
+      .close--btn {
+        background-color: $accent;
+      }
+
+      .help--btn,
+      .edit--btn {
+        background-color: rgb(0, 180, 90);
       }
     }
   }

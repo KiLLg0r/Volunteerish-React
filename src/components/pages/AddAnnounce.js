@@ -125,6 +125,7 @@ function AddAnnounce(props, ref) {
           imgURL: imgRef.current.src,
           posted: firebase.firestore.FieldValue.serverTimestamp(),
           status: "active",
+          helpedBy: "",
         })
         .catch((error) => setError("The announcement could not be posted"));
       setAddSuccess(true);

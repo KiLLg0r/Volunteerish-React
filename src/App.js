@@ -16,6 +16,7 @@ import Settings from "./components/pages/Settings";
 import Account from "./components/pages/Account";
 import HelpAndSupport from "./components/pages/HelpAndSupport";
 import About from "./components/pages/About";
+import Card from "./components/pages/Card";
 
 //Css
 import "./assets/css/main.css";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/register" component={Register} />
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute path="/announces" component={Announces} />
+          <PrivateRoute path="/announce/:id" component={Card} />
           <PrivateRoute path="/settings" component={Settings} />
           <PrivateRoute path="/messages" component={Messages} />
           <PrivateRoute path="/account" component={Account} />

@@ -4,7 +4,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { Country, State, City } from "country-state-city";
 import AddAnnounce from "./AddAnnounce";
 import Card from "../Card";
-import CardPage from "./CardPage";
+import { Link } from "react-router-dom";
 import AnnouncesQuery from "../AnnounceQuery";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -22,7 +22,6 @@ const Announces = () => {
   const [announces, setAnnounces] = useState([]);
   const [lastKey, setLastKey] = useState("");
   const [nextAnnouncesLoading, setNextAnnouncesLoading] = useState(false);
-  // const [acceptAnnounce, setAcceptAnnounce] = useState(false);
 
   const [filter, setFilter] = useState({
     country: "",
@@ -142,19 +141,19 @@ const Announces = () => {
     <>
       {announces.map((announce) => {
         return (
-          <CardPage>
+          <Link to={`/announce/${announce.ID}`} style={{ textDecoration: "none" }}>
             <Card
-              key={announce.id}
-              ID={announce.id}
-              img={announce.announceData.imgURL}
-              name={announce.announceData.name}
-              desc={announce.announceData.description}
-              category={announce.announceData.category}
-              difficulty={announce.announceData.difficulty}
-              uid={announce.announceData.uid}
+              key={announce.ID}
+              ID={announce.ID}
+              img={announce.Data.imgURL}
+              name={announce.Data.name}
+              desc={announce.Data.description}
+              category={announce.Data.category}
+              difficulty={announce.Data.difficulty}
+              uid={announce.Data.uid}
               loaded={pullData}
             />
-          </CardPage>
+          </Link>
         );
       })}
     </>

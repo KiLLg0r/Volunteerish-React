@@ -38,8 +38,8 @@ const announcesFirstFetch = async (UID, filter) => {
 
     data.forEach((doc) => {
       announces.push({
-        announceID: doc.id,
-        announceData: doc.data(),
+        ID: doc.id,
+        Data: doc.data(),
       });
       lastKey = doc.data().posted;
     });
@@ -84,9 +84,10 @@ const announcesNextFetch = async (key, UID, filter) => {
     let lastKey = "";
     data.forEach((doc) => {
       announces.push({
-        announceID: doc.id,
-        announceData: doc.data(),
+        ID: doc.id,
+        Data: doc.data(),
       });
+      console.log([announces[announces.length].ID]);
       lastKey = doc.data().posted;
     });
 
@@ -99,7 +100,6 @@ const announcesNextFetch = async (key, UID, filter) => {
 const myAnnouncesFirstFetch = async (UID, status) => {
   let query = db
     .collection("announces")
-    .where("status", "==", "active")
     .where("uid", "==", UID)
     .where("status", "==", status)
     .orderBy("posted", "desc");
@@ -112,8 +112,8 @@ const myAnnouncesFirstFetch = async (UID, status) => {
 
     data.forEach((doc) => {
       announces.push({
-        announceID: doc.id,
-        announceData: doc.data(),
+        ID: doc.id,
+        Data: doc.data(),
       });
       lastKey = doc.data().posted;
     });
@@ -124,10 +124,9 @@ const myAnnouncesFirstFetch = async (UID, status) => {
   }
 };
 
-const myActiveAnnouncesNextFetch = async (key, UID, status) => {
+const myAnnouncesNextFetch = async (key, UID, status) => {
   let query = db
     .collection("announces")
-    .where("status", "==", "active")
     .where("uid", "==", UID)
     .where("status", "==", status)
     .orderBy("posted", "desc");
@@ -140,8 +139,8 @@ const myActiveAnnouncesNextFetch = async (key, UID, status) => {
 
     data.forEach((doc) => {
       announces.push({
-        announceID: doc.id,
-        announceData: doc.data(),
+        ID: doc.id,
+        Data: doc.data(),
       });
       lastKey = doc.data().posted;
     });
@@ -155,7 +154,6 @@ const myActiveAnnouncesNextFetch = async (key, UID, status) => {
 const myHelpedAnnouncesFirstFetch = async (UID, status) => {
   let query = db
     .collection("announces")
-    .where("status", "==", "active")
     .where("uid", "!=", UID)
     .where("helpedBy", "==", UID)
     .where("status", "==", status)
@@ -170,8 +168,8 @@ const myHelpedAnnouncesFirstFetch = async (UID, status) => {
 
     data.forEach((doc) => {
       announces.push({
-        announceID: doc.id,
-        announceData: doc.data(),
+        ID: doc.id,
+        Data: doc.data(),
       });
       lastKey = doc.data().posted;
     });
@@ -185,7 +183,6 @@ const myHelpedAnnouncesFirstFetch = async (UID, status) => {
 const myHelpedAnnouncesNextFetch = async (key, UID, status) => {
   let query = db
     .collection("announces")
-    .where("status", "==", "active")
     .where("uid", "!=", UID)
     .where("helpedBy", "==", UID)
     .where("status", "==", status)
@@ -200,8 +197,8 @@ const myHelpedAnnouncesNextFetch = async (key, UID, status) => {
 
     data.forEach((doc) => {
       announces.push({
-        announceID: doc.id,
-        announceData: doc.data(),
+        ID: doc.id,
+        Data: doc.data(),
       });
       lastKey = doc.data().posted;
     });
@@ -216,7 +213,7 @@ const exportedFunctions = {
   announcesFirstFetch,
   announcesNextFetch,
   myAnnouncesFirstFetch,
-  myActiveAnnouncesNextFetch,
+  myAnnouncesNextFetch,
   myHelpedAnnouncesFirstFetch,
   myHelpedAnnouncesNextFetch,
 };

@@ -20,7 +20,7 @@ function Card(props) {
   }, [props.difficulty]);
 
   return (
-    <div className="card" id={props.id}>
+    <div className="card">
       <div className="card--content">
         <div className="main--content">
           <img className="card--img" src={props.img} alt="profile" />
