@@ -3,6 +3,7 @@ import { auth } from "../../firebase";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import "firebase/compat/firestore";
+import { Country, State, City } from "country-state-city";
 
 const AuthContext = React.createContext();
 
@@ -68,6 +69,10 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    loading,
+    Country,
+    State,
+    City,
   };
 
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;

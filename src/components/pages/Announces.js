@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { BsPlusCircleFill } from "react-icons/bs";
-import { Country, State, City } from "country-state-city";
 import AddAnnounce from "./AddAnnounce";
 import Card from "../Card";
 import { Link } from "react-router-dom";
@@ -9,7 +8,7 @@ import AnnouncesQuery from "../AnnounceQuery";
 import { useAuth } from "../contexts/AuthContext";
 
 const Announces = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, Country, State, City } = useAuth();
 
   const [isOpen, setOpen] = useState(false);
   const countries = Country.getAllCountries();

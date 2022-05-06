@@ -144,8 +144,8 @@ function AddAnnounce(props, ref) {
   const DefaultData = () => {
     return (
       <div className="secondary--information" style={{ display: "none" }}>
-        <Input name="Email" ref={emailRef} icon="email" value={currentUser.email} />
-        <Input name="Phone number" ref={phoneNumberRef} icon="phone" value={"+40774653200"} />
+        <Input type="email" name="Email" ref={emailRef} icon="email" value={currentUser.email} />
+        <Input type="tel" name="Phone number" ref={phoneNumberRef} icon="phone" value={"+40774653200"} />
         <div className="input--field">
           <div className="input--content">
             <div className="input--label">Country</div>
@@ -197,11 +197,11 @@ function AddAnnounce(props, ref) {
             </select>
           </div>
         </div>
-        <Input name="Street" ref={streetRef} icon="address" value={userData.street} />
-        <Input name="Street Number" ref={streetNumberRef} icon="address" value={userData.streetNumber} />
-        <Input name="Building" ref={buildingRef} icon="address" value={userData.building} />
-        <Input name="Apartment" ref={apartmentRef} icon="address" value={userData.apartment} />
-        <Input name="Zipcode" ref={zipcodeRef} icon="address" value={userData.zipcode} />
+        <Input type="text" name="Street" ref={streetRef} icon="address" value={userData.street} />
+        <Input type="number" name="Street Number" ref={streetNumberRef} icon="address" value={userData.streetNumber} />
+        <Input type="text" name="Building" ref={buildingRef} icon="address" value={userData.building} />
+        <Input type="number" name="Apartment" ref={apartmentRef} icon="address" value={userData.apartment} />
+        <Input type="number" name="Zipcode" ref={zipcodeRef} icon="address" value={userData.zipcode} />
       </div>
     );
   };
@@ -209,8 +209,8 @@ function AddAnnounce(props, ref) {
   const EmptyData = () => {
     return (
       <div className="secondary--information">
-        <Input name="Email" ref={emailRef} icon="email" value="" />
-        <Input name="Phone number" ref={phoneNumberRef} icon="phone" value="" />
+        <Input type="email" name="Email" ref={emailRef} icon="email" value="" />
+        <Input type="tel" name="Phone number" ref={phoneNumberRef} icon="phone" value="" />
         <div className="input--field">
           <div className="input--content">
             <div className="input--label">Country</div>
@@ -256,11 +256,11 @@ function AddAnnounce(props, ref) {
             </select>
           </div>
         </div>
-        <Input name="Street" ref={streetRef} icon="address" value="" />
-        <Input name="Street Number" ref={streetNumberRef} icon="address" value="" />
-        <Input name="Building" ref={buildingRef} icon="address" value="" />
-        <Input name="Apartment" ref={apartmentRef} icon="address" value="" />
-        <Input name="Zipcode" ref={zipcodeRef} icon="address" value="" />
+        <Input type="text" name="Street" ref={streetRef} icon="address" value="" />
+        <Input type="number" name="Street Number" ref={streetNumberRef} icon="address" value="" />
+        <Input type="text" name="Building" ref={buildingRef} icon="address" value="" />
+        <Input type="number" name="Apartment" ref={apartmentRef} icon="address" value="" />
+        <Input type="number" name="Zipcode" ref={zipcodeRef} icon="address" value="" />
       </div>
     );
   };

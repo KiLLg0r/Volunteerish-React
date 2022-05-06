@@ -209,6 +209,17 @@ const myHelpedAnnouncesNextFetch = async (key, UID, status) => {
   }
 };
 
+const getAnnounceData = async (ID) => {
+  try {
+    const data = await db.collection("announces").doc(ID).get();
+    const announceData = data.data();
+
+    return announceData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const exportedFunctions = {
   announcesFirstFetch,
   announcesNextFetch,
@@ -216,6 +227,7 @@ const exportedFunctions = {
   myAnnouncesNextFetch,
   myHelpedAnnouncesFirstFetch,
   myHelpedAnnouncesNextFetch,
+  getAnnounceData,
 };
 
 export default exportedFunctions;
