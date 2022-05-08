@@ -4,7 +4,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import AddAnnounce from "./AddAnnounce";
 import Card from "../Card";
 import { Link } from "react-router-dom";
-import AnnouncesQuery from "../AnnounceQuery";
+import AnnouncesQuery from "../Queries";
 import { useAuth } from "../contexts/AuthContext";
 
 const Announces = () => {

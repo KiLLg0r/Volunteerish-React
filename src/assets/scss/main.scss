@@ -12,6 +12,7 @@
 @use "./profile";
 @use "./messages";
 @use "./addannounce";
+@use "./conversation";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Love+Light&display=swap");
 
@@ -113,5 +114,24 @@ section {
     span {
       color: $accent;
     }
+  }
+}
+
+.header {
+  width: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $accent;
+  margin-bottom: 1rem;
+
+  button {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    color: $accent;
+    font-size: 3rem;
   }
 }

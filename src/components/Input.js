@@ -32,6 +32,7 @@ function Input(props, ref) {
           ref={ref}
           defaultValue={props.value}
           onChange={handleChange}
+          readOnly={props.readOnly && true}
         />
       </div>
       <Icon />

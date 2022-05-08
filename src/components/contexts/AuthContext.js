@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(true);
+  const [db, setDB] = useState();
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -53,6 +54,7 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       if (user) getData(user.uid);
+      setDB(firebase.firestore());
       setLoading(false);
     });
 
@@ -69,6 +71,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    db,
     loading,
     Country,
     State,

@@ -6,7 +6,6 @@ import Input from "../Input";
 import SuccessModal from "../SuccessModal";
 
 import firebase from "firebase/compat/app";
-import "firebase/compat/storage";
 import "firebase/compat/firestore";
 
 function AddAnnounce(props, ref) {

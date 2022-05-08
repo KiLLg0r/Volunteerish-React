@@ -1,0 +1,135 @@
+@use "./colors" as *;
+
+.conversation--page {
+  height: calc(100vh - 5rem);
+  overflow-y: auto;
+  color: $gray-light-600;
+  padding: 2rem;
+  background-color: $gray;
+  width: 100%;
+
+  .header {
+    height: 4rem;
+
+    .conversation--card--header {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      .conversation--card--img {
+        display: block;
+        height: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .conversation--card--name {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .conversation--card {
+    height: calc(100% - 5rem);
+    width: 100%;
+    overflow-y: auto;
+    position: relative;
+
+    .conversation--card--messages {
+      height: calc(100% - 3.2rem);
+      width: 100%;
+      overflow: hidden;
+      overflow-y: auto;
+      padding-bottom: 1rem;
+    }
+  }
+
+  .send--message--input {
+    width: 100%;
+    min-height: 3rem;
+    height: auto;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.1rem;
+
+    input {
+      height: auto;
+      min-height: 3rem;
+      width: 100%;
+      border: none;
+      border-radius: 1.5rem;
+      text-indent: 1rem;
+      background-color: $gray-light-200;
+      color: $gray-light-900;
+      font-size: 1.125rem;
+
+      &::placeholder {
+        color: $gray-light-900;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 2px 2px $accent;
+      }
+    }
+
+    button {
+      font-size: 2rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      background-color: $accent-dark-100;
+      border-radius: 50%;
+      padding: 0.5rem;
+      color: $gray-light-900;
+    }
+  }
+
+  .message--card {
+    width: 100%;
+    height: auto;
+    float: left;
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    &.sent {
+      float: right;
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .message--card--img {
+      display: block;
+      width: 3rem;
+      height: 3rem;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .message--card--body {
+      max-width: 10rem;
+      width: fit-content;
+      height: fit-content;
+
+      background-color: $gray-light-100;
+      padding: 0.5rem;
+      border-radius: 0.625rem;
+
+      .message--card--name {
+        font-size: 1.125rem;
+        color: $gray-light-900;
+      }
+
+      .message--card--message {
+        word-wrap: break-word;
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 import CompleteRegistration from "./CompleteRegistration";
-import AnnouncesQuery from "../AnnounceQuery";
+import AnnouncesQuery from "../Queries";
 import Card from "../Card";
 
 const Home = () => {

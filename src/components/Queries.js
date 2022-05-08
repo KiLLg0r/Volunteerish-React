@@ -220,6 +220,69 @@ const getAnnounceData = async (ID) => {
   }
 };
 
+const getMessages = async (ID) => {
+  try {
+    let messages = [];
+    let lastKey = "";
+    // await db
+    //   .collection("conversations")
+    //   .doc(ID)
+    //   .collection("messages")
+    //   .orderBy("posted", "desc")
+    //   .limit(10)
+    //   .onSnapshot((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //       messages.push({ ID: doc.id, Data: doc.data() });
+    //       lastKey = doc.data().posted;
+    //     });
+    //   });
+
+    const data = await db.collection("conversations").doc(ID).collection("messages").limit(10).get();
+
+    data.forEach((doc) => {
+      messages.push({ ID: doc.id, Data: doc.data() });
+      lastKey = doc.data().created;
+    });
+
+    return { messages, lastKey };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getNextMessages = async (key, ID1, ID2) => {
+  try {
+    const data = await db.collection("conversations").where("uid1", "==", ID1).where("uid2", "==", ID2).get();
+
+    let messages = [];
+    let lastKey = "";
+    let conversationID = "";
+
+    data.forEach((snapshot) => {
+      conversationID = snapshot.id;
+      snapshot.forEach((document) => {
+        const conversationMessages = document
+          .collection("messages")
+          .orderBy("posted", "desc")
+          .startAfter(key)
+          .limit(10)
+          .get();
+        conversationMessages.forEach((doc) => {
+          messages.push({
+            ID: doc.id,
+            Data: doc.data(),
+          });
+          lastKey = doc.data().posted;
+        });
+      });
+    });
+
+    return { messages, lastKey, conversationID };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const exportedFunctions = {
   announcesFirstFetch,
   announcesNextFetch,
@@ -228,6 +291,8 @@ const exportedFunctions = {
   myHelpedAnnouncesFirstFetch,
   myHelpedAnnouncesNextFetch,
   getAnnounceData,
+  getMessages,
+  getNextMessages,
 };
 
 export default exportedFunctions;

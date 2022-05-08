@@ -603,23 +603,6 @@
   width: 100%;
   padding-bottom: 2rem;
 }
-.full--card .header {
-  width: 100%;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #ff5a5a;
-  margin-bottom: 1rem;
-}
-.full--card .header button {
-  display: flex;
-  align-items: center;
-  background: transparent;
-  border: none;
-  color: #ff5a5a;
-  font-size: 3rem;
-}
 .full--card .card--content {
   height: 100%;
   width: 100%;
@@ -644,6 +627,8 @@
   gap: 1rem;
   font-size: 1.25rem;
   color: #eaeaeb;
+  overflow: hidden;
+  overflow-x: auto;
 }
 .full--card .card--content .card--data.description {
   min-height: fit-content;
@@ -669,11 +654,13 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 .full--card .card--content .btn--group .cancel--btn,
 .full--card .card--content .btn--group .help--btn,
 .full--card .card--content .btn--group .close--btn,
-.full--card .card--content .btn--group .edit--btn {
+.full--card .card--content .btn--group .edit--btn,
+.full--card .card--content .btn--group .sendMsg--btn {
   padding: 1rem 2rem;
   width: 100%;
   height: auto;
@@ -683,13 +670,16 @@
   text-transform: uppercase;
   font-size: 1.25rem;
   white-space: nowrap;
+  text-decoration: none;
+  text-align: center;
 }
 .full--card .card--content .btn--group .cancel--btn,
 .full--card .card--content .btn--group .close--btn {
   background-color: #ff5a5a;
 }
 .full--card .card--content .btn--group .help--btn,
-.full--card .card--content .btn--group .edit--btn {
+.full--card .card--content .btn--group .edit--btn,
+.full--card .card--content .btn--group .sendMsg--btn {
   background-color: #00b45a;
 }
 
@@ -835,23 +825,6 @@
   z-index: 1000;
   background-color: #282c34;
   width: 100%;
-}
-.account .header {
-  width: 100%;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #ff5a5a;
-  margin-bottom: 1rem;
-}
-.account .header button {
-  display: flex;
-  align-items: center;
-  background: transparent;
-  border: none;
-  color: #ff5a5a;
-  font-size: 3rem;
 }
 .account .img-placeholder {
   height: 10rem;
@@ -1001,23 +974,6 @@
   padding: 2rem;
   overflow-y: auto;
 }
-.announce--page .header {
-  width: 100%;
-  font-size: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #ff5a5a;
-  margin-bottom: 2rem;
-}
-.announce--page .header button {
-  display: flex;
-  align-items: center;
-  background: transparent;
-  border: none;
-  color: #ff5a5a;
-  font-size: 2rem;
-}
 .announce--page .page--content {
   width: 100%;
   height: 100%;
@@ -1052,6 +1008,122 @@
   background: linear-gradient(to top right, #cc4848, #4c1b1b);
   color: #eaeaeb;
   cursor: pointer;
+}
+
+.conversation--page {
+  height: calc(100vh - 5rem);
+  overflow-y: auto;
+  color: #a9abae;
+  padding: 2rem;
+  background-color: #282c34;
+  width: 100%;
+}
+.conversation--page .header {
+  height: 4rem;
+}
+.conversation--page .header .conversation--card--header {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.conversation--page .header .conversation--card--header .conversation--card--img {
+  display: block;
+  height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.conversation--page .header .conversation--card--header .conversation--card--name {
+  font-size: 2rem;
+}
+.conversation--page .conversation--card {
+  height: calc(100% - 5rem);
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+.conversation--page .conversation--card .conversation--card--messages {
+  height: calc(100% - 3.2rem);
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-bottom: 1rem;
+}
+.conversation--page .send--message--input {
+  width: 100%;
+  min-height: 3rem;
+  height: auto;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.1rem;
+}
+.conversation--page .send--message--input input {
+  height: auto;
+  min-height: 3rem;
+  width: 100%;
+  border: none;
+  border-radius: 1.5rem;
+  text-indent: 1rem;
+  background-color: #53565d;
+  color: #eaeaeb;
+  font-size: 1.125rem;
+}
+.conversation--page .send--message--input input::placeholder {
+  color: #eaeaeb;
+}
+.conversation--page .send--message--input input:focus {
+  outline: none;
+  box-shadow: 0 0 2px 2px #ff5a5a;
+}
+.conversation--page .send--message--input button {
+  font-size: 2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  background-color: #e65151;
+  border-radius: 50%;
+  padding: 0.5rem;
+  color: #eaeaeb;
+}
+.conversation--page .message--card {
+  width: 100%;
+  height: auto;
+  float: left;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.conversation--page .message--card.sent {
+  float: right;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.conversation--page .message--card .message--card--img {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.conversation--page .message--card .message--card--body {
+  max-width: 10rem;
+  width: fit-content;
+  height: fit-content;
+  background-color: #3e4148;
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+}
+.conversation--page .message--card .message--card--body .message--card--name {
+  font-size: 1.125rem;
+  color: #eaeaeb;
+}
+.conversation--page .message--card .message--card--body .message--card--message {
+  word-wrap: break-word;
 }
 
 *,
@@ -1142,6 +1214,24 @@ section .title {
 }
 .success--modal .modal--subtitle span {
   color: #ff5a5a;
+}
+
+.header {
+  width: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ff5a5a;
+  margin-bottom: 1rem;
+}
+.header button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #ff5a5a;
+  font-size: 3rem;
 }
 
 /*# sourceMappingURL=main.css.map */
