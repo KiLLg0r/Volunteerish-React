@@ -3,18 +3,15 @@ import { useHistory } from "react-router-dom";
 import { BiChevronLeft } from "react-icons/bi";
 import { useAuth } from "../contexts/AuthContext";
 import { BiSend } from "react-icons/bi";
-import Queries from "../Queries";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
 function Conversation(props) {
   const { currentUser, db } = useAuth();
   const state = props.location.state;
-  const [nextMessagesLoading, setNextMessagesLoading] = useState(false);
   const [conversationID, setConversationID] = useState("");
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const [lastKey, setLastKey] = useState("");
   const personName = state.name;
   const personUID = state.uid;
   const personImgURL = state.imgURL;
@@ -55,38 +52,31 @@ function Conversation(props) {
           console.log(error);
         });
 
-    if (conversationID.length > 0) {
-      Queries.getMessages(conversationID).then((result) => {
-        setMessages(result.messages);
-        setLastKey(result.lastKey);
-      });
+    if (conversationID) {
+      const unsubscribe = db
+        .collection("conversations")
+        .doc(conversationID)
+        .collection("messages")
+        .orderBy("created")
+        .limit(100)
+        .onSnapshot((querySnapshot) => {
+          const data = querySnapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+
+          setMessages(data);
+        });
+      return unsubscribe;
     }
   }, [conversationID, currentUser.uid, db, personUID]);
-
-  const getMoreMessages = (key) => {
-    if (key.length > 0) {
-      setNextMessagesLoading(true);
-      Queries.getNextMessages(key, currentUser.uid, personUID)
-        .then((result) => {
-          if (result) {
-            setLastKey(result.lastKey);
-            setMessages((messages) => [...messages, result.messages]);
-            setNextMessagesLoading(false);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          setNextMessagesLoading(false);
-        });
-    }
-  };
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
     const query = db.collection("conversations");
 
-    if (!conversationID) {
+    if (!conversationID && message.length > 0) {
       await query
         .doc()
         .set({
@@ -96,11 +86,22 @@ function Conversation(props) {
           name2: personName,
           imgURL1: currentUser.photoURL,
           imgURL2: personImgURL,
+          lastMessage: message,
+          lastMessageCreated: firebase.firestore.FieldValue.serverTimestamp(),
         })
-        .then((doc) => conversationID(doc.id));
+        .then((doc) => setConversationID(doc.id))
+        .catch((error) => console.log(error));
     }
 
     if (message.length > 0) {
+      await query.doc(conversationID).set(
+        {
+          lastMessage: message,
+          lastMessageCreated: firebase.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true },
+      );
+
       await query.doc(conversationID).collection("messages").doc().set({
         message: message,
         receivedBy: personUID,
@@ -128,21 +129,16 @@ function Conversation(props) {
         <div className="conversation--card--messages">
           {messages.map((message) => (
             <div
-              className={`message--card ${currentUser.uid === message.Data.sentBy ? "sent" : "received"}`}
-              key={message.ID}
+              className={`message--card ${currentUser.uid === message.sentBy ? "sent" : "received"}`}
+              key={message.id}
             >
-              <img className="message--card--img" alt="Sender" src={message.Data.senderPhotoURL} />
+              <img className="message--card--img" alt="Sender" src={message.senderPhotoURL} />
               <div className="message--card--body">
-                <div className="message--card--name">{message.Data.senderName}</div>
-                <div className="message--card--message">{message.Data.message}</div>
+                <div className="message--card--name">{message.senderName}</div>
+                <div className="message--card--message">{message.message}</div>
               </div>
             </div>
           ))}
-          {nextMessagesLoading ? (
-            <p>Loading ...</p>
-          ) : (
-            lastKey.length > 0 && <button onClick={() => getMoreMessages(lastKey)}>Show more messages</button>
-          )}
         </div>
         <form className="send--message--input" onSubmit={sendMessage}>
           <input

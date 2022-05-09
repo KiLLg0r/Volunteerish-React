@@ -283,6 +283,27 @@ const getNextMessages = async (key, ID1, ID2) => {
   }
 };
 
+const getConversations = async (UID) => {
+  try {
+    let conversations = [];
+
+    const person1 = await db.collection("conversations").where("uid1", "==", UID).get();
+    const person2 = await db.collection("conversations").where("uid2", "==", UID).get();
+
+    person1.forEach((doc) => {
+      conversations.push({ ID: doc.id, data: doc.data() });
+    });
+
+    person2.forEach((doc) => {
+      conversations.push({ ID: doc.id, data: doc.data() });
+    });
+
+    return conversations;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const exportedFunctions = {
   announcesFirstFetch,
   announcesNextFetch,
@@ -293,6 +314,7 @@ const exportedFunctions = {
   getAnnounceData,
   getMessages,
   getNextMessages,
+  getConversations,
 };
 
 export default exportedFunctions;

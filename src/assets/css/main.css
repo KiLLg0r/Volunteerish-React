@@ -962,6 +962,9 @@
   font-size: 1.125rem;
   color: #eaeaeb;
 }
+.messages .list--item .list--last-message {
+  color: #a9abae;
+}
 
 .announce--page {
   position: fixed;
@@ -1025,7 +1028,7 @@
   height: 100%;
   width: 100%;
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
 }
 .conversation--page .header .conversation--card--header .conversation--card--img {
