@@ -10,7 +10,7 @@ Volunteerish is an open-source application created by students and intended for 
 
 ## ➤ Home
 
-![App Screenshot](https://imgur.com/T1H2fID)
+![App Screenshot](https://i.imgur.com/T1H2fID.png)
 
 The Home menu contains information such as people who have been helped, people who are currently being helped, and announcements posted by the user. There is also information about the number of points (See more in the Shop section) and the number of people helped.
 
@@ -18,11 +18,11 @@ The Home menu contains information such as people who have been helped, people w
 
 ## ➤ Announcements
 
-![App Screenshot](https://imgur.com/SPVhHCq)
+![App Screenshot](https://i.imgur.com/SPVhHCq.png)
 
 In the Announcements section, users can respond to other people's requests for help as well as post their requests for help. At the top of the menu is a filter with which users can filter the announcements depending on: country, state, city, difficulty, date of publication. Also in the lower right corner is the button with which users can add help announcements.
 
-![App Screenshot](https://imgur.com/icTMmQY)
+![App Screenshot](https://i.imgur.com/icTMmQY.png)
 
 When you press the button, a menu will open where it will be completed, as the case may be, with the description of the announcement, its difficulty and the category to which it belongs. Details such as country, state, and city are automatically entered from the data provided by the user upon registration and are subject to change.
 
@@ -40,21 +40,21 @@ The points are calculated according to the category to which the announcements b
 
 ## ➤ Messages
 
-![App Screenshot](https://imgur.com/a33imDK)
+![App Screenshot](https://i.imgur.com/a33imDK.png)
 
 In the Messages section, users can communicate with each other through text messages and pictures. Conversations can be initiated either by the person requesting help or by the person helping, from the announcement menu. Messages are encrypted and transmitted instantly via the real-time database. The user can also delete conversations.
 
-![App Screenshot](https://imgur.com/hGgHVNC)
+![App Screenshot](https://i.imgur.com/hGgHVNC.png)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#settings)
 
 ## ➤ Settings
 
-![App Screenshot](https://imgur.com/VnluPRu)
+![App Screenshot](https://i.imgur.com/VnluPRu.png)
 
 In the last section, the Settings section, the user can change his profile data such as: picture, name, date of birth, address (country, state, city, street, etc.) and phone number. Also in this section you can find more details about the application, the user can log in and access the Help & Support section.
 
-![App Screenshot](https://imgur.com/aLPsrOi)
+![App Screenshot](https://i.imgur.com/aLPsrOi.png)
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#technology-and-frameworks)
 
