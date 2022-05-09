@@ -30,32 +30,33 @@ const Login = () => {
     setLoading(false);
   }
 
-  // TODO Add 1s timeout after successfully login and display to user a success message
-  // TODO Implement errors
-
   return (
     <div className="login">
-      <h1 className="title app-name">Volunteerish</h1>
-      <LoginSvg />
-      <h1 className="title">Log in</h1>
-      {error && (
-        <div className="alert" role="alert">
-          {error}
+      <div className="auth--header">
+        <h1 className="title app-name">Volunteerish</h1>
+        <LoginSvg />
+      </div>
+      <div className="auth--content">
+        <h1 className="title">Log in</h1>
+        {error && (
+          <div className="error--message" role="alert">
+            {error}
+          </div>
+        )}
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <div className="wrapper">
+            <Input type="email" ref={emailRef} name="Email" icon="email" />
+            <Input type="password" ref={passwordRef} name="Password" icon="password" />
+          </div>
+          <div className="wrapper">
+            <button type="submit" className="btn" disabled={loading}>
+              Log in
+            </button>
+          </div>
+        </form>
+        <div className="link-text">
+          Need an account? <Link to="/register">Sign up</Link>
         </div>
-      )}
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <div className="wrapper">
-          <Input type="email" ref={emailRef} name="Email" icon="email" />
-          <Input type="password" ref={passwordRef} name="Password" icon="password" />
-        </div>
-        <div className="wrapper">
-          <button type="submit" className="btn" disabled={loading}>
-            Log in
-          </button>
-        </div>
-      </form>
-      <div className="link-text">
-        Need an account? <Link to="/register">Sign up</Link>
       </div>
     </div>
   );

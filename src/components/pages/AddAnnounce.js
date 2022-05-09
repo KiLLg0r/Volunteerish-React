@@ -7,16 +7,18 @@ import SuccessModal from "../SuccessModal";
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import { useHistory } from "react-router-dom";
 
-function AddAnnounce(props, ref) {
+function AddAnnounce() {
   const { currentUser, userData, getData } = useAuth();
+
+  const history = useHistory();
 
   const [error, setError] = useState("");
   const [difficultyError, setDifficultyError] = useState("");
   const [categoryError, setCategoryError] = useState("");
 
   const [addSuccess, setAddSuccess] = useState(false);
-  const [sent, setSent] = useState(false);
   const [useSameAddress, setUseSameAddress] = useState(true);
 
   const countries = Country.getAllCountries();
@@ -132,8 +134,7 @@ function AddAnnounce(props, ref) {
   };
 
   const pullData = (state) => {
-    setAddSuccess(state);
-    setSent(!state);
+    history.push("/announces");
   };
 
   const handleCheckbox = () => {
@@ -266,7 +267,7 @@ function AddAnnounce(props, ref) {
 
   return (
     <div className="announce--page">
-      <div className="header" onClick={() => props.state(false)}>
+      <div className="header" onClick={history.goBack}>
         <button>
           <BsXCircle />
         </button>
@@ -338,7 +339,6 @@ function AddAnnounce(props, ref) {
         <input type="submit" className="add--announce" value="Post announce" />
       </form>
       {addSuccess && <SuccessModal state={pullData} title="Your announcement has been posted successfully!" sec="3" />}
-      {addSuccess === false && sent ? props.state(false) : null}
     </div>
   );
 }

@@ -144,24 +144,32 @@ function Card() {
         Go back
       </div>
       <div className="card--content">
-        <img className="card--img" src={announceData.imgURL} alt="User" />
-        <div className="card--data name">
-          <div className="card--label">Name</div>
-          {announceData.name}
+        <div className="flex--container">
+          <div className="main--content">
+            <img className="card--img" src={announceData.imgURL} alt="User" />
+            <div className="card--data name">
+              <div className="card--label">Name</div>
+              {announceData.name}
+            </div>
+            <div className="card--data description">
+              <div className="card--label">Description</div>
+              {announceData.description}
+            </div>
+            <div className="card--data category">
+              <div className="card--label">Category</div>
+              {announceData.category}
+            </div>
+            <div className={`card--data difficulty ${difficulty}`}>
+              <div className="card--label">Difficulty</div>
+              {difficulty}
+            </div>
+          </div>
+          {(helping || myAnnounce) && <SensitiveData />}
         </div>
-        <div className="card--data description">
-          <div className="card--label">Description</div>
-          {announceData.description}
-        </div>
-        <div className="card--data category">
-          <div className="card--label">Category</div>
-          {announceData.category}
-        </div>
-        <div className={`card--data difficulty ${difficulty}`}>
-          <div className="card--label">Difficulty</div>
-          {difficulty}
-        </div>
-        {(helping || myAnnounce) && <SensitiveData />}
+
+        {closeSuccess && (
+          <SuccessModal state={pullData} title="Your announcement has been closed successfully!" sec="3" />
+        )}
         {!helping && !myAnnounce && (
           <div className="btn--group">
             <button onClick={history.goBack} className="cancel--btn">
@@ -195,9 +203,6 @@ function Card() {
               Send message
             </Link>
           </div>
-        )}
-        {closeSuccess && (
-          <SuccessModal state={pullData} title="Your announcement has been closed successfully!" sec="3" />
         )}
       </div>
     </div>

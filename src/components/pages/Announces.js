@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { BsPlusCircleFill } from "react-icons/bs";
-import AddAnnounce from "./AddAnnounce";
 import Card from "../Card";
 import { Link } from "react-router-dom";
 import AnnouncesQuery from "../Queries";
@@ -17,7 +16,6 @@ const Announces = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [addAnnounce, setAddAnnounce] = useState(false);
   const [announces, setAnnounces] = useState([]);
   const [lastKey, setLastKey] = useState("");
   const [nextAnnouncesLoading, setNextAnnouncesLoading] = useState(false);
@@ -97,10 +95,6 @@ const Announces = () => {
   const DropdownIcon = ({ isOpen }) => {
     if (isOpen) return <BiChevronDown />;
     else return <BiChevronUp />;
-  };
-
-  const openModal = (state) => {
-    setAddAnnounce(state);
   };
 
   const pullData = (data) => {
@@ -233,10 +227,9 @@ const Announces = () => {
       ) : (
         lastKey.length > 0 && <button onClick={() => fetchMoreAnnounces(lastKey)}>Show more announces</button>
       )}
-      <div className="add--ann--button" onClick={() => setAddAnnounce(true)}>
+      <Link to="/add-announce" className="add--ann--button">
         <BsPlusCircleFill />
-      </div>
-      {addAnnounce && <AddAnnounce state={openModal} />}
+      </Link>
     </section>
   );
 };

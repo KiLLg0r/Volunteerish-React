@@ -39,28 +39,32 @@ const Register = () => {
 
   return (
     <div className="register">
-      <h1 className="title app-name">Volunteerish</h1>
-      <RegisterSvg />
-      <h1 className="title">Create new account</h1>
-      {error && (
-        <div className="alert" role="alert">
-          {error}
+      <div className="auth--header">
+        <h1 className="title app-name">Volunteerish</h1>
+        <RegisterSvg />
+      </div>
+      <div className="auth--content">
+        <h1 className="title">Create new account</h1>
+        {error && (
+          <div className="error--message" role="alert">
+            {error}
+          </div>
+        )}
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <div className="wrapper">
+            <Input type="email" ref={emailRef} name="Email" icon="email" />
+            <Input type="password" ref={passwordRef} name="Password" icon="password" />
+            <Input type="password" ref={passwordConfirmRef} name="Confirm password" icon="password" />
+          </div>
+          <div className="wrapper">
+            <button disabled={loading} type="submit" className="btn">
+              Sign Up
+            </button>
+          </div>
+        </form>
+        <div className="link-text">
+          Already have an account? <Link to="/login">Log in</Link>
         </div>
-      )}
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <div className="wrapper">
-          <Input type="email" ref={emailRef} name="Email" icon="email" />
-          <Input type="password" ref={passwordRef} name="Password" icon="password" />
-          <Input type="password" ref={passwordConfirmRef} name="Confirm password" icon="password" />
-        </div>
-        <div className="wrapper">
-          <button disabled={loading} type="submit" className="btn">
-            Sign Up
-          </button>
-        </div>
-      </form>
-      <div className="link-text">
-        Already have an account? <Link to="/login">Log in</Link>
       </div>
     </div>
   );

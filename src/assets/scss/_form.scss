@@ -19,7 +19,8 @@
 
   &.checkbox {
     background-color: transparent;
-    justify-content: flex-start;npm
+    justify-content: flex-start;
+    width: fit-content;
 
     input#sameAddress {
       width: 50px;
@@ -29,6 +30,10 @@
 
     &:focus-within {
       box-shadow: none;
+    }
+
+    label {
+      color: $gray-light-600;
     }
   }
 

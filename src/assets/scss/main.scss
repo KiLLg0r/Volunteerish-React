@@ -136,24 +136,92 @@ section {
   }
 }
 
+@media screen and (min-width: 600px) {
+  .card {
+    height: 150px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    .main--content {
+      height: 90px;
+      width: 100%;
+
+      .card--img {
+        height: 100%;
+        width: auto;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 1200px) {
   html {
     display: flex;
     justify-content: center;
   }
+
   body {
-    width: 1000px;
+    width: 1200px;
     position: relative;
   }
+
+  #app {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
   .primary-nav {
-    width: 1000px;
+    width: 1200px;
     left: 50%;
     transform: translate(-50%, 0);
+    top: 0;
+    .navigation {
+      .navigation-links {
+        width: fit-content;
+        gap: 2rem;
+        margin-inline: auto;
+        .nav-link {
+          flex-direction: row;
+          gap: 0.5rem;
+          width: fit-content;
+        }
+      }
+    }
   }
+
+  .login,
+  .register {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    .auth--content,
+    .auth--header {
+      padding: 2rem;
+    }
+    .auth--header {
+      background-color: $gray-light-100;
+      border-radius: 0.625rem;
+      width: 100%;
+    }
+    .auth--content {
+      width: 100%;
+    }
+  }
+
   .announcements {
+    .card {
+      width: 350px;
+    }
     .announces--content {
       display: flex;
       flex-direction: row-reverse;
+      justify-content: flex-end;
       gap: 2rem;
       width: 100%;
       height: 100%;
@@ -165,20 +233,118 @@ section {
       }
 
       .filter {
-        width: 40%;
+        width: 100%;
         .dropdown-menu {
           display: block !important;
+          padding-block: 1.5rem;
         }
         .dropdown-btn {
           display: none;
         }
       }
       .all--announces {
-        width: 60%;
+        height: fit-content;
+        min-width: 716px;
+        width: 716px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
       }
     }
     .add--ann--button {
-      right: calc(250px - 3rem) !important;
+      right: calc(300px - 3rem) !important;
+    }
+  }
+
+  section {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    .cards-container {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
+
+  .home {
+    display: flex;
+    gap: 2rem;
+
+    .profile {
+      width: 30%;
+    }
+    .announces {
+      width: 70%;
+    }
+  }
+
+  .full--card {
+    width: 1200px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    margin-inline: auto;
+
+    .header {
+      cursor: pointer;
+    }
+
+    .card--content {
+      height: auto;
+      .flex--container {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+
+        .card--data {
+          font-size: 1rem;
+          min-height: auto;
+        }
+
+        .main--content {
+          width: 40%;
+        }
+
+        .sensitive--data {
+          width: 60%;
+          overflow-y: auto;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      }
+    }
+  }
+
+  .announce--page,
+  .account {
+    width: 1200px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+  }
+
+  .conversation--page {
+    .conversation--card--messages {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;
     }
   }
 }

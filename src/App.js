@@ -18,6 +18,7 @@ import HelpAndSupport from "./components/pages/HelpAndSupport";
 import About from "./components/pages/About";
 import Card from "./components/pages/Card";
 import Conversation from "./components/pages/Conversation";
+import AddAnnounce from "./components/pages/AddAnnounce";
 
 //Css
 import "./assets/css/main.css";
@@ -33,6 +34,7 @@ function App() {
           <PrivateRoute path="/announces" component={Announces} />
           <PrivateRoute path="/announce/:id" component={Card} />
           <PrivateRoute path="/conversation/:id" component={Conversation} />
+          <PrivateRoute path="/add-announce" component={AddAnnounce} />
           <PrivateRoute path="/settings" component={Settings} />
           <PrivateRoute path="/messages" component={Messages} />
           <PrivateRoute path="/account" component={Account} />
