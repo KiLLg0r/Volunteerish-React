@@ -4,6 +4,7 @@ import { BiChevronLeft } from "react-icons/bi";
 import { useAuth } from "../contexts/AuthContext";
 import AnnounceQuery from "../Queries";
 import { Link } from "react-router-dom";
+import SuccessModal from "../SuccessModal";
 
 function Card() {
   const { id } = useParams();
@@ -13,6 +14,7 @@ function Card() {
 
   const [difficulty, setDifficulty] = useState("");
   const [helping, setHelping] = useState(false);
+  const [closeSuccess, setCloseSuccess] = useState(false);
   const [myAnnounce, setMyAnnounce] = useState(false);
   const [announceData, setAnnounceData] = useState([]);
   const [age, setAge] = useState("");
@@ -119,12 +121,18 @@ function Card() {
   };
 
   const closeAnnounce = () => {
-    docRef.set(
-      {
-        status: "closed",
-      },
-      { merge: true },
-    );
+    docRef
+      .set(
+        {
+          status: "closed",
+        },
+        { merge: true },
+      )
+      .then(() => setCloseSuccess(true));
+  };
+
+  const pullData = (state) => {
+    setCloseSuccess(state);
   };
 
   return (
@@ -187,6 +195,9 @@ function Card() {
               Send message
             </Link>
           </div>
+        )}
+        {closeSuccess && (
+          <SuccessModal state={pullData} title="Your announcement has been closed successfully!" sec="3" />
         )}
       </div>
     </div>

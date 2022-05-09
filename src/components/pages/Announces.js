@@ -162,70 +162,72 @@ const Announces = () => {
     <section className="announcements">
       <div className="title">Announcements</div>
       <p className="subtitle">Look at the announcements below and can find someone you can help</p>
-      <div className="filter">
-        <div className="dropdown" id="filterDropdown">
-          <div className="dropdown-btn" onClick={() => setOpen(!isOpen)}>
-            <div className="subtitle">Filter</div>
-            <DropdownIcon isOpen={isOpen} />
-          </div>
-          <div className={`dropdown-menu ${isOpen ? "opened" : "closed"}`}>
-            <div className="select-group">
-              <label htmlFor="country">Country:</label>
-              <select id="country" ref={selectedCountryRef} onChange={showStates}>
-                <option value="">Select a country</option>
-                {countries.map((country) => {
-                  return (
-                    <option value={country.isoCode} key={country.isoCode}>
-                      {country.name}
-                    </option>
-                  );
-                })}
-              </select>
+      <div className="announces--content">
+        <div className="filter">
+          <div className="dropdown" id="filterDropdown">
+            <div className="dropdown-btn" onClick={() => setOpen(!isOpen)}>
+              <div className="subtitle">Filter</div>
+              <DropdownIcon isOpen={isOpen} />
             </div>
-            <div className="select-group">
-              <label htmlFor="state">State:</label>
-              <select id="state" ref={selectedStateRef} onChange={showCities}>
-                <option value="">Select a state</option>
-                {states.map((state) => {
-                  return (
-                    <option value={state.isoCode} key={state.isoCode}>
-                      {state.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className="select-group">
-              <label htmlFor="city">City:</label>
-              <select id="city" ref={selectedCityRef} onChange={handleCityChange}>
-                <option value="">Select a city</option>
-                {cities.map((city) => {
-                  return (
-                    <option value={city.isoCode} key={city.isoCode}>
-                      {city.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className="select-group">
-              <label htmlFor="orderBy">Order by:</label>
-              <select id="orderBy" ref={orderByRef} onChange={handleOrderChange}>
-                <option value="recently">The newest</option>
-                <option value="latest">The oldest</option>
-                <option value="difficultyAscending">Difficulty (Ascending)</option>
-                <option value="difficultyDescending">Difficulty (Descending)</option>
-              </select>
+            <div className={`dropdown-menu ${isOpen ? "opened" : "closed"}`}>
+              <div className="select-group">
+                <label htmlFor="country">Country:</label>
+                <select id="country" ref={selectedCountryRef} onChange={showStates}>
+                  <option value="">Select a country</option>
+                  {countries.map((country) => {
+                    return (
+                      <option value={country.isoCode} key={country.isoCode}>
+                        {country.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="select-group">
+                <label htmlFor="state">State:</label>
+                <select id="state" ref={selectedStateRef} onChange={showCities}>
+                  <option value="">Select a state</option>
+                  {states.map((state) => {
+                    return (
+                      <option value={state.isoCode} key={state.isoCode}>
+                        {state.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="select-group">
+                <label htmlFor="city">City:</label>
+                <select id="city" ref={selectedCityRef} onChange={handleCityChange}>
+                  <option value="">Select a city</option>
+                  {cities.map((city) => {
+                    return (
+                      <option value={city.isoCode} key={city.isoCode}>
+                        {city.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="select-group">
+                <label htmlFor="orderBy">Order by:</label>
+                <select id="orderBy" ref={orderByRef} onChange={handleOrderChange}>
+                  <option value="recently">The newest</option>
+                  <option value="latest">The oldest</option>
+                  <option value="difficultyAscending">Difficulty (Ascending)</option>
+                  <option value="difficultyDescending">Difficulty (Descending)</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
+        <div className="all--announces">{allAnnounces}</div>
       </div>
       {loading && (
         <div className="spinner">
           <div className="loader">Loading...</div>
         </div>
       )}
-      {allAnnounces}
       {nextAnnouncesLoading ? (
         <p>Loading ...</p>
       ) : (

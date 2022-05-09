@@ -172,8 +172,9 @@
 }
 .input--field.checkbox {
   background-color: transparent;
+  justify-content: flex-start;
 }
-.input--field.checkbox input#sameAddress {
+.input--field.checkbox npm input#sameAddress {
   width: 50px;
   height: 50px;
   accent-color: #ff5a5a;
@@ -385,6 +386,7 @@
 .home .container-title .show-hide-btn {
   text-decoration: underline;
   width: 2.75rem;
+  cursor: pointer;
 }
 .home .cards-container {
   overflow-x: scroll;
@@ -743,6 +745,7 @@
   color: #a9abae;
   border-radius: 0.685rem;
   margin-top: 0.5rem;
+  border: 2px solid #94969a;
 }
 .announcements .add--ann--button {
   font-size: 3rem;
@@ -1235,6 +1238,52 @@ section .title {
   border: none;
   color: #ff5a5a;
   font-size: 3rem;
+}
+
+@media screen and (min-width: 1200px) {
+  html {
+    display: flex;
+    justify-content: center;
+  }
+
+  body {
+    width: 1000px;
+    position: relative;
+  }
+
+  .primary-nav {
+    width: 1000px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .announcements .announces--content {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 2rem;
+    width: 100%;
+    height: 100%;
+    margin-top: 1rem;
+  }
+  .announcements .announces--content .dropdown {
+    margin-block: 0;
+    border-radius: 0.625rem;
+  }
+  .announcements .announces--content .filter {
+    width: 40%;
+  }
+  .announcements .announces--content .filter .dropdown-menu {
+    display: block !important;
+  }
+  .announcements .announces--content .filter .dropdown-btn {
+    display: none;
+  }
+  .announcements .announces--content .all--announces {
+    width: 60%;
+  }
+  .announcements .add--ann--button {
+    right: calc(250px - 3rem) !important;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
