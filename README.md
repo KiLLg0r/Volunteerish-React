@@ -30,7 +30,7 @@ When you press the button, a menu will open where it will be completed, as the c
 
 ## ➤ Shop
 
-![App Screenshot](https://imgur.com/D3R3xQP)
+![App Screenshot](https://i.imgur.com/D3R3xQP.png)
 
 In the Shop section there is a mini shop with personalized products with our logo and slogan or with other accessories or clothing items. These can be bought with the points obtained when the user helps a person.
 
