@@ -10,7 +10,7 @@ Volunteerish is an open-source application created by students and intended for 
 
 ## ➤ Home
 
-![App Screenshot](https://i.imgur.com/dC4z9MNt.png)
+![App Screenshot](https://i.imgur.com/dC4z9MNm.png)
 
 The Home menu contains information such as people who have been helped, people who are currently being helped, and announcements posted by the user. There is also information about the number of points (See more in the Shop section) and the number of people helped.
 
