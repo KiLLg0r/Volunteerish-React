@@ -60,9 +60,11 @@ In the last section, the Settings section, the user can change his profile data 
 
 The application is made entirely of JavaScript, SCSS and HTML5. Optional frameworks have been added such as:
 
--> FirebaseFirebase for authentication, storage of files, messages and user data
+-> Firebase for authentication, storage of files, messages and user data
 
 -> Countries States Cities Database for precise location management of users (country, state, and city)
+
+-> Swiper.js for slide menu from Complete your registration page
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
 
