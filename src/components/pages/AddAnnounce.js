@@ -105,6 +105,161 @@ function AddAnnounce() {
     if (validate() === 1) {
       let desc = descRef.current.value;
       if (desc === "") desc = defaultMessage;
+      let amountOfPoints = 0;
+      switch (categoryRef.current.value) {
+        case "Groceries":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 10;
+              break;
+            case "1":
+              amountOfPoints = 25;
+              break;
+            case "2":
+              amountOfPoints = 40;
+              break;
+            default:
+              break;
+          }
+          break;
+        case "School meditations":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 40;
+              break;
+            case "1":
+              amountOfPoints = 50;
+              break;
+            case "2":
+              amountOfPoints = 60;
+              break;
+            default:
+              break;
+          }
+          break;
+        case "Shopping":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 10;
+              break;
+            case "1":
+              amountOfPoints = 25;
+              break;
+            case "2":
+              amountOfPoints = 40;
+              break;
+            default:
+              break;
+          }
+          break;
+        case "Cleaning":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 20;
+              break;
+            case "1":
+              amountOfPoints = 35;
+              break;
+            case "2":
+              amountOfPoints = 50;
+              break;
+            default:
+              break;
+          }
+          break;
+        case "Walking":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 15;
+              break;
+            case "1":
+              amountOfPoints = 30;
+              break;
+            case "2":
+              amountOfPoints = 45;
+              break;
+            default:
+              break;
+          }
+          break;
+        case "Cooking":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 25;
+              break;
+            case "1":
+              amountOfPoints = 45;
+              break;
+            case "2":
+              amountOfPoints = 60;
+              break;
+            default:
+              break;
+          }
+          break;
+        case "Paying of bills":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 15;
+              break;
+            case "1":
+              amountOfPoints = 20;
+              break;
+            case "2":
+              amountOfPoints = 30;
+              break;
+            default:
+              break;
+          }
+          break;
+        case "Emotional support":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 20;
+              break;
+            case "1":
+              amountOfPoints = 40;
+              break;
+            case "2":
+              amountOfPoints = 60;
+              break;
+            default:
+              break;
+          }
+          break;
+        case "Physical labour":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 40;
+              break;
+            case "1":
+              amountOfPoints = 60;
+              break;
+            case "2":
+              amountOfPoints = 80;
+              break;
+            default:
+              break;
+          }
+          break;
+        case "Hard work":
+          switch (difficultyRef.current.value) {
+            case "0":
+              amountOfPoints = 40;
+              break;
+            case "1":
+              amountOfPoints = 60;
+              break;
+            case "2":
+              amountOfPoints = 80;
+              break;
+            default:
+              break;
+          }
+          break;
+        default:
+          break;
+      }
       announcesDB
         .add({
           uid: currentUser.uid,
@@ -127,6 +282,7 @@ function AddAnnounce() {
           posted: firebase.firestore.FieldValue.serverTimestamp(),
           status: "active",
           helpedBy: "",
+          points: amountOfPoints,
         })
         .catch((error) => setError("The announcement could not be posted"));
       setAddSuccess(true);
