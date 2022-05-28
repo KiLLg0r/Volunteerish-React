@@ -152,11 +152,7 @@
       gap: 1rem;
       margin-bottom: 1rem;
 
-      .cancel--btn,
-      .help--btn,
-      .close--btn,
-      .edit--btn,
-      .sendMsg--btn {
+      .ann--btn {
         padding: 1rem 2rem;
         width: 100%;
         height: auto;
@@ -171,17 +167,18 @@
         text-align: center;
 
         cursor: pointer;
-      }
 
-      .cancel--btn,
-      .close--btn {
-        background-color: $accent;
-      }
+        &.cancel,
+        &.close {
+          background-color: $accent;
+        }
 
-      .help--btn,
-      .edit--btn,
-      .sendMsg--btn {
-        background-color: rgb(0, 180, 90);
+        &.help,
+        &.edit,
+        &.sendMsg,
+        &.finish {
+          background-color: rgb(0, 180, 90);
+        }
       }
     }
   }

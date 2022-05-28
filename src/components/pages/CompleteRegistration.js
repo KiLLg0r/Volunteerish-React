@@ -178,6 +178,8 @@ const CompleteRegistration = () => {
           building: buildingRef.current.value,
           apartment: apartmentRef.current.value,
           zipcode: zipcodeRef.current.value,
+          points: 0,
+          helpedPeople: 0,
         },
         { merge: true },
       )

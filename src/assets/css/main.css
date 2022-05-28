@@ -662,11 +662,7 @@
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.full--card .card--content .btn--group .cancel--btn,
-.full--card .card--content .btn--group .help--btn,
-.full--card .card--content .btn--group .close--btn,
-.full--card .card--content .btn--group .edit--btn,
-.full--card .card--content .btn--group .sendMsg--btn {
+.full--card .card--content .btn--group .ann--btn {
   padding: 1rem 2rem;
   width: 100%;
   height: auto;
@@ -680,13 +676,10 @@
   text-align: center;
   cursor: pointer;
 }
-.full--card .card--content .btn--group .cancel--btn,
-.full--card .card--content .btn--group .close--btn {
+.full--card .card--content .btn--group .ann--btn.cancel, .full--card .card--content .btn--group .ann--btn.close {
   background-color: #ff5a5a;
 }
-.full--card .card--content .btn--group .help--btn,
-.full--card .card--content .btn--group .edit--btn,
-.full--card .card--content .btn--group .sendMsg--btn {
+.full--card .card--content .btn--group .ann--btn.help, .full--card .card--content .btn--group .ann--btn.edit, .full--card .card--content .btn--group .ann--btn.sendMsg, .full--card .card--content .btn--group .ann--btn.finish {
   background-color: #00b45a;
 }
 

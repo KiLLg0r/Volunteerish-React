@@ -97,11 +97,12 @@ const announcesNextFetch = async (key, UID, filter) => {
   }
 };
 
-const myAnnouncesFirstFetch = async (UID, status) => {
+const myAnnouncesFirstFetch = async (UID) => {
   let query = db
     .collection("announces")
     .where("uid", "==", UID)
-    .where("status", "==", status)
+    .where("status", "!=", "closed")
+    .orderBy("status", "desc")
     .orderBy("posted", "desc");
 
   try {
@@ -124,11 +125,12 @@ const myAnnouncesFirstFetch = async (UID, status) => {
   }
 };
 
-const myAnnouncesNextFetch = async (key, UID, status) => {
+const myAnnouncesNextFetch = async (key, UID) => {
   let query = db
     .collection("announces")
     .where("uid", "==", UID)
-    .where("status", "==", status)
+    .where("status", "!=", "closed")
+    .orderBy("status", "desc")
     .orderBy("posted", "desc");
 
   try {
@@ -304,6 +306,19 @@ const getConversations = async (UID) => {
   }
 };
 
+const getHelpingUser = async (uid) => {
+  let query = db.collection("users").doc(uid);
+  try {
+    let users = [];
+    console.log("Cauta: ");
+    await query.get().then((doc) => (users = doc.data()));
+    console.log(users);
+    return users;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const exportedFunctions = {
   announcesFirstFetch,
   announcesNextFetch,
@@ -315,6 +330,7 @@ const exportedFunctions = {
   getMessages,
   getNextMessages,
   getConversations,
+  getHelpingUser,
 };
 
 export default exportedFunctions;

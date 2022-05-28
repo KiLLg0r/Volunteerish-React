@@ -8,7 +8,7 @@ import SuccessModal from "../SuccessModal";
 
 function Card() {
   const { id } = useParams();
-  const { currentUser, db } = useAuth();
+  const { currentUser, db, userData, getData } = useAuth();
 
   const history = useHistory();
 
@@ -18,10 +18,13 @@ function Card() {
   const [myAnnounce, setMyAnnounce] = useState(false);
   const [announceData, setAnnounceData] = useState([]);
   const [age, setAge] = useState("");
+  const [helpingUser, setHelpingUser] = useState([]);
 
   const docRef = db.collection("announces").doc(id);
 
   useEffect(() => {
+    if (!userData) getData(currentUser.uid);
+
     if (announceData.length === 0)
       AnnounceQuery.getAnnounceData(id)
         .then((result) => {
@@ -47,7 +50,14 @@ function Card() {
 
     if (announceData.helpedBy === currentUser.uid) setHelping(true);
     if (announceData.uid === currentUser.uid) setMyAnnounce(true);
-  }, [announceData, docRef, currentUser.uid, id]);
+
+    if (helpingUser.length === 0)
+      AnnounceQuery.getHelpingUser(announceData.helpedBy).then((result) => {
+        if (result) {
+          setHelpingUser(result);
+        } else console.table("No data");
+      });
+  }, [announceData, docRef, currentUser.uid, id, userData, getData, db, helpingUser]);
 
   const SensitiveData = () => {
     useEffect(() => {
@@ -131,8 +141,34 @@ function Card() {
       .then(() => setCloseSuccess(true));
   };
 
+  const finishAnnounce = () => {
+    docRef.set(
+      {
+        status: "closed",
+      },
+      { merge: true },
+    );
+    const helpingUserUID = db.collection("users").doc(announceData.helpedBy);
+    const helpingUserPoints = helpingUser.points ? helpingUser.points : 0;
+    const helpingUserHelped = helpingUser.helpedPeople ? helpingUser.helpedPeople : 0;
+    const newTotalAmountOfPoints = announceData.points + helpingUserPoints;
+    const newTotalHelpedPeople = helpingUserHelped + 1;
+    console.table([helpingUserPoints, helpingUserHelped, newTotalAmountOfPoints, newTotalHelpedPeople]);
+    helpingUserUID
+      .set(
+        {
+          points: newTotalAmountOfPoints,
+          helpedPeople: newTotalHelpedPeople,
+        },
+        { merge: true },
+      )
+      .then(() => setCloseSuccess(true));
+    console.log("closed");
+  };
+
   const pullData = (state) => {
     setCloseSuccess(state);
+    if (state === false) history.push("/");
   };
 
   return (
@@ -172,18 +208,21 @@ function Card() {
         )}
         {!helping && !myAnnounce && (
           <div className="btn--group">
-            <button onClick={history.goBack} className="cancel--btn">
+            <button onClick={history.goBack} className="ann--btn cancel">
               Cancel
             </button>
-            <button onClick={helpNow} className="help--btn">
+            <button onClick={helpNow} className="ann--btn help">
               Help now
             </button>
           </div>
         )}
         {myAnnounce && (
           <div className="btn--group">
-            <button onClick={closeAnnounce} className="close--btn">
+            <button onClick={closeAnnounce} className="ann--btn close">
               Close
+            </button>
+            <button onClick={finishAnnounce} className="ann--btn finish">
+              Finish this announce
             </button>
           </div>
         )}
@@ -198,7 +237,7 @@ function Card() {
                   uid: announceData.uid,
                 },
               }}
-              className="sendMsg--btn"
+              className="ann--btn sendMsg"
             >
               Send message
             </Link>

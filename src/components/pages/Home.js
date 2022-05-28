@@ -7,7 +7,7 @@ import AnnouncesQuery from "../Queries";
 import Card from "../Card";
 
 const Home = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, userData, getData } = useAuth();
 
   const [isOpen, setOpen] = useState([false, true, false]);
 
@@ -21,7 +21,9 @@ const Home = () => {
   };
 
   useEffect(() => {
-    AnnouncesQuery.myAnnouncesFirstFetch(currentUser.uid, "active")
+    if (!userData) getData(currentUser.uid);
+
+    AnnouncesQuery.myAnnouncesFirstFetch(currentUser.uid)
       .then((result) => {
         if (result) {
           setMyAnnounces(result.announces);
@@ -44,7 +46,8 @@ const Home = () => {
         }
       })
       .catch((error) => console.log(error));
-  }, [currentUser.uid]);
+    console.log(userData);
+  }, [currentUser.uid, getData, userData]);
 
   return (
     <section className="home">
@@ -58,11 +61,11 @@ const Home = () => {
           </h3>
           <h3 className="points">
             <span>Points</span>
-            <p>100K</p>
+            <p>{userData && !isNaN(userData.points) ? userData.points : 0}</p>
           </h3>
           <h3 className="helped">
-            <span>Helped</span>
-            <p>20K</p>
+            <span>Helped people</span>
+            <p>{userData && !isNaN(userData.helpedPeople) ? userData.helpedPeople : 0}</p>
           </h3>
         </div>
       </div>
